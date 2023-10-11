@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Copiladores-Angular';
+  
 }

@@ -1,0 +1,45 @@
+<div>
+    <body class="mx-3">
+        <h1>Compilador java</h1>
+        <header class="mb-3">
+            <div class="btn-group botao" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Tipo de Analisador
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Analisador Lexico</a></li>
+                        <li><a class="dropdown-item" href="#">Analisador sla2</a></li>
+                        <li><a class="dropdown-item" href="#">Analisador sla3</a></li>
+                    </ul>
+                </div>
+            </div>
+            <button id="compilerButton" class="btn btn-primary botao">Compilar</button>
+        </header>
+
+        <main class="">
+            <textarea name="" id="codigo" cols="500" rows="20" class="texto">
+public class HelloWorld {
+    public static void main(final String[] args) {
+    System.out.println("Helooooooo");
+    }
+    public void teste() {
+    System.out.println("mtknack");
+    }
+}
+          </textarea>
+
+
+            <div name="" id="arvore" cols="200" rows="20" class="texto">
+
+            </div>
+
+            <div id="tree"></div>
+            <div id="credits">
+                <p>Powered by
+                <p>Chistian, Matheus, Daniel, Vanderson</p>
+            </div>
+        </main>
+    </body>
+</div>
