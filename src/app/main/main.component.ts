@@ -1,40 +1,31 @@
-import { Component, AfterViewInit, ElementRef } from '@angular/core';
-import { basicSetup } from 'codemirror';
-import { EditorState } from "@codemirror/state"
-import { java } from '@codemirror/lang-java';
-import { EditorView } from '@codemirror/view';
+import { Component } from '@angular/core';
+import { AnalizadorLexico } from '../services/AnalizadorLexico';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class MainComponent implements AfterViewInit {
-  
-  constructor(private el: ElementRef) {}
+export class MainComponent {
 
-  ngAfterViewInit(): void {
-    const codeMirrorOptions = {
-      lineNumbers: true,
-      language: java(),
-      ...basicSetup
-    };
+  texto: string = `public class HelloWorld {
+    public static void main(final String[] args) {
+      System.out.println("Helooooooo");
+    }
+    public void teste() {
+      System.out.println("mtknack");
+    }
+  }`;
 
-    const codeMirrorTextArea = this.el.nativeElement.querySelector('#codigo');
-    const editorState = EditorState.create({
-      doc: codeMirrorTextArea.value,
-      extensions: [basicSetup, java()]
-    });
+  textoConvertido: string[] = ['']
 
-    const editorViewConfig = {
-      state: editorState,
-      parent: codeMirrorTextArea
-    };
+  constructor(
+    private analizadorLexico: AnalizadorLexico
+  ){
 
-    const editor = new EditorView(editorViewConfig);
+  }
 
-    editor.dom.addEventListener('input', () => {
-      codeMirrorTextArea.value = editor.state.doc.toString();
-    });
+  btnCopilar() {
+    this.textoConvertido = this.analizadorLexico.analizadorLexico(this.texto)
   }
 }

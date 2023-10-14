@@ -15,27 +15,14 @@
                     </ul>
                 </div>
             </div>
-            <button id="compilerButton" class="btn btn-primary botao">Compilar</button>
+            <button id="compilerButton" class="btn btn-primary botao" (click)="btnCopilar()">Compilar</button>
         </header>
 
         <main class="">
-            <textarea name="" id="codigo" cols="500" rows="20" class="texto">
-public class HelloWorld {
-    public static void main(final String[] args) {
-    System.out.println("Helooooooo");
-    }
-    public void teste() {
-    System.out.println("mtknack");
-    }
-}
-          </textarea>
+            <textarea name="" id="codigo" cols="500" rows="20" class="texto" [(ngModel)]="texto"></textarea>
 
+            <textarea name="" id="codigoConvertido" cols="200" rows="20" class="texto" [(ngModel)]="textoConvertido"></textarea>
 
-            <div name="" id="arvore" cols="200" rows="20" class="texto">
-
-            </div>
-
-            <div id="tree"></div>
             <div id="credits">
                 <p>Powered by
                 <p>Chistian, Matheus, Daniel, Vanderson</p>

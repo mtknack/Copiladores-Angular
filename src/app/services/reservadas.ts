@@ -112,9 +112,9 @@ export class Reservadas {
     }
 
 
-    public buscaReservadas(token: string): string | null {
+    public buscaReservadas(token: string): string {
         const reservada = this.reservadas.find(op => op.token === token);
-        return reservada ? reservada.valor : null;
+        return reservada ? reservada.valor : 'N/A';
     }
 
 }
