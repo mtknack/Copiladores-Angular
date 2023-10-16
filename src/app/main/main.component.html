@@ -19,7 +19,7 @@
         </header>
 
         <main class="">
-            <textarea name="" id="codigo" cols="500" rows="20" class="texto" [(ngModel)]="texto"></textarea>
+            <textarea name="" id="codigo" cols="500" rows="20" class="texto" [(ngModel)]="texto" (ngModelChange)="btnCopilar()"></textarea>
 
             <textarea name="" id="codigoConvertido" cols="200" rows="20" class="texto" [(ngModel)]="textoConvertido"></textarea>
 

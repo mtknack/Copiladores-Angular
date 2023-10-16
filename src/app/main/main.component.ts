@@ -12,9 +12,6 @@ export class MainComponent {
     public static void main(final String[] args) {
       System.out.println("Helooooooo");
     }
-    public void teste() {
-      System.out.println("mtknack");
-    }
   }`;
 
   textoConvertido: string[] = ['']

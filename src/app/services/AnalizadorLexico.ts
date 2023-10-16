@@ -19,18 +19,37 @@ export class AnalizadorLexico {
         this.identificadores = identificadores
     }
 
+    private formatadorDeTexto(texto: string[]): string[] {
+
+        // fazer a parte de formatar texto aqui
+        return texto
+    }
+
+    private processarTexto(texto: string): string {
+        // Ignorar linhas que começam com // (com espaços antes ou depois)
+        texto = texto.replace(/^\s*\/\/.*$/gm, '');
+
+        // Ignorar blocos de comentários /* ... */ (incluindo espaços dentro dos delimitadores)
+        texto = texto.replace(/\/\*[\s\S]*?\*\//g, '');
+
+        return texto;
+    }
+
     private separarTexto(texto: string): string[] {
 
-        var vetorTexto = texto.split(" ").filter(palavra => palavra != "")
+        var textoSemComentario = this.processarTexto(texto);
+        var vetorTexto = textoSemComentario.split(/\s+/).filter(palavra => palavra !== '');
+
+        console.log(vetorTexto)
 
         let linhas: string[] = [];
         vetorTexto.forEach(x => {
             if (
-                x.includes('(') 
-                || x.includes(')') 
-                || x.includes('{') 
+                x.includes('(')
+                || x.includes(')')
+                || x.includes('{')
                 || x.includes('}')
-                || x.includes('[') 
+                || x.includes('[')
                 || x.includes(']')
             ) {
                 let substrings = x.split(/([()\[\]])/).map(substring => substring.trim()).filter(substring => substring !== '');
@@ -41,14 +60,8 @@ export class AnalizadorLexico {
         });
 
         vetorTexto = linhas
-        
+
         return vetorTexto
-    }
-
-    private formatadorDeTexto(texto: string[]): string[] {
-
-        // fazer a parte de formatar texto aqui
-        return texto
     }
 
     public analizadorLexico(texto: string): string[] {
@@ -58,10 +71,7 @@ export class AnalizadorLexico {
 
         var i = 0
         textoVetor.map(palavra => {
-            if (palavra.includes('\n')) {
-                palavra = palavra.replace('\n', '');
-            }
-
+            
             this.vetorDeToekens[i] = this.reservadas.buscaReservadas(palavra)
             if (this.vetorDeToekens[i] == 'N/A' && this.identificadores.VerificarIdentificador(palavra)) {
                 this.vetorDeToekens[i] = palavra
