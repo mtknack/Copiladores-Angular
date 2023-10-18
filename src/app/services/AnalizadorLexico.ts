@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
+import { ITabela, ITipo } from './ITabela';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalizadorLexico {
   reservadas: Reservadas;
-  vetorDeToekens: [string] = [''];
+  vetorDeTokens!: [ITabela];
   identificadores: Identificadores;
-
+  
   constructor(reservadas: Reservadas, identificadores: Identificadores) {
     this.reservadas = reservadas;
     this.identificadores = identificadores;
@@ -65,35 +67,40 @@ export class AnalizadorLexico {
 
   public analizar(texto: string): string[] {
     const textoVetor : string[] = this.separarTexto(texto);
-    this.vetorDeToekens = [''];
+    this.vetorDeTokens = [null];
 
     var i = 0;
     textoVetor.map((palavra) => {
-      this.vetorDeToekens[i] = this.reservadas.buscaReservadas(palavra);
+      this.vetorDeTokens[i] = this.reservadas.buscaReservadas(palavra);
       //Verifica se e um identificador
       if (
-        this.vetorDeToekens[i] == 'N/A' &&
+        this.vetorDeTokens[i] == null &&
         this.identificadores.VerificarIdentificador(palavra)
       ) {
-        this.vetorDeToekens[i] = palavra;
+      this.vetorDeTokens[i] = palavra;
       }
       //Verfica se e uma string
       else if (/^".*"$/.test(palavra) || /^'.*'$/.test(palavra)) {
-        this.vetorDeToekens[i] = palavra;
+      this.vetorDeTokens[i] = palavra;
       }
       //Verifica se e um numero
       else if (/^-?\d+(\.\d+)?$/.test(palavra)) {
-        this.vetorDeToekens[i] = palavra;
+      this.vetorDeTokens[i] = palavra;
       }
       //Se nao e nada e um identificador invalido
-      else if (this.vetorDeToekens[i] == 'N/A') {
-        this.vetorDeToekens[i] = 'IdetificadorInvalido';
+      else if (this.vetorDeTokens[i] == null) {
+      this.vetorDeTokens[i] = {
+          id: i, 
+          tipo: ITipo.IDENTIFICADOR_INVALIDO,
+          textoOriginal:palavra,
+          token: 'IDENTIFICADOR_INVALIDO',
+      };
       }
-
+      this.vetorDeTokens[i].id = i;
       i++;
     });
 
-    console.log(this.vetorDeToekens);
-    return this.formatadorDeTexto(this.vetorDeToekens);
+    console.log(this.vetorDeTokens);
+    return this.formatadorDeTexto(this.vetorDeTokens);
   }
 }
