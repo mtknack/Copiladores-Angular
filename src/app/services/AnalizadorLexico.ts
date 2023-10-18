@@ -31,8 +31,8 @@ export class AnalizadorLexico {
   }
 
   private separarTexto(texto: string): string[] {
-    var textoSemComentario = this.processarTexto(texto);
-    var vetorTexto = textoSemComentario
+    const textoSemComentario : string = this.processarTexto(texto);
+    let vetorTexto : string[] = textoSemComentario
       .split(/\s+/)
       .filter((palavra) => palavra !== '');
 
@@ -48,7 +48,7 @@ export class AnalizadorLexico {
         x.includes('[') ||
         x.includes(']')
       ) {
-        let substrings = x
+        let substrings : string[] = x
           .split(/([()\[\]])/)
           .map((substring) => substring.trim())
           .filter((substring) => substring !== '');
@@ -63,8 +63,8 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public analizadorLexico(texto: string): string[] {
-    const textoVetor = this.separarTexto(texto);
+  public analizar(texto: string): string[] {
+    const textoVetor : string[] = this.separarTexto(texto);
     this.vetorDeToekens = [''];
 
     var i = 0;

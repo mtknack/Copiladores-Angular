@@ -7,6 +7,6 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Copiladores-Angular';
+  title = 'Compilador-Java';
   
 }

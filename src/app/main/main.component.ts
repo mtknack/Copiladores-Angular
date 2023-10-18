@@ -23,6 +23,6 @@ export class MainComponent {
   }
 
   btnCopilar() {
-    this.textoConvertido = this.analizadorLexico.analizadorLexico(this.texto)
+    this.textoConvertido = this.analizadorLexico.analizar(this.texto)
   }
 }
