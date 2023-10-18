@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
-import { ITabela, ITipo } from './ITabela';
-
+import { ITabela, Tipo } from './ITabela';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalizadorLexico {
   reservadas: Reservadas;
-  vetorDeTokens!: [ITabela];
+  vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
-  
+
   constructor(reservadas: Reservadas, identificadores: Identificadores) {
     this.reservadas = reservadas;
     this.identificadores = identificadores;
   }
 
-  private formatadorDeTexto(texto: string[]): string[] {
+  private formatadorDeTexto(texto: [ITabela | null]): ITabela[] {
     // fazer a parte de formatar texto aqui
-    return texto;
+    let tabela: ITabela[] = [];
+    texto.forEach((text) => {
+      if (text != null) {
+        tabela.push(text);
+      }
+    });
+    return tabela;
   }
 
   private processarTexto(texto: string): string {
@@ -33,8 +38,8 @@ export class AnalizadorLexico {
   }
 
   private separarTexto(texto: string): string[] {
-    const textoSemComentario : string = this.processarTexto(texto);
-    let vetorTexto : string[] = textoSemComentario
+    const textoSemComentario: string = this.processarTexto(texto);
+    let vetorTexto: string[] = textoSemComentario
       .split(/\s+/)
       .filter((palavra) => palavra !== '');
 
@@ -50,7 +55,7 @@ export class AnalizadorLexico {
         x.includes('[') ||
         x.includes(']')
       ) {
-        let substrings : string[] = x
+        let substrings: string[] = x
           .split(/([()\[\]])/)
           .map((substring) => substring.trim())
           .filter((substring) => substring !== '');
@@ -65,8 +70,8 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public analizar(texto: string): string[] {
-    const textoVetor : string[] = this.separarTexto(texto);
+  public analizar(texto: string): ITabela[] {
+    const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [null];
 
     var i = 0;
@@ -77,26 +82,41 @@ export class AnalizadorLexico {
         this.vetorDeTokens[i] == null &&
         this.identificadores.VerificarIdentificador(palavra)
       ) {
-      this.vetorDeTokens[i] = palavra;
+        this.vetorDeTokens[i] = {
+          id: i,
+          tipo: Tipo.IDENTIFICADOR_VALIDO,
+          textoOriginal: palavra,
+          token: 'IDENTIFICADOR_VALIDO',
+        };
       }
       //Verfica se e uma string
       else if (/^".*"$/.test(palavra) || /^'.*'$/.test(palavra)) {
-      this.vetorDeTokens[i] = palavra;
+        this.vetorDeTokens[i] = {
+          id: i,
+          tipo: Tipo.STRING,
+          textoOriginal: palavra,
+          token: 'STRING',
+        };
       }
       //Verifica se e um numero
       else if (/^-?\d+(\.\d+)?$/.test(palavra)) {
-      this.vetorDeTokens[i] = palavra;
+        this.vetorDeTokens[i] = {
+          id: i,
+          tipo: Tipo.NUMBER,
+          textoOriginal: palavra,
+          token: 'NUMBER',
+        };
       }
       //Se nao e nada e um identificador invalido
       else if (this.vetorDeTokens[i] == null) {
-      this.vetorDeTokens[i] = {
-          id: i, 
-          tipo: ITipo.IDENTIFICADOR_INVALIDO,
-          textoOriginal:palavra,
+        this.vetorDeTokens[i] = {
+          id: i,
+          tipo: Tipo.IDENTIFICADOR_INVALIDO,
+          textoOriginal: palavra,
           token: 'IDENTIFICADOR_INVALIDO',
-      };
+        };
       }
-      this.vetorDeTokens[i].id = i;
+      this.vetorDeTokens[i]!.id = i;
       i++;
     });
 
