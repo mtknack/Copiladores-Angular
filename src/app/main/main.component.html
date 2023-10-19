@@ -1,32 +1,56 @@
-<div>
-    <body class="mx-3">
-        <h1>Compilador Java</h1>
-        <header class="mb-3">
-            <div class="btn-group botao" role="group" aria-label="Button group with nested dropdown">
-                <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Tipo de Analisador
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Analisador Lexico</a></li>
-                        <li><a class="dropdown-item" href="#">Analisador sla2</a></li>
-                        <li><a class="dropdown-item" href="#">Analisador sla3</a></li>
-                    </ul>
-                </div>
-            </div>
-            <button id="compilerButton" class="btn btn-primary botao" (click)="btnCopilar()">Compilar</button>
-        </header>
+<div class="background">
+  <h1>Compilador Java</h1>
+  <header class="mb-3">
+    <div
+      class="btn-group botao"
+      role="group"
+      aria-label="Button group with nested dropdown"
+    >
+      <div class="btn-group" role="group">
+        <button
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Tipo de Analisador
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Analisador Lexico</a></li>
+          <li><a class="dropdown-item" href="#">Analisador sla2</a></li>
+          <li><a class="dropdown-item" href="#">Analisador sla3</a></li>
+        </ul>
+      </div>
+    </div>
+    <button
+      id="compilerButton"
+      class="btn btn-primary botao"
+      (click)="btnCopilar()"
+    >
+      Compilar
+    </button>
+  </header>
 
-        <main class="">
-            <textarea name="" id="codigo" cols="500" rows="20" class="texto" [(ngModel)]="texto" (ngModelChange)="btnCopilar()"></textarea>
+  <main class="">
+    <textarea
+      name=""
+      id="codigo"
+      cols="500"
+      rows="20"
+      class="texto"
+      [(ngModel)]="texto"
+      (ngModelChange)="btnCopilar()"
+    ></textarea>
 
-            <textarea name="" id="codigoConvertido" cols="200" rows="20" class="texto" [(ngModel)]="textoConvertido"></textarea>
+    <div class="resultado" [hidden]="show()">
+      <p class="texto" *ngFor="let t of textoConvertido">
+        {{ t | json }}
+      </p>
+    </div>
 
-            <div id="credits">
-                <p>Powered by
-                <p>Chistian, Matheus, Daniel, Vanderson</p>
-            </div>
-        </main>
-    </body>
+    <div id="credits">
+      <p>Powered by</p>
+      <p>Chistian, Matheus, Daniel, Vanderson</p>
+    </div>
+  </main>
 </div>
