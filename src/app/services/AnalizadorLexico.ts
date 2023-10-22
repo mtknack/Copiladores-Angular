@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
 import { ITabela, Tipo } from './ITabela';
+import { IError } from './IError'
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +17,22 @@ export class AnalizadorLexico {
     this.identificadores = identificadores;
   }
 
-  private formatadorDeTexto(texto: [ITabela | null]): ITabela[] {
+  private formatadorDeTexto(texto: [ITabela | null]): IError[] {
     // fazer a parte de formatar texto aqui
     let tabela: ITabela[] = [];
+    var errors: IError[] = []
     texto.forEach((text) => {
-      if (text != null) {
+      if (text != null && text.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
         tabela.push(text);
+        errors.push({
+          linha: 2,
+          coluna: 3,
+          tipoError: text
+        })
       }
     });
-    return tabela;
+
+    return errors;
   }
 
   private processarTexto(texto: string): string {
@@ -42,8 +50,6 @@ export class AnalizadorLexico {
     let vetorTexto: string[] = textoSemComentario
       .split(/\s+/)
       .filter((palavra) => palavra !== '');
-
-    console.log(vetorTexto);
 
     let linhas: string[] = [];
     vetorTexto.forEach((x) => {
@@ -70,7 +76,7 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public analizar(texto: string): ITabela[] {
+  public analizar(texto: string): IError[] {
     const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [null];
 
@@ -120,7 +126,6 @@ export class AnalizadorLexico {
       i++;
     });
 
-    console.log(this.vetorDeTokens);
     return this.formatadorDeTexto(this.vetorDeTokens);
   }
 }

@@ -1,18 +1,9 @@
 <div class="background">
   <h1>Compilador Java</h1>
   <header class="mb-3">
-    <div
-      class="btn-group botao"
-      role="group"
-      aria-label="Button group with nested dropdown"
-    >
+    <div class="btn-group botao" role="group" aria-label="Button group with nested dropdown">
       <div class="btn-group" role="group">
-        <button
-          type="button"
-          class="btn btn-primary dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Tipo de Analisador
         </button>
         <ul class="dropdown-menu">
@@ -22,25 +13,33 @@
         </ul>
       </div>
     </div>
-    <button
-      id="compilerButton"
-      class="btn btn-primary botao"
-      (click)="btnCopilar()"
-    >
+    <button id="compilerButton" class="btn btn-primary botao" (click)="btnCopilar()">
       Compilar
     </button>
   </header>
 
   <main class="">
-    <textarea
-      name=""
-      id="codigo"
-      cols="500"
-      rows="20"
-      class="texto"
-      [(ngModel)]="texto"
-      (ngModelChange)="btnCopilar()"
-    ></textarea>
+
+    <div class="container">
+      <div class="line-numbers">
+        <ng-container *ngFor="let line of textareaLines">
+          <div>
+             {{ line }}
+          </div>
+        </ng-container>
+      </div>
+      <textarea
+        name=""
+        id="codigo"
+        rows="10"
+        class="texto"
+        [(ngModel)]="texto"
+        (ngModelChange)="btnCopilar()"
+        spellcheck="false"
+        appHighlightWordsWithE
+        #textareaRef
+      ></textarea>
+    </div>
 
     <div class="resultado" [hidden]="show()">
       <p class="texto" *ngFor="let t of textoConvertido">

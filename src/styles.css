@@ -5,3 +5,15 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.texto {
+  position: relative;
+}
+
+.texto .highlighted {
+  position: absolute;
+  bottom: -2px; /* Ajuste conforme necessário para o posicionamento do sublinhado */
+  text-decoration: underline;
+  color: red; /* Cor do sublinhado */
+}
+

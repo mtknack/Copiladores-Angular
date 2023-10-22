@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { MainComponent } from './main/main.component';
 import { Reservadas } from './services/Reservadas';
 import { AnalizadorLexico } from './services/AnalizadorLexico';
+import { HighlightWordsWithEDirective } from './diretivas/highlight-words-with-e.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    HighlightWordsWithEDirective
   ],
   imports: [
     BrowserModule,
