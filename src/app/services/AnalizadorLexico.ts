@@ -8,26 +8,54 @@ import { IError } from './IError'
   providedIn: 'root',
 })
 export class AnalizadorLexico {
+  
+
   reservadas: Reservadas;
   vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
+  texto:string;
 
   constructor(reservadas: Reservadas, identificadores: Identificadores) {
+    this.texto = "";
     this.reservadas = reservadas;
     this.identificadores = identificadores;
+  }
+
+  
+  //TROCAR O TIPO DE RETORNO PRA IPALAVRA???
+  private encontrarLinhaColuna(palavra:string):any{
+    //trocar p interface dps???
+    interface IPalavra {
+      linha:number
+      coluna:number
+    }    
+    
+    const linhas = this.texto.split('\n');
+
+    for (let i = 0; i < linhas.length; i++) {
+      const linha = linhas[i];
+      const j = linha.indexOf(palavra);
+      if (j !== -1) {
+        // Se a palavra for encontrada, retorne a linha e a coluna
+        const palavra = { linha: i + 1, coluna: j + 1 };
+        return palavra
+      }
+    }
+    
   }
 
   private formatadorDeTexto(texto: [ITabela | null]): IError[] {
     // fazer a parte de formatar texto aqui
     let tabela: ITabela[] = [];
     var errors: IError[] = []
-    texto.forEach((text) => {
-      if (text != null && text.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
-        tabela.push(text);
+    texto.forEach((word) => {
+      if (word != null && word.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
+        let obj = this.encontrarLinhaColuna(word.textoOriginal);
+        tabela.push(word);
         errors.push({
-          linha: 2,
-          coluna: 3,
-          tipoError: text
+          linha: obj.linha,
+          coluna: obj.coluna,
+          tipoError: word
         })
       }
     });
@@ -77,11 +105,13 @@ export class AnalizadorLexico {
   }
 
   public analizar(texto: string): IError[] {
+    this.texto = texto
     const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [null];
 
     var i = 0;
     textoVetor.map((palavra) => {
+      //Verifica se palavra reservada
       this.vetorDeTokens[i] = this.reservadas.buscaReservadas(palavra);
       //Verifica se e um identificador
       if (
