@@ -20,27 +20,54 @@ export class AnalizadorLexico {
     this.identificadores = identificadores;
   }
 
+  //preciso somar os espacos em branco que vem antes de uma palavra
   private encontrarLinhaColuna(idPalavra: number): ILocalPalavra {
     const linhas: string[] = this.texto.split('\n');
+    debugger;
 
     let idAtual = 0;
     let palavraBuscada: ILocalPalavra = {
-      coluna: 0,
-      linha: 0,
+      coluna: -1,
+      linha: -1,
     };
     for (let indexLinha = 0; indexLinha < linhas.length; indexLinha++) {
       let coluna: number = 1;
 
       const linha = linhas[indexLinha];
-      const linhavetorizada = this.separarTexto(linha);
 
-      linhavetorizada.forEach((palavra) => {
-        if (idPalavra == idAtual) {
-          palavraBuscada.coluna = coluna;
-          palavraBuscada.linha = indexLinha;
+      const linhavetorizada = linha.split(' ');
+
+      let aux: string[] = [];
+      linhavetorizada.forEach((x) => {
+        if (
+          x.includes('(') ||
+          x.includes(')') ||
+          x.includes('{') ||
+          x.includes('}') ||
+          x.includes('[') ||
+          x.includes(']')
+        ) {
+          let substrings: string[] = x
+            .split(/([()\[\]])/)
+            .map((substring) => substring.trim())
+            .filter((substring) => substring !== '');
+          aux.push(...substrings);
+        } else {
+          aux.push(x);
         }
-        idAtual++;
-        coluna = coluna + palavra.length + 1;
+      });
+
+      aux.forEach((palavra) => {
+        if (palavra == '') {
+          coluna++;
+        } else {
+          if (idPalavra == idAtual) {
+            palavraBuscada.coluna = coluna;
+            palavraBuscada.linha = indexLinha;
+          }
+          idAtual++;
+          coluna = coluna + palavra.length + 1;
+        }
       });
     }
     return palavraBuscada;
