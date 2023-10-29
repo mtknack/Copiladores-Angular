@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
 import { ITabela, Tipo } from './ITabela';
-import { IError } from './IError'
+import { IError } from './IError';
+import { ILocalPalavra } from './ILocalPalavra';
 
 @Injectable({
   providedIn: 'root',
@@ -11,24 +12,80 @@ export class AnalizadorLexico {
   reservadas: Reservadas;
   vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
+  texto: string;
 
   constructor(reservadas: Reservadas, identificadores: Identificadores) {
+    this.texto = '';
     this.reservadas = reservadas;
     this.identificadores = identificadores;
+  }
+
+  //preciso somar os espacos em branco que vem antes de uma palavra
+  private encontrarLinhaColuna(idPalavra: number): ILocalPalavra {
+    const linhas: string[] = this.texto.split('\n');
+    debugger;
+
+    let idAtual = 0;
+    let palavraBuscada: ILocalPalavra = {
+      coluna: -1,
+      linha: -1,
+    };
+    for (let indexLinha = 0; indexLinha < linhas.length; indexLinha++) {
+      let coluna: number = 1;
+
+      const linha = linhas[indexLinha];
+
+      const linhavetorizada = linha.split(' ');
+
+      let aux: string[] = [];
+      linhavetorizada.forEach((x) => {
+        if (
+          x.includes('(') ||
+          x.includes(')') ||
+          x.includes('{') ||
+          x.includes('}') ||
+          x.includes('[') ||
+          x.includes(']')
+        ) {
+          let substrings: string[] = x
+            .split(/([()\[\]])/)
+            .map((substring) => substring.trim())
+            .filter((substring) => substring !== '');
+          aux.push(...substrings);
+        } else {
+          aux.push(x);
+        }
+      });
+
+      aux.forEach((palavra) => {
+        if (palavra == '') {
+          coluna++;
+        } else {
+          if (idPalavra == idAtual) {
+            palavraBuscada.coluna = coluna;
+            palavraBuscada.linha = indexLinha;
+          }
+          idAtual++;
+          coluna = coluna + palavra.length + 1;
+        }
+      });
+    }
+    return palavraBuscada;
   }
 
   private formatadorDeTexto(texto: [ITabela | null]): IError[] {
     // fazer a parte de formatar texto aqui
     let tabela: ITabela[] = [];
-    var errors: IError[] = []
-    texto.forEach((text) => {
-      if (text != null && text.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
-        tabela.push(text);
+    var errors: IError[] = [];
+    texto.forEach((word) => {
+      if (word != null && word.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
+        let obj: ILocalPalavra = this.encontrarLinhaColuna(word.id!);
+        tabela.push(word);
         errors.push({
-          linha: 2,
-          coluna: 3,
-          tipoError: text
-        })
+          linha: obj.linha,
+          coluna: obj.coluna,
+          tipoError: word,
+        });
       }
     });
 
@@ -77,11 +134,13 @@ export class AnalizadorLexico {
   }
 
   public analizar(texto: string): IError[] {
+    this.texto = texto;
     const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [null];
 
     var i = 0;
     textoVetor.map((palavra) => {
+      //Verifica se palavra reservada
       this.vetorDeTokens[i] = this.reservadas.buscaReservadas(palavra);
       //Verifica se e um identificador
       if (

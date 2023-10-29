@@ -13,8 +13,8 @@ export const Tipo = {
 };
 
 export interface ITabela {
-  id?: Number;
-  tipo: Number;
+  id?: number;
+  tipo: number;
   textoOriginal: string;
   token: string;
 }
