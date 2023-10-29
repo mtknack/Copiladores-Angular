@@ -2,61 +2,63 @@ import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
 import { ITabela, Tipo } from './ITabela';
-import { IError } from './IError'
+import { IError } from './IError';
+import { ILocalPalavra } from './ILocalPalavra';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnalizadorLexico {
-  
-
   reservadas: Reservadas;
   vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
-  texto:string;
+  texto: string;
 
   constructor(reservadas: Reservadas, identificadores: Identificadores) {
-    this.texto = "";
+    this.texto = '';
     this.reservadas = reservadas;
     this.identificadores = identificadores;
   }
 
-  
-  //TROCAR O TIPO DE RETORNO PRA IPALAVRA???
-  private encontrarLinhaColuna(palavra:string):any{
-    //trocar p interface dps???
-    interface IPalavra {
-      linha:number
-      coluna:number
-    }    
-    
-    const linhas = this.texto.split('\n');
+  private encontrarLinhaColuna(idPalavra: number): ILocalPalavra {
+    const linhas: string[] = this.texto.split('\n');
 
-    for (let i = 0; i < linhas.length; i++) {
-      const linha = linhas[i];
-      const j = linha.indexOf(palavra);
-      if (j !== -1) {
-        // Se a palavra for encontrada, retorne a linha e a coluna
-        const palavra = { linha: i + 1, coluna: j + 1 };
-        return palavra
-      }
+    let idAtual = 0;
+    let palavraBuscada: ILocalPalavra = {
+      coluna: 0,
+      linha: 0,
+    };
+    for (let indexLinha = 0; indexLinha < linhas.length; indexLinha++) {
+      let coluna: number = 1;
+
+      const linha = linhas[indexLinha];
+      const linhavetorizada = this.separarTexto(linha);
+
+      linhavetorizada.forEach((palavra) => {
+        if (idPalavra == idAtual) {
+          palavraBuscada.coluna = coluna;
+          palavraBuscada.linha = indexLinha;
+        }
+        idAtual++;
+        coluna = coluna + palavra.length + 1;
+      });
     }
-    
+    return palavraBuscada;
   }
 
   private formatadorDeTexto(texto: [ITabela | null]): IError[] {
     // fazer a parte de formatar texto aqui
     let tabela: ITabela[] = [];
-    var errors: IError[] = []
+    var errors: IError[] = [];
     texto.forEach((word) => {
       if (word != null && word.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
-        let obj = this.encontrarLinhaColuna(word.textoOriginal);
+        let obj: ILocalPalavra = this.encontrarLinhaColuna(word.id!);
         tabela.push(word);
         errors.push({
           linha: obj.linha,
           coluna: obj.coluna,
-          tipoError: word
-        })
+          tipoError: word,
+        });
       }
     });
 
@@ -105,7 +107,7 @@ export class AnalizadorLexico {
   }
 
   public analizar(texto: string): IError[] {
-    this.texto = texto
+    this.texto = texto;
     const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [null];
 
