@@ -1,4 +1,4 @@
-import { Arvore } from "./arvore"
+import { Arvore } from "./Arvore"
 
 export interface IObjectInfo{
     vetorTokens: []

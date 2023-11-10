@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { IClassDeclaration } from "../IClassDeclaration";
-import { ReservadasEnum } from "../../Reservadas";
+import { PalavrasReservadas } from "../../Reservadas";
 import { IClassBody } from "../IClassBody";
 import { IClassModifier } from "../IClassModifier";
 import { IIdentifier } from "../IIdentifier";
@@ -13,13 +13,13 @@ import { IObjectInfo } from "./IObjectInfo";
 export class ClassDeclarationImpl implements IClassDeclaration {
 
     regra1: IClassModifier
-    regra2: ReservadasEnum.PalavrasReservadas.CLASS
+    regra2: PalavrasReservadas.CLASS
     regra3: IIdentifier
     // regra4: IClassBody
 
     constructor(
         private classModifier: IClassModifier,
-        private reservadasClass: ReservadasEnum.PalavrasReservadas.CLASS,
+        private reservadasClass: PalavrasReservadas.CLASS,
         private identifier: IdentifierImpl
     ) {
         this.regra1 = classModifier

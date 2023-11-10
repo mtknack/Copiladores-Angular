@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { ReservadasEnum } from "../../Reservadas";
 import { IClassModifier } from "../IClassModifier";
 import { IIdentifier } from "../IIdentifier";
 

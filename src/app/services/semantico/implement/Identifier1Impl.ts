@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ReservadasEnum } from "../../Reservadas";
+import { PalavrasReservadas } from "../../Reservadas";
 import { IClassModifier } from "../IClassModifier";
 
 
@@ -8,7 +8,7 @@ import { IClassModifier } from "../IClassModifier";
 })
 export class ClassDeclarationImpl implements IClassModifier {
 
-    regra1!: ReservadasEnum.PalavrasReservadas.ABSTRACT | ReservadasEnum.PalavrasReservadas.FINAL | ReservadasEnum.PalavrasReservadas.PUBLIC;
+    regra1!: PalavrasReservadas.ABSTRACT | PalavrasReservadas.FINAL | PalavrasReservadas.PUBLIC;
 
     processar( a: any){
 
