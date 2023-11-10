@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { ReservadasEnum } from "../../Reservadas";
+import { PalavrasReservadas } from "../../Reservadas";
 import { IClassModifier } from "../IClassModifier";
 import { IObjectInfo } from "./IObjectInfo";
 
@@ -9,11 +9,11 @@ import { IObjectInfo } from "./IObjectInfo";
 })
 export class ClassDeclarationImpl implements IClassModifier {
 
-    regra1!: ReservadasEnum.PalavrasReservadas.ABSTRACT | ReservadasEnum.PalavrasReservadas.FINAL | ReservadasEnum.PalavrasReservadas.PUBLIC;
+    regra1!: PalavrasReservadas.ABSTRACT | PalavrasReservadas.FINAL | PalavrasReservadas.PUBLIC;
 
     processar( object: IObjectInfo ): any{
 
-        if(object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.ABSTRACT || object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.FINAL || ReservadasEnum.PalavrasReservadas.PUBLIC){
+        if(object.vetorTokens[object.atual] == PalavrasReservadas.ABSTRACT || object.vetorTokens[object.atual] == PalavrasReservadas.FINAL || PalavrasReservadas.PUBLIC){
             return true
         }
         else{
