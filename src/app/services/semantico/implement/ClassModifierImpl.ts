@@ -13,7 +13,7 @@ export class ClassDeclarationImpl implements IClassModifier {
 
     processar( object: IObjectInfo ): any{
 
-        if(object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.ABSTRACT | object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.FINAL | ReservadasEnum.PalavrasReservadas.PUBLIC){
+        if(object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.ABSTRACT || object.vetorTokens[object.atual] == ReservadasEnum.PalavrasReservadas.FINAL || ReservadasEnum.PalavrasReservadas.PUBLIC){
             return true
         }
         else{
