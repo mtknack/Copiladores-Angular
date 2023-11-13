@@ -3,6 +3,7 @@ import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
 import { ITabela, Tipo } from './ITabela';
 import { IError } from './IError'
+import { AnalizadorSemantico } from './AnalisadorSemantico';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AnalizadorLexico {
   vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
 
-  constructor(reservadas: Reservadas, identificadores: Identificadores) {
+  constructor(reservadas: Reservadas, identificadores: Identificadores, private analisadorSemantico: AnalizadorSemantico) {
     this.reservadas = reservadas;
     this.identificadores = identificadores;
   }
@@ -125,6 +126,8 @@ export class AnalizadorLexico {
       this.vetorDeTokens[i]!.id = i;
       i++;
     });
+
+    this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
 
     return this.formatadorDeTexto(this.vetorDeTokens);
   }

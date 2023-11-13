@@ -1,11 +1,10 @@
 import { Injectable } from "@angular/core";
-import { IClassDeclaration } from "../IClassDeclaration";
 import { PalavrasReservadas } from "../../Reservadas";
-import { IClassBody } from "../IClassBody";
-import { IClassModifier } from "../IClassModifier";
-import { IIdentifier } from "../IIdentifier";
 import { IdentifierImpl } from "./IdentifierImpl";
-import { IObjectInfo } from "./IObjectInfo";
+import { IClassDeclaration } from "../interfaces/IClassDeclaration";
+import { IClassModifier } from "../interfaces/IClassModifier";
+import { IIdentifier } from "../interfaces/IIdentifier";
+import { IObjectInfo } from "../Objetcs/IObjectInfo";
 
 @Injectable({
     providedIn: 'root',

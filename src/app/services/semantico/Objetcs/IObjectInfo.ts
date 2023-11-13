@@ -1,7 +1,8 @@
+import { ITabela } from "../../ITabela"
 import { Arvore } from "./Arvore"
 
 export interface IObjectInfo{
-    vetorTokens: []
+    tokens: [ITabela]
     atual: number
     arvore: Arvore
 }

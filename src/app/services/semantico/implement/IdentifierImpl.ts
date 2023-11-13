@@ -1,23 +1,23 @@
 import { Injectable } from "@angular/core";
-import { IClassModifier } from "../IClassModifier";
-import { IIdentifier } from "../IIdentifier";
+import { IIdentifier } from "../interfaces/IIdentifier";
+import { ObjectService } from "../Objetcs/ObjectService";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class IdentifierImpl implements IIdentifier {
+export class IdentifierImpl {
 
-    regra1!: String;
+    constructor(
+        private objectService: ObjectService
+    ){}
 
-    processar( a: any ){
-
-        if(a === String){
+    processar(){
+        if(this.objectService.getVetorTokensAtual('')){
             return true
         }
         else{
             return false
         }
-        
     }
 }

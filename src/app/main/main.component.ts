@@ -14,11 +14,7 @@ export class MainComponent implements AfterViewInit {
   textareaLines!: number[];
 
   texto: string = 
-`public class HelloWorld {
-    public static void main(final String[] args) {
-      System.out.println("Helooooooo");
-    }
-}`;
+`package br.biblioteca.telas;`;
 
   textoConvertido: IError[] = [];
   constructor(private analizadorLexico: AnalizadorLexico) {}
