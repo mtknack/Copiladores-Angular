@@ -29,9 +29,7 @@ export class ObjectService {
     }
 
     getVetorTokensAtual(regra: string): boolean {
-        console.log(this.object.tokens[this.object.atual].token, regra)
         if(this.object.tokens[this.object.atual].token == regra){
-            console.log('1')
             return true
         }
         return false

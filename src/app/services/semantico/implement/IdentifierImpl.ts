@@ -14,6 +14,7 @@ export class IdentifierImpl {
 
     processar(){
         if(this.objectService.getVetorTokensAtual('')){
+            
             return true
         }
         else{

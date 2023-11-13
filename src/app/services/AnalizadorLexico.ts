@@ -60,10 +60,11 @@ export class AnalizadorLexico {
         x.includes('{') ||
         x.includes('}') ||
         x.includes('[') ||
-        x.includes(']')
+        x.includes(']') || 
+        x.includes(';') 
       ) {
         let substrings: string[] = x
-          .split(/([()\[\]])/)
+          .split(/([()\;[\]])/)
           .map((substring) => substring.trim())
           .filter((substring) => substring !== '');
         linhas.push(...substrings);
@@ -73,7 +74,6 @@ export class AnalizadorLexico {
     });
 
     vetorTexto = linhas;
-
     return vetorTexto;
   }
 
@@ -126,6 +126,8 @@ export class AnalizadorLexico {
       this.vetorDeTokens[i]!.id = i;
       i++;
     });
+
+    console.log(this.vetorDeTokens)
 
     this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
 
