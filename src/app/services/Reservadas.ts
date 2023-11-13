@@ -204,5 +204,6 @@ export enum PalavrasReservadas {
   RIGHT_BRACE = 'RIGHT_BRACE',
   LEFT_BRACKET = 'LEFT_BRACKET',
   RIGHT_BRACKET = 'RIGHT_BRACKET',
-  COLON = 'COLON'
+  COLON = 'COLON',
+  EPSON = ''
 };
