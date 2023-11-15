@@ -1,14 +1,14 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { IdentifierImpl } from "./IdentifierImpl";
 import { ImportsDeclarationImpl } from "./ImportsDeclarationImpl";
+import { ILog, IObjectLog } from "../Objetcs/Log";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ImportsDeclarationsImpl {
+export class ImportsDeclarationsImpl implements ILog {
 
     constructor(
         private importsDeclarationImpl: ImportsDeclarationImpl,
@@ -17,16 +17,21 @@ export class ImportsDeclarationsImpl {
 
     }
 
-    processar(): boolean{
-
-        if(this.importsDeclarationImpl.processar()){
-            if( this.objectService.verificationWithinRange() && this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)){
-                this.processar()
-                return true
-            }
+    message(): IObjectLog {
+        return {
+            analise: "Import Declarations",
+            status: true
         }
+    }
 
-        return true
+    processar(){
+        this.objectService.logStatusSemantico(this.message(), true)
+
+        this.importsDeclarationImpl.processar() 
+        this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
+        this.processar()
+        
+        this.objectService.logStatusSemantico(this.message(), false)
     }
 
 }

@@ -5,6 +5,5 @@ export interface IObjectLog {
 
 export interface ILog {
 
-    message(): String
-    status(): boolean
+    message(): IObjectLog
 }

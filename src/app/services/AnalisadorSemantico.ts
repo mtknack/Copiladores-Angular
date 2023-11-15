@@ -24,12 +24,10 @@ export class AnalizadorSemantico {
   }
 
   startProcess(){
-    if(
-      this.packageDeclaration.processar() 
-      &&
-      this.importsDeclarationsImpl.processar()
-      ){
-      console.log('foiiiiiiii')
-    }
+    
+    this.packageDeclaration.processar() 
+    this.importsDeclarationsImpl.processar()
+    console.log('foiiiiiiii')
+    
   }
 }

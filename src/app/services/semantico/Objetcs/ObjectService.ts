@@ -1,7 +1,9 @@
-import { Injectable } from "@angular/core";
+import { ElementRef, Injectable } from "@angular/core";
 import { IObjectInfo } from "./IObjectInfo";
 import { Arvore } from "./Arvore";
-import { ITabela } from "../../ITabela";
+import { ITabela, Tipo } from "../../ITabela";
+import { IObjectLog } from "./Log";
+import {  } from "../../ITabela"
 
 @Injectable({
     providedIn: 'root', // Este serviço será injetado em toda a aplicação
@@ -9,15 +11,20 @@ import { ITabela } from "../../ITabela";
 export class ObjectService {
 
     object!: IObjectInfo
-    
+
     constructor(){}
 
     skipIndex(){
-        this.object.atual++
+        if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
+            this.object.atual++
+        }
     }
 
     backIndex(){
-        this.object.atual--
+        
+        if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
+            this.object.atual--
+        }
     }
 
     getObject(): IObjectInfo{
@@ -28,27 +35,22 @@ export class ObjectService {
         this.object = object
     }
 
-    verificationWithinRange(): boolean{
-        if(this.object.atual > this.object.tokens.length){
+    getVetorTokensAtual(regra: string){
+        if(this.object.tokens[this.object.atual].token == regra){
+            
+        }
+        else{
+            throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+        }
+    }
+
+    getVetorTokensAtualVerifique(tipo: Number){
+        if(this.object.tokens[this.object.atual].tipo == tipo){
             return true
         }
         else{
-            return false
+            throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
         }
-    }
-
-    getVetorTokensAtual(regra: string): boolean {
-        if(this.object.tokens[this.object.atual].token == regra){
-            return true
-        }
-        return false
-    }
-
-    getVetorTokensAtualverifiqueType(type: any){
-        if(typeof this.object.tokens[this.object.atual].token === typeof type){
-            return true
-        }
-        return false
     }
 
     newObject(tokens: [ITabela]){
@@ -67,8 +69,11 @@ export class ObjectService {
         }
     }
 
-    logStatusSemantico(){
-        
+    logStatusSemantico(log: IObjectLog, entrada: boolean){
+        if(entrada){
+            console.log('entrando em: ', log, this.object)
+        }
+        console.log('saindo de: ', log, this.object)
     }
 
     assembleTree(){
