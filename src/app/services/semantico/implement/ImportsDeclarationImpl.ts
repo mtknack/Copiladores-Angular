@@ -7,7 +7,7 @@ import { IdentifierImpl } from "./IdentifierImpl";
 @Injectable({
     providedIn: 'root',
 })
-export class PackageDeclarationImpl {
+export class ImportsDeclarationImpl {
 
     constructor(
         private identifier: IdentifierImpl,
@@ -18,7 +18,7 @@ export class PackageDeclarationImpl {
 
     processar(): boolean{
 
-        if(this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE)){
+        if(this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)){
             this.objectService.skipIndex()
             if(this.identifier.processar()){
                 this.objectService.skipIndex()

@@ -28,6 +28,15 @@ export class ObjectService {
         this.object = object
     }
 
+    verificationWithinRange(): boolean{
+        if(this.object.atual > this.object.tokens.length){
+            return true
+        }
+        else{
+            return false
+        }
+    }
+
     getVetorTokensAtual(regra: string): boolean {
         if(this.object.tokens[this.object.atual].token == regra){
             return true
@@ -56,6 +65,10 @@ export class ObjectService {
         return{
             vetor: []
         }
+    }
+
+    logStatusSemantico(){
+        
     }
 
     assembleTree(){
