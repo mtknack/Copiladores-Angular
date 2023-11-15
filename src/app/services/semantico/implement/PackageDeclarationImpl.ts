@@ -24,17 +24,29 @@ export class PackageDeclarationImpl implements ILog {
         }
     }
 
-
+    // <importDeclaration> → import <identifier> ; | define <modifier> ;
     processar(){
+
         debugger
         this.objectService.logStatusSemantico(this.message(), true)
 
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE)
+        let atualInicio = this.objectService.getIndex();
+        let palavra1 = true;
+        let palavra2 = true;
+        let palavra3 = true;
+
+        //REGRA 1
+        palavra1 = this.objectService.validaPalavraReservada(PalavrasReservadas.PACKAGE)
         this.objectService.skipIndex()
-        this.identifier.processar()
+        
+        palavra2 = this.identifier.processar()
         this.objectService.skipIndex()
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)
+
+        palavra3 = this.objectService.validaPalavraReservada(PalavrasReservadas.SEMICOLON)
         this.objectService.skipIndex()
+
+        if(palavra1 && palavra2 && palavra3)
+
 
         this.objectService.logStatusSemantico(this.message(), false)
     }

@@ -22,11 +22,17 @@ export class IdentifierImpl implements ILog {
     }
 
     processar(){
+        let tdcerto = true
 
         this.objectService.logStatusSemantico(this.message(), true)
 
-        this.objectService.getVetorTokensAtualVerifique(Tipo.IDENTIFICADOR_VALIDO)
-
+        return this.objectService.validaTipoTokenAtual(Tipo.IDENTIFICADOR_VALIDO)
+        
         this.objectService.logStatusSemantico(this.message(), false)
+        
+ 
     }
+
+    
+
 }

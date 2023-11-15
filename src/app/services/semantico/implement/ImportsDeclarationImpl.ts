@@ -27,11 +27,13 @@ export class ImportsDeclarationImpl implements ILog{
     processar(){
         this.objectService.logStatusSemantico(this.message(), true)
 
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
+        this.objectService.validaPalavraReservada(PalavrasReservadas.IMPORT)
         this.objectService.skipIndex()
+
         this.identifier.processar()
         this.objectService.skipIndex()
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)       
+        
+        this.objectService.validaPalavraReservada(PalavrasReservadas.SEMICOLON)
         this.objectService.skipIndex()
             
         this.objectService.logStatusSemantico(this.message(), false)

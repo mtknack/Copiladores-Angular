@@ -1,7 +1,7 @@
 import { ElementRef, Injectable } from "@angular/core";
 import { IObjectInfo } from "./IObjectInfo";
 import { Arvore } from "./Arvore";
-import { ITabela, Tipo } from "../../ITabela";
+import { IToken, Tipo } from "../../ITabela";
 import { IObjectLog } from "./Log";
 import {  } from "../../ITabela"
 
@@ -27,6 +27,14 @@ export class ObjectService {
         }
     }
 
+    getIndex(){
+        return this.object.atual;
+    }
+
+    setIndex(newIndex:number){
+        this.object.atual = newIndex;
+    }
+
     getObject(): IObjectInfo{
         return this.object
     }
@@ -35,25 +43,58 @@ export class ObjectService {
         this.object = object
     }
 
-    getVetorTokensAtual(regra: string){
+    validaRegra(arrayDeToken:any[]):boolean{
+        let qtdPalavra = arrayDeToken.length;
+        let arrayVerdade = []
+        let verdadeFinal = true
+        let primeiroIndex = this.getIndex();
+        for (let i = 0; i < qtdPalavra; i++) {
+            let teste = false;
+
+            if(typeof arrayDeToken[i] == typeof ``){
+                teste = this.validaPalavraReservada(arrayDeToken[i]);
+            }else if(typeof arrayDeToken[i] == typeof 10){
+                teste = this.validaTipoTokenAtual(arrayDeToken[i]);
+            }
+            else{
+                teste = arrayDeToken[i].processar();
+            }
+
+            arrayVerdade.push(teste);
+            if(arrayVerdade[i] == false){
+                verdadeFinal = false
+                break
+            }
+            this.skipIndex();
+        }
+        if (verdadeFinal == false) {
+            this.setIndex(primeiroIndex);
+            return false
+        }
+        return true
+    }
+
+    validaPalavraReservada(regra: string){
         if(this.object.tokens[this.object.atual].token == regra){
-            
+            return true
         }
         else{
-            throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+            return false
+            // throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
         }
     }
 
-    getVetorTokensAtualVerifique(tipo: Number){
+    validaTipoTokenAtual(tipo: Number){
         if(this.object.tokens[this.object.atual].tipo == tipo){
             return true
         }
         else{
-            throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
+            return false
+            // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
         }
     }
 
-    newObject(tokens: [ITabela]){
+    newObject(tokens: IToken[]){
         var x = {
             tokens: tokens,
             atual: 0,

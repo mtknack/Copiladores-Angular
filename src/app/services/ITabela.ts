@@ -12,9 +12,11 @@ export const Tipo = {
   NUMBER: 11,
 };
 
-export interface ITabela {
+export interface IToken {
   id?: Number;
   tipo: Number;
   textoOriginal: string;
   token: string;
+  linha?: Number;
+  coluna?: Number;
 }

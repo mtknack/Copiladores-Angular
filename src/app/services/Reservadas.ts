@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import { ITabela, Tipo } from './ITabela';
+import { IToken, Tipo } from './ITabela';
 
 @Injectable({
   providedIn: 'root', // Este serviço será injetado em toda a aplicação
 })
 export class Reservadas {
-  private reservadas: ITabela[] = [];
+  private reservadas: IToken[] = [];
 
   constructor() {
     this.inicializareservadas();
   }
 
-  public buscaReservadas(token: string): ITabela | null {
+  public buscaReservadas(token: string): IToken | null{
     const reservada = this.reservadas.find((op) => op.textoOriginal === token);
     return reservada ? reservada : null;
   }

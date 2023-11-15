@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ITabela, Tipo } from './ITabela';
+import { IToken, Tipo } from './ITabela';
 import { ObjectService } from './semantico/Objetcs/ObjectService';
 import { PackageDeclarationImpl } from './semantico/implement/PackageDeclarationImpl';
 import { ImportsDeclarationsImpl } from './semantico/implement/ImportsDeclarationsImpl';
@@ -16,9 +16,9 @@ export class AnalizadorSemantico {
   ){
   }
 
-  initializeVariables(vetorTokens: [ITabela | null]){
+  initializeVariables(vetorTokens: IToken[]){
     if(vetorTokens != null){
-      this.objectService.newObject(vetorTokens as [ITabela]);
+      this.objectService.newObject(vetorTokens as IToken[]);
       this.startProcess()
     }
   }

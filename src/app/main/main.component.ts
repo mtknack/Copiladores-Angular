@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AnalizadorLexico } from '../services/AnalizadorLexico';
-import { ITabela } from '../services/ITabela';
-import { IError } from '../services/IError';
+import { IToken } from '../services/ITabela';
 
 @Component({
   selector: 'app-main',
@@ -19,7 +18,7 @@ import java.awt.List;
 import java.util.List;
 import java.util.ArrayList;`;
 
-  textoConvertido: IError[] = [];
+  textoConvertido: IToken[] = [];
   constructor(private analizadorLexico: AnalizadorLexico) {}
 
   show(): boolean {

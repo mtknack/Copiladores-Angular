@@ -43,7 +43,7 @@
 
     <div class="resultado" [hidden]="show()">
       <p class="texto" *ngFor="let t of textoConvertido">
-        <span style="color: rgb(233, 44, 44);">Error: </span>{{t.tipoError.token}}
+        <span style="color: rgb(233, 44, 44);">Error: </span>{{t.textoOriginal}}
         <span style="color: rgb(233, 44, 44);">Linha: </span>{{t.linha}}
         <span style="color: rgb(233, 44, 44);">Coluna: </span> {{t.coluna}}
       </p>

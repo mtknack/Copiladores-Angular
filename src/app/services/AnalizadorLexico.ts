@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
-import { ITabela, Tipo } from './ITabela';
-import { IError } from './IError'
+import { IToken, Tipo } from './ITabela';
 import { AnalizadorSemantico } from './AnalisadorSemantico';
 
 @Injectable({
@@ -10,26 +9,22 @@ import { AnalizadorSemantico } from './AnalisadorSemantico';
 })
 export class AnalizadorLexico {
   reservadas: Reservadas;
-  vetorDeTokens!: [ITabela | null];
+  vetorDeTokens: IToken[];
   identificadores: Identificadores;
 
   constructor(reservadas: Reservadas, identificadores: Identificadores, private analisadorSemantico: AnalizadorSemantico) {
+    this.vetorDeTokens = [];
     this.reservadas = reservadas;
     this.identificadores = identificadores;
   }
 
-  private formatadorDeTexto(texto: [ITabela | null]): IError[] {
+  private formatadorDeTexto(texto: IToken[]): IToken[] {
     // fazer a parte de formatar texto aqui
-    let tabela: ITabela[] = [];
-    var errors: IError[] = []
-    texto.forEach((text) => {
+
+    var errors: IToken[] = []
+    texto!.forEach((text,index) => {
       if (text != null && text.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
-        tabela.push(text);
-        errors.push({
-          linha: 2,
-          coluna: 3,
-          tipoError: text
-        })
+        errors.push(text);
       }
     });
 
@@ -77,19 +72,34 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public analizar(texto: string): IError[] {
+  public encontrarPosicao(texto:string, palavra:string, token:IToken|null) {
+    var linhas = texto.split('\n');  // Dividir o texto em linhas
+    for (var i = 0; i < linhas.length; i++) {
+        var coluna = linhas[i].indexOf(palavra);
+        if (coluna !== -1) {
+          // A palavra foi encontrada na linha i, coluna coluna
+          token!.linha = i+1
+          token!.coluna = coluna+1
+        }
+    }
+  }
+
+
+
+  public analizar(texto: string): IToken[] {
     const textoVetor: string[] = this.separarTexto(texto);
-    this.vetorDeTokens = [null];
+    this.vetorDeTokens = [];
 
     var i = 0;
     textoVetor.map((palavra) => {
-      this.vetorDeTokens[i] = this.reservadas.buscaReservadas(palavra);
+      let tokenAux = this.reservadas.buscaReservadas(palavra);
+
       //Verifica se e um identificador
       if (
-        this.vetorDeTokens[i] == null &&
+        tokenAux == null &&
         this.identificadores.VerificarIdentificador(palavra)
       ) {
-        this.vetorDeTokens[i] = {
+        tokenAux = {
           id: i,
           tipo: Tipo.IDENTIFICADOR_VALIDO,
           textoOriginal: palavra,
@@ -98,7 +108,7 @@ export class AnalizadorLexico {
       }
       //Verfica se e uma string
       else if (/^".*"$/.test(palavra) || /^'.*'$/.test(palavra)) {
-        this.vetorDeTokens[i] = {
+        tokenAux = {
           id: i,
           tipo: Tipo.STRING,
           textoOriginal: palavra,
@@ -107,7 +117,7 @@ export class AnalizadorLexico {
       }
       //Verifica se e um numero
       else if (/^-?\d+(\.\d+)?$/.test(palavra)) {
-        this.vetorDeTokens[i] = {
+        tokenAux = {
           id: i,
           tipo: Tipo.NUMBER,
           textoOriginal: palavra,
@@ -115,16 +125,23 @@ export class AnalizadorLexico {
         };
       }
       //Se nao e nada e um identificador invalido
-      else if (this.vetorDeTokens[i] == null) {
-        this.vetorDeTokens[i] = {
+      else if (tokenAux == null) {
+        tokenAux = {
           id: i,
           tipo: Tipo.IDENTIFICADOR_INVALIDO,
           textoOriginal: palavra,
           token: 'IDENTIFICADOR_INVALIDO',
         };
       }
+      if(tokenAux != null){
+        this.vetorDeTokens[i] = tokenAux
+      }
+      this.encontrarPosicao(texto, palavra, this.vetorDeTokens[i]);
       this.vetorDeTokens[i]!.id = i;
       i++;
+
+      
+
     });
 
     console.log(this.vetorDeTokens)

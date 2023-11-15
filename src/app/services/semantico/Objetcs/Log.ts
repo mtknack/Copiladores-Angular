@@ -5,5 +5,7 @@ export interface IObjectLog {
 
 export interface ILog {
 
-    message(): IObjectLog
+    message(): IObjectLog,
+    processar():boolean
+
 }
