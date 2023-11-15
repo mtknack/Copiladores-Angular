@@ -20,11 +20,15 @@ export class PackageDeclarationImpl {
 
         if(this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE)){
             this.objectService.skipIndex()
-            this.identifier.processar()
+            if(this.identifier.processar()){
+                this.objectService.skipIndex()
+                this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)
+            }
             return true
+        }else{
+            return false
         }
 
-        return false
     }
 
 }

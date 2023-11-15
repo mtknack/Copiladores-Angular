@@ -22,6 +22,7 @@ export class AnalizadorSemantico {
   }
 
   startProcess(){
+    debugger
     if(this.packageDeclaration.processar()){
       console.log('foiiiiiiii')
     }

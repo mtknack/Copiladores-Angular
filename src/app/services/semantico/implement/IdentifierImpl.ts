@@ -13,12 +13,6 @@ export class IdentifierImpl {
     ){}
 
     processar(){
-        if(this.objectService.getVetorTokensAtual('')){
-            
-            return true
-        }
-        else{
-            return false
-        }
+        return this.objectService.getVetorTokensAtualverifiqueType('')
     }
 }
