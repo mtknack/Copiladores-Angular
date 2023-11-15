@@ -3,6 +3,7 @@ import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
 import { ITabela, Tipo } from './ITabela';
 import { IError } from './IError'
+import { AnalizadorSemantico } from './AnalisadorSemantico';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class AnalizadorLexico {
   vetorDeTokens!: [ITabela | null];
   identificadores: Identificadores;
 
-  constructor(reservadas: Reservadas, identificadores: Identificadores) {
+  constructor(reservadas: Reservadas, identificadores: Identificadores, private analisadorSemantico: AnalizadorSemantico) {
     this.reservadas = reservadas;
     this.identificadores = identificadores;
   }
@@ -59,10 +60,11 @@ export class AnalizadorLexico {
         x.includes('{') ||
         x.includes('}') ||
         x.includes('[') ||
-        x.includes(']')
+        x.includes(']') || 
+        x.includes(';') 
       ) {
         let substrings: string[] = x
-          .split(/([()\[\]])/)
+          .split(/([()\;[\]])/)
           .map((substring) => substring.trim())
           .filter((substring) => substring !== '');
         linhas.push(...substrings);
@@ -72,7 +74,6 @@ export class AnalizadorLexico {
     });
 
     vetorTexto = linhas;
-
     return vetorTexto;
   }
 
@@ -125,6 +126,10 @@ export class AnalizadorLexico {
       this.vetorDeTokens[i]!.id = i;
       i++;
     });
+
+    console.log(this.vetorDeTokens)
+
+    this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
 
     return this.formatadorDeTexto(this.vetorDeTokens);
   }

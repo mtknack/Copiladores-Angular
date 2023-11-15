@@ -14,11 +14,10 @@ export class MainComponent implements AfterViewInit {
   textareaLines!: number[];
 
   texto: string = 
-`public class HelloWorld {
-    public static void main(final String[] args) {
-      System.out.println("Helooooooo");
-    }
-}`;
+`package br.biblioteca.telas;
+import java.awt.List;
+import java.util.List;
+import java.util.ArrayList;`;
 
   textoConvertido: IError[] = [];
   constructor(private analizadorLexico: AnalizadorLexico) {}

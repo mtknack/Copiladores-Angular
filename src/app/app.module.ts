@@ -8,6 +8,7 @@ import { MainComponent } from './main/main.component';
 import { Reservadas } from './services/Reservadas';
 import { AnalizadorLexico } from './services/AnalizadorLexico';
 import { HighlightWordsWithEDirective } from './diretivas/highlight-words-with-e.directive';
+import { PackageDeclarationImpl } from './services/semantico/implement/PackageDeclarationImpl';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HighlightWordsWithEDirective } from './diretivas/highlight-words-with-e
   ],
   providers: [
     Reservadas,
-    AnalizadorLexico
+    AnalizadorLexico,
+    PackageDeclarationImpl
   ],
   bootstrap: [AppComponent]
 })
