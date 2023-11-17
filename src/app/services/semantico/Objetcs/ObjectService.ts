@@ -11,16 +11,17 @@ import {  } from "../../ITabela"
 export class ObjectService {
 
     object!: IObjectInfo
+    vetorDeLog: [any] = [null]
 
     constructor(){}
 
-    skipIndex(){
+    async skipIndex(){
         if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
             this.object.atual++
         }
     }
 
-    backIndex(){
+    async backIndex(){
         
         if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
             this.object.atual--
@@ -31,29 +32,23 @@ export class ObjectService {
         return this.object
     }
 
-    setObject(object: IObjectInfo ){
+    async setObject(object: IObjectInfo ){
         this.object = object
     }
 
-    getVetorTokensAtual(regra: string){
-        if(this.object.tokens[this.object.atual].token == regra){
-            
-        }
-        else{
+    async getVetorTokensAtual(regra: string){
+        if(this.object.tokens[this.object.atual].token != regra){
             throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
         }
     }
 
-    getVetorTokensAtualVerifique(tipo: Number){
-        if(this.object.tokens[this.object.atual].tipo == tipo){
-            return true
-        }
-        else{
+    async getVetorTokensAtualVerifique(tipo: Number){
+        if(this.object.tokens[this.object.atual].tipo != tipo){
             throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
         }
     }
 
-    newObject(tokens: [ITabela]){
+    async newObject(tokens: [ITabela]){
         var x = {
             tokens: tokens,
             atual: 0,
@@ -69,11 +64,21 @@ export class ObjectService {
         }
     }
 
-    logStatusSemantico(log: IObjectLog, entrada: boolean){
-        if(entrada){
-            console.log('entrando em: ', log, this.object)
+    async logStatusSemantico(log: IObjectLog, entrada: boolean){
+        if (entrada) {
+            this.vetorDeLog.push(`entrando em: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
         }
-        console.log('saindo de: ', log, this.object)
+        else{
+            this.vetorDeLog.push(`saindo de: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
+        }  
+    }
+
+    printVetorLog(): any{
+        return this.vetorDeLog;
+    }
+
+    resetVetorLog(){
+        this.vetorDeLog = [null];
     }
 
     assembleTree(){

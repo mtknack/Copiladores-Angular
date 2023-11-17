@@ -24,14 +24,19 @@ export class ImportsDeclarationsImpl implements ILog {
         }
     }
 
-    processar(){
-        this.objectService.logStatusSemantico(this.message(), true)
+    async processar(){
 
-        this.importsDeclarationImpl.processar() 
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
-        this.processar()
-        
-        this.objectService.logStatusSemantico(this.message(), false)
+        try {
+            await this.objectService.logStatusSemantico(this.message(), true)
+
+            await this.importsDeclarationImpl.processar() 
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
+            await this.processar()
+            
+            await this.objectService.logStatusSemantico(this.message(), false)
+        } catch (error) {
+            
+        }
     }
 
 }

@@ -1,0 +1,73 @@
+<program> → <packageDeclaration>? <importDeclarations>? <classDeclaration>?
+<packageDeclaration> → package <identifier> ;
+<importDeclarations> → <importDeclaration> | <importDeclarations> <importDeclaration>
+<importDeclaration> → import < identifier> ;
+<classDeclaration> → <classModifier>? class <identifier> <classBody> {permitido somente uma definião de classe por unit}
+<classModifier> → public | abstract | final
+<classBody> → { <classBodyDeclarations>? }
+<classBodyDeclarations> → <classBodyDeclaration> | <classBodyDeclarations> <classBodyDeclaration>
+<classBodyDeclaration> → <Modifiers>?<Type><identifier><fieldMethodDeclaration>
+<FieldMethodDeclaration> → <fieldDeclaration> | <methodDeclaration>
+<fieldDeclaration> → <variableDeclarators> ;
+<Modifier> → public | protected | private | static | final { pode tern a LP somente um destes modifier ou nehum deles}
+<variableDeclarators> → <variableDeclarator> | , <identifier> <variableDeclarators> | E
+<variableDeclarator> → = <expression> | E
+<methodDeclaration> → <methodDeclarator> <block>
+<methodDeclarator> → ( <formalParameterList>? )
+<formalParameterList> → <formalParameter> | <formalParameterList> , <formalParameter>
+<formalParameter> → <type> <identifier>
+<type> → byte | short | int | long | char | float | double | boolean | void
+<block> → { <blockStatements>? }
+<blockStatements> → <blockStatement> | <blockStatements> <blockStatement>
+<blockStatement> → <localVariableDeclaration> ; | <statement>
+<localVariableDeclaration> → <type><identifier> <variableDeclarators>
+<statement> → <block> | <emptyStatement> | <identifier><statementExpression> ; | <doStatement> |
+<breakStatement> | <continueStatement> | <returnStatement> |<ifSstatement> |
+<whileStatement> | <tryStatement> | <classInstanceCreationExpression>
+
+<emptyStatement> → ;
+<labeledStatement> → : <statement>
+<statementExpression> → <assignment> | <methodInvocation> | <labeledStatement>
+<ifStatement>→ if ( <expression> ) <statement> <ifThenElseStatement> ?
+<ifThenElseStatement>→ else <statement>
+<whileStatement> → while ( <expression> ) <statement>
+<doStatement> → do <statement> while ( <expression> ) ;
+<breakStatement> → break <identifier>? ;
+<continueStatement> → continue <identifier>? ;
+<returnStatement> → return <expression>? ;
+<tryStatement> → try <block> <catchesStatement>
+<catchesStatement> → <catchClause> <finally> ? | <finally>
+<catchClause> → catch ( <formalParameter> ) <block> <catchClause> | E
+<finally > → finally <block>
+<assignment> → <assignmentOperator> <expression>
+<assignmentOperator> → = | *= | /= | %= | += | -= | <<= | >>= | >>>= | &= | ^=
+<expression> → <comparationExpression> <expression2> //Faltou inserir parenteses
+<expression2> → || <comparationExpression> <expression2> | && <comparationExpression>
+
+<expression2> | ε
+
+<comparationExpression> → <operationalExpression> <relationalExpression>
+<relationalExpression> → == <operationalExpression> <relationalExpression>
+| != <operationalExpression> <relationalExpression>
+|< <operationalExpression> <relationalExpression>
+| <= <operationalExpression> <relationalExpression>
+| > <operationalExpression> <relationalExpression>
+| >= <operationalExpression> <relationalExpression>
+| ε
+
+<operationalExpression> → <term> <additiveExpression>
+<additiveExpression>→ + <term> <additiveExpression>| - <term> <additiveExpression> | ε
+
+<term> → <unaryExpression> <multiplicativeExpression>
+<multiplicativeExpression> → * <unaryExpression> <multiplicativeExpression> | / <unaryExpression>
+<multiplicativeExpression> | % <unaryExpression> <multiplicativeExpression> | ε
+<unaryExpression> → + <identifier1> <methodInvocation>? | - <identifier1><methodInvocation>?
+
+| <identifier1><methodInvocation>?
+
+<methodInvocation> → ( <argumentList>? ) | super . <identifier> ( <argumentList>? )
+<classInstanceCreationExpression> → new <classType> ( <argumentList>? )
+<argumentList> → <expression> | <argumentList> , <expression>
+
+<Identifier > aceita nome
+<Identifier1 > aceita nome, int, real

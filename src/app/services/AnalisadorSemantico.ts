@@ -16,18 +16,20 @@ export class AnalizadorSemantico {
   ){
   }
 
-  initializeVariables(vetorTokens: [ITabela | null]){
+  async initializeVariables(vetorTokens: [ITabela | null]){
     if(vetorTokens != null){
       this.objectService.newObject(vetorTokens as [ITabela]);
-      this.startProcess()
+      await this.startProcess()
     }
   }
 
-  startProcess(){
+  async startProcess(){
     
-    this.packageDeclaration.processar() 
-    this.importsDeclarationsImpl.processar()
-    console.log('foiiiiiiii')
-    
+    await this.packageDeclaration.processar() 
+    await this.importsDeclarationsImpl.processar()
+
+    console.clear()
+    console.log(this.objectService.printVetorLog()) 
+    this.objectService.resetVetorLog()
   }
 }

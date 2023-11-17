@@ -25,18 +25,22 @@ export class PackageDeclarationImpl implements ILog {
     }
 
 
-    processar(){
-        debugger
-        this.objectService.logStatusSemantico(this.message(), true)
+    async processar() {
+        await this.objectService.logStatusSemantico(this.message(), true);
 
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE)
-        this.objectService.skipIndex()
-        this.identifier.processar()
-        this.objectService.skipIndex()
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)
-        this.objectService.skipIndex()
-
-        this.objectService.logStatusSemantico(this.message(), false)
+        try {
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE);
+            await this.objectService.skipIndex();
+            
+            await this.identifier.processar();
+            await this.objectService.skipIndex();
+            
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON);
+            await this.objectService.skipIndex();
+        } catch (error) {
+            // Trate o erro aqui, se necessário
+            console.error(error);
+        }
+        await this.objectService.logStatusSemantico(this.message(), false);
     }
-
 }

@@ -24,18 +24,22 @@ export class ImportsDeclarationImpl implements ILog{
         }
     }
 
-    processar(){
-        this.objectService.logStatusSemantico(this.message(), true)
+    async processar(){
 
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
-        this.objectService.skipIndex()
-        this.identifier.processar()
-        this.objectService.skipIndex()
-        this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)       
-        this.objectService.skipIndex()
+        try {
+            await this.objectService.logStatusSemantico(this.message(), true)
+
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
+            await this.objectService.skipIndex()
+            await this.identifier.processar()
+            await this.objectService.skipIndex()
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON)       
+            await this.objectService.skipIndex()
+                
+            await this.objectService.logStatusSemantico(this.message(), false)
+        } catch (error) {
             
-        this.objectService.logStatusSemantico(this.message(), false)
-            
+        }
     }
 
 }

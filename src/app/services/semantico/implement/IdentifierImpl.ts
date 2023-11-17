@@ -21,12 +21,18 @@ export class IdentifierImpl implements ILog {
         }
     }
 
-    processar(){
+    async processar(){
 
-        this.objectService.logStatusSemantico(this.message(), true)
+        try {
+            await this.objectService.logStatusSemantico(this.message(), true)
 
-        this.objectService.getVetorTokensAtualVerifique(Tipo.IDENTIFICADOR_VALIDO)
+            await this.objectService.getVetorTokensAtualVerifique(Tipo.IDENTIFICADOR_VALIDO)
 
-        this.objectService.logStatusSemantico(this.message(), false)
+            await this.objectService.logStatusSemantico(this.message(), false)
+        } catch (error) {
+            // Trate o erro aqui, se necessário
+            console.error(error);
+        }
+        
     }
 }
