@@ -9,7 +9,7 @@ import { Tipo } from "../../Interfaces";
 @Injectable({
     providedIn: 'root',
 })
-export class ImportsDeclarationsImpl implements ILog {
+export class ImportDeclarations implements ILog {
 
     constructor(
         private importsDeclarationImpl: ImportsDeclarationImpl,

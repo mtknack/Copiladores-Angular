@@ -19,4 +19,5 @@ export interface IToken {
   token: string;
   linha?: Number;
   coluna?: Number;
+  erro?: string
 }

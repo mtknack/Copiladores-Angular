@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AnalizadorLexico } from '../services/AnalizadorLexico';
 import { IToken } from '../services/Interfaces';
+import { AnalizadorSemantico } from '../services/AnalisadorSemantico';
 
 @Component({
   selector: 'app-main',
@@ -20,7 +21,8 @@ import java.util.ArrayList;`;
 
   Erros: IToken[] = [];
   Tokens: IToken[] = [];
-  constructor(private analizadorLexico: AnalizadorLexico) {}
+  // Arovre: Arvore
+  constructor(private analizadorLexico: AnalizadorLexico, private analizadorSemantico: AnalizadorSemantico) {}
 
   show(): boolean {
     if (this.Erros.length == 0) {
@@ -33,8 +35,7 @@ import java.util.ArrayList;`;
     this.updateTextareaLines();
     this.Tokens = this.analizadorLexico.analizar(this.texto);
     this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
-    
-    console.log(this.Erros)
+    let teste = this.analizadorSemantico.initializeVariables(this.Tokens)
   }
 
   ngAfterViewInit(): void {

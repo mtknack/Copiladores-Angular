@@ -15,24 +15,24 @@ export class ObjectService {
 
     constructor(){}
 
-    skipIndex(){
+    private skipIndex(){
         if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
             this.object.atual++
         }
     }
 
-    backIndex(){
+    private backIndex(){
         
         if(this.object.atual <= this.object.tokens.length && this.object.atual >= 0){
             this.object.atual--
         }
     }
 
-    getIndex(){
+    private getIndex(){
         return this.object.atual;
     }
 
-    setIndex(newIndex:number){
+    private setIndex(newIndex:number){
         this.object.atual = newIndex;
     }
 
@@ -44,16 +44,17 @@ export class ObjectService {
         this.object = object
     }
 
-    
-
-    validaRegra(arrayDeToken:any[]):boolean{
-        let qtdPalavra = arrayDeToken.length;
+    public validaRegra(arrayDeToken:any[],optionalTokens:number[]):boolean{
+        let qtdToken = arrayDeToken.length;
         let arrayVerdade = []
         let verdadeFinal = true
         let primeiroIndex = this.getIndex();
-        for (let i = 0; i < qtdPalavra; i++) {
-            let teste = false;
-
+        let teste 
+        let indexErro = this.object.atual
+        let tipoErro;
+        for (let i = 0; i < qtdToken; i++) {
+            teste = false
+            tipoErro = arrayDeToken[i];
             if(typeof arrayDeToken[i] == typeof ``){
                 teste = this.validaPalavraReservada(arrayDeToken[i]);
             }else if(typeof arrayDeToken[i] == typeof 10){
@@ -62,15 +63,18 @@ export class ObjectService {
             else{
                 teste = arrayDeToken[i].processar();
             }
-
-            arrayVerdade.push(teste);
-            if(arrayVerdade[i] == false){
+            if(teste == false){
+                if(i in optionalTokens){
+                    continue
+                }
+                indexErro = this.object.atual
                 verdadeFinal = false
                 break
             }
             this.skipIndex();
         }
         if (verdadeFinal == false) {
+            this.criaErro(tipoErro)
             this.setIndex(primeiroIndex);
             return false
         }
@@ -94,6 +98,14 @@ export class ObjectService {
         else{
             return false
             // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
+        }
+    }
+
+    criaErro(esperado:any){
+        if(typeof esperado == typeof ``){
+            this.object.tokens[this.object.atual].erro = `"${esperado}" esperado na linha=${this.object.tokens[this.object.atual].linha} coluna=${this.object.tokens[this.object.atual].coluna}` 
+        }else if(typeof esperado == typeof 10){
+            this.object.tokens[this.object.atual].erro = `Tipo ${esperado} esperado na linha=${this.object.tokens[this.object.atual].linha} coluna=${this.object.tokens[this.object.atual].coluna}`
         }
     }
 

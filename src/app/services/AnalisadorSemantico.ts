@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { IToken, Tipo } from './Interfaces';
 import { ObjectService } from './semantico/Objetcs/ObjectService';
 import { PackageDeclarationImpl } from './semantico/implement/PackageDeclarationImpl';
-import { ImportsDeclarationsImpl } from './semantico/implement/ImportsDeclarationsImpl';
+import { ImportDeclarations } from './semantico/implement/ImportDeclarations';
+import { Program } from './semantico/implement/Program';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +12,7 @@ export class AnalizadorSemantico {
 
   constructor(
     private objectService: ObjectService,
-    private packageDeclaration: PackageDeclarationImpl,
-    private importsDeclarationsImpl: ImportsDeclarationsImpl,
+    private program:Program,
   ){
   }
 
@@ -25,8 +25,7 @@ export class AnalizadorSemantico {
 
   startProcess(){
     
-    this.packageDeclaration.processar() 
-    this.importsDeclarationsImpl.processar()
+    this.program.processar() 
     console.log('foiiiiiiii')
     
   }
