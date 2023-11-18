@@ -41,69 +41,52 @@ export class ObjectService {
         return this.object
     }
 
-    async setObject(object: IObjectInfo ){
+    setObject(object: IObjectInfo ){
         this.object = object
     }
 
-    public validaRegra(arrayDeToken:any[],optionalTokens:number[]):boolean{
-        let qtdToken = arrayDeToken.length;
-        let arrayVerdade = []
-        let verdadeFinal = true
+    public validaRegra(arrayDeToken:any[],optionalTokens:number[]){
+        //([IMPORT, IDENTIFICADOR, SEMICOLON],[0,1,2])
+        
         let primeiroIndex = this.getIndex();
-        let teste 
-        let indexErro = this.object.atual
-        let tipoErro;
-        for (let i = 0; i < qtdToken; i++) {
-            teste = false
-            tipoErro = arrayDeToken[i];
-            if(typeof arrayDeToken[i] == typeof ``){
-                teste = this.validaPalavraReservada(arrayDeToken[i]);
-            }else if(typeof arrayDeToken[i] == typeof 10){
-                teste = this.validaTipoTokenAtual(arrayDeToken[i]);
-            }
-            else{
-                teste = arrayDeToken[i].processar();
-            }
-            if(teste == false){
-                if(i in optionalTokens){
-                    continue
+        let indexErro;
+        try{
+            arrayDeToken.map((tipoToken, index) => {
+                // console.log(this.object.tokens[this.object.atual].token, tipoToken, this.object.atual)
+                try {
+                    if (typeof tipoToken === typeof '') {
+                        this.validaPalavraReservada(tipoToken);
+                        this.skipIndex();
+
+                    } else if (typeof tipoToken === typeof 1) {
+                        this.validaTipoTokenAtual(tipoToken);
+                        this.skipIndex();
+                    } else {
+                        tipoToken.processar();
+                    }
+                } catch (error) {
+                    // if(index in optionalTokens){
+                    //     continue
+                    // }
+                    indexErro = this.object.atual;
+                    throw error;
                 }
-                indexErro = this.object.atual
-                verdadeFinal = false
-                break
-            }
-            this.skipIndex();
-        }
-        if (verdadeFinal == false) {
-            this.criaErro(tipoErro)
+            });
+        }catch(erro){
             this.setIndex(primeiroIndex);
-            return false
-        }
-        return true
-    }
-
-    validaPalavraReservada(regra: string){
-        if(this.object.tokens[this.object.atual].token == regra){
-            return true
-        }
-        else{
-            return false
-            // throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+            throw erro
         }
     }
 
-    async validaTipoTokenAtual(tipo: Number){
+    private validaPalavraReservada(regra: string){
+        if(this.object.tokens[this.object.atual].token != regra){
+            throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+        }
+    }
+
+    private validaTipoTokenAtual(tipo: Number){
         if(this.object.tokens[this.object.atual].tipo != tipo){
-            return false
-            // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].token} === ${tipo} `)
-        }
-    }
-
-    criaErro(esperado:any){
-        if(typeof esperado == typeof ``){
-            this.object.tokens[this.object.atual].erro = `"${esperado}" esperado na linha=${this.object.tokens[this.object.atual].linha} coluna=${this.object.tokens[this.object.atual].coluna}` 
-        }else if(typeof esperado == typeof 10){
-            this.object.tokens[this.object.atual].erro = `Tipo ${esperado} esperado na linha=${this.object.tokens[this.object.atual].linha} coluna=${this.object.tokens[this.object.atual].coluna}`
+            throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
         }
     }
 
@@ -123,7 +106,7 @@ export class ObjectService {
         }
     }
 
-    async logStatusSemantico(log: IObjectLog, entrada: boolean){
+    logStatusSemantico(log: IObjectLog, entrada: boolean){
         if (entrada) {
             this.vetorDeLog.push(`entrando em: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
         }
@@ -144,3 +127,5 @@ export class ObjectService {
 
     }
 }
+
+//PROGRAM -> PACKAGE IMPORT CLASS

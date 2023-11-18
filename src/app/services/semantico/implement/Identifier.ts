@@ -3,12 +3,13 @@ import { IIdentifier } from "../interfaces/IIdentifier";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { Tipo } from "../../Interfaces";
+import { toArray } from "rxjs";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class IdentifierImpl implements ILog {
+export class Identifier implements ILog {
 
     constructor(
         private objectService: ObjectService
@@ -21,20 +22,18 @@ export class IdentifierImpl implements ILog {
         }
     }
 
-    async processar(){
+    processar(){
 
         try {
-            await this.objectService.logStatusSemantico(this.message(), true)
-
-            await return this.objectService.validaTipoTokenAtual(Tipo.IDENTIFICADOR_VALIDO)
-        
-            await this.objectService.logStatusSemantico(this.message(), false)
+            // this.objectService.logStatusSemantico(this.message(), true)
+            this.objectService.validaRegra([Tipo.IDENTIFICADOR_VALIDO],[])
+            // this.objectService.logStatusSemantico(this.message(), false)
         } catch (error) {
             // Trate o erro aqui, se necessário
-            console.error(error);
+            throw error
         }
         
-        
+
  
     }
 

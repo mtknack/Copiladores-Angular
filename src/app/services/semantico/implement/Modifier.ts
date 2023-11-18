@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { ObjectService } from "../Objetcs/ObjectService";
 
 
 @Injectable({
@@ -21,33 +22,33 @@ export class Modifier implements ILog {
 // Regra: <classModifier> → public | abstract | final
     processar(): boolean {
         var flag: boolean = false; 
-        this.objectService.logStatusSemantico(this.message(), true)
+        // this.objectService.logStatusSemantico(this.message(), true)
 
-        if(this.objectService.validaPalavraReservada(PalavrasReservadas.PUBLIC)){
-            flag = true;
-        }
-        else{
-            if(this.objectService.validaPalavraReservada(PalavrasReservadas.PROTECTED)){
-                flag= true;
-            }
-            else{
-                if(this.objectService.validaPalavraReservada(PalavrasReservadas.PRIVATE)){
-                    flag= true;
-                }
-								else{
-									if(this.objectService.validaPalavraReservada(PalavrasReservadas.STATIC)){
-											flag= true;
-									}
-									else{
-										if(this.objectService.validaPalavraReservada(PalavrasReservadas.FINAL)){
-												flag= true;
-										}
-								}
-							}
-            }
-        }
+        // if(this.objectService.validaPalavraReservada(PalavrasReservadas.PUBLIC)){
+        //     flag = true;
+        // }
+        // else{
+        //     if(this.objectService.validaPalavraReservada(PalavrasReservadas.PROTECTED)){
+        //         flag= true;
+        //     }
+        //     else{
+        //         if(this.objectService.validaPalavraReservada(PalavrasReservadas.PRIVATE)){
+        //             flag= true;
+        //         }
+		// 						else{
+		// 							if(this.objectService.validaPalavraReservada(PalavrasReservadas.STATIC)){
+		// 									flag= true;
+		// 							}
+		// 							else{
+		// 								if(this.objectService.validaPalavraReservada(PalavrasReservadas.FINAL)){
+		// 										flag= true;
+		// 								}
+		// 						}
+		// 					}
+        //     }
+        // }
 
-        this.objectService.logStatusSemantico(this.message(), false)
+        // this.objectService.logStatusSemantico(this.message(), false)
         return flag;
     }
 }

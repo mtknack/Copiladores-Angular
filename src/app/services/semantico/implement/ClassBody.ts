@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { ImportsDeclarationImpl } from "./ImportsDeclarationImpl";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { ClassBodyDeclaration } from "./ClassBodyDeclaration";
 
 
 @Injectable({
@@ -12,7 +12,7 @@ export class ClassBody implements ILog {
 
     constructor(
         private objectService: ObjectService,
-		private classBodyDeclarations: ClassBodyDeclarations
+		private classBodyDeclarations: ClassBodyDeclaration
     ){}
 
     message(): IObjectLog {
@@ -24,17 +24,14 @@ export class ClassBody implements ILog {
 
     // REGRA: <classBody> → { <classBodyDeclarations>? }
     processar(){
-        this.objectService.logStatusSemantico(this.message(), true)
+        // this.objectService.logStatusSemantico(this.message(), true)
 
-        this.objectService.validaPalavraReservada(PalavrasReservadas.LEFT_BRACE);
-				this.objectService.skipIndex()
+        // this.objectService.validaPalavraReservada(PalavrasReservadas.LEFT_BRACE);
 
-				this.classBodyDeclarations.processar();
-				
-				this.objectService.skipIndex()
-        this.objectService.validaPalavraReservada(PalavrasReservadas.RIGHT_BRACE);
+		// 		this.classBodyDeclarations.processar();
+        // this.objectService.validaPalavraReservada(PalavrasReservadas.RIGHT_BRACE);
         
-        this.objectService.logStatusSemantico(this.message(), false)
+        // this.objectService.logStatusSemantico(this.message(), false)
     }
 
 }

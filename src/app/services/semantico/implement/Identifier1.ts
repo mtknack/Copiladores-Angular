@@ -5,7 +5,7 @@ import { PalavrasReservadas } from "../../Reservadas";
 @Injectable({
     providedIn: 'root',
 })
-export class Identifier1Impl {
+export class Identifier1 {
 
     regra1!: PalavrasReservadas.ABSTRACT | PalavrasReservadas.FINAL | PalavrasReservadas.PUBLIC;
 

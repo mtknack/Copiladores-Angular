@@ -6,6 +6,6 @@ export interface IObjectLog {
 export interface ILog {
 
     message(): IObjectLog,
-    processar():boolean
+    processar():any
 
 }

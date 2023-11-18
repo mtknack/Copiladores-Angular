@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { ImportsDeclarationImpl } from "./ImportsDeclarationImpl";
+import { ImportDeclaration } from "./ImportDeclaration";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { Tipo } from "../../Interfaces";
 
@@ -12,7 +12,7 @@ import { Tipo } from "../../Interfaces";
 export class ImportDeclarations implements ILog {
 
     constructor(
-        private importsDeclarationImpl: ImportsDeclarationImpl,
+        private importDeclaration: ImportDeclaration,
         private objectService: ObjectService,
     ){
 
@@ -25,19 +25,28 @@ export class ImportDeclarations implements ILog {
         }
     }
 
+    // <importDeclarations> → <importDeclaration> | <importDeclarations> <importDeclaration>
     processar(){
-        this.objectService.logStatusSemantico(this.message(), true)
 
-        this.importsDeclarationImpl.processar() 
-        this.objectService.validaPalavraReservada(PalavrasReservadas.IMPORT)
-        this.processar()
         
-        this.objectService.logStatusSemantico(this.message(), false)
+        let regra1 = [this, this.importDeclaration]
+        let regra2 = [this.importDeclaration]
 
-        // let regra1 = [PalavrasReservadas.PACKAGE, Tipo.IDENTIFICADOR_VALIDO, PalavrasReservadas.SEMICOLON]
-        // if(this.objectService.validaRegra(regra1))
-        // else regra2
-        return true
+        
+        try{
+            // this.objectService.validaRegra(regra1,[])
+            throw "Validar com o professor de como parar a recursão"
+        }
+        catch(erro1){
+            try{
+                this.objectService.validaRegra(regra2, [])
+            }
+            catch(erro2){
+                throw erro2
+            }
+            // verificar qual ods erros kancar
+            
+        }
     }
 
 }

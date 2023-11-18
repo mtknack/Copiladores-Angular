@@ -1,11 +1,12 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { IdentifierImpl } from "./IdentifierImpl";
+import { Identifier } from "./Identifier";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { PackageDeclarationImpl } from "./PackageDeclarationImpl";
+import { PackageDeclaration } from "./PackageDeclaration";
 import { ImportDeclarations } from "./ImportDeclarations";
 import { ClassDeclaration } from "./ClassDeclaration";
+import { ImportDeclaration } from "./ImportDeclaration";
 
 
 @Injectable({
@@ -14,9 +15,9 @@ import { ClassDeclaration } from "./ClassDeclaration";
 export class Program implements ILog{
 
     constructor(
-        private packageDeclarationImpl: PackageDeclarationImpl,
+        private packageDeclaration: PackageDeclaration,
         private importDeclarations:ImportDeclarations,
-        private classDeclaration:ClassDeclaration,
+        // private classDeclaration:ClassDeclaration,
         private objectService: ObjectService,
     ){
 
@@ -30,14 +31,23 @@ export class Program implements ILog{
     }
 
     processar(){
-        // let regra1 = [this.packageDeclarationImpl, this.importDeclarations, this.classDeclaration]
-        let regra1 = [this.packageDeclarationImpl]
-        let retorno = this.objectService.validaRegra(regra1,[0])
+        // let regra1 = [this.packageDeclarations, this.importDeclarations, this.classDeclarations]
+        try{
+            let regra1 = [this.packageDeclaration, this.importDeclarations]
+            // this.packageDeclaration.processar()
+            console.clear()
+            this.objectService.validaRegra(regra1,[0])
+            console.log(true)
+        }catch(err){
+            console.log(err)
+            // console.log(err)
+        }
+        
 
-        if(retorno)
-            return true
+        // if(retorno)
+        //     return true
 
-        return false
+        // return false
     }
 
 }

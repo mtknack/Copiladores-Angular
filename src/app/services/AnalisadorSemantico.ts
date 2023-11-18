@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IToken, Tipo } from './Interfaces';
 import { ObjectService } from './semantico/Objetcs/ObjectService';
-import { PackageDeclarationImpl } from './semantico/implement/PackageDeclarationImpl';
+import { PackageDeclaration } from './semantico/implement/PackageDeclaration';
 import { ImportDeclarations } from './semantico/implement/ImportDeclarations';
 import { Program } from './semantico/implement/Program';
 
@@ -26,7 +26,6 @@ export class AnalizadorSemantico {
   async startProcess(){
     
     this.program.processar() 
-    console.log('foiiiiiiii')
     
   }
 }

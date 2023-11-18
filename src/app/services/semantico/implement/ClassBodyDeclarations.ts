@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { ImportsDeclarationImpl } from "./ImportsDeclarationImpl";
+import { ImportDeclaration } from "./ImportDeclaration";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { Modifier } from "./Modifier";
-import { IdentifierImpl } from "./IdentifierImpl";
+import { Identifier } from "./Identifier";
 import { Type } from "./Type";
 
 
@@ -16,9 +16,9 @@ export class ClassBodyDeclarations implements ILog {
     constructor(
         private objectService: ObjectService,
 				private modifier: Modifier,
-				private identifier: IdentifierImpl,
+				private identifier: Identifier,
 				private type: Type,
-				private fieldMethodDeclarations : FieldMethodDeclarations 
+				// private fieldMethodDeclarations : FieldMethodDeclarations 
     ){
 
     }
