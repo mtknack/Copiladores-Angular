@@ -1,9 +1,8 @@
 import { ElementRef, Injectable } from "@angular/core";
 import { IObjectInfo } from "./IObjectInfo";
-import { Arvore } from "./Arvore";
 import { ITabela, Tipo } from "../../ITabela";
 import { IObjectLog } from "./Log";
-import {  } from "../../ITabela"
+import { Arvore } from "./Arvore";
 
 @Injectable({
     providedIn: 'root', // Este serviço será injetado em toda a aplicação
@@ -60,12 +59,21 @@ export class ObjectService {
 
     newArvore(): Arvore{
         return{
-            vetor: []
+            id: 0,
+            name: '',
+            arvore: null
         }
     }
 
     async logStatusSemantico(log: IObjectLog, entrada: boolean){
         if (entrada) {
+            if(this.object.arvore.id == null){
+                this.object.arvore.arvore?.push({
+                    id: 0,
+                    name: log.analise,
+                    arvore: null
+                });
+            }
             this.vetorDeLog.push(`entrando em: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
         }
         else{

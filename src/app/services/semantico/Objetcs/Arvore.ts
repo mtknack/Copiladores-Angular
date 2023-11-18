@@ -1,3 +1,5 @@
 export interface Arvore{
-    vetor: []
+    id: Number,
+    name: String,
+    arvore: Arvore[] | null
 }
