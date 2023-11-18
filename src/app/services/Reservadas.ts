@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IToken, Tipo } from './ITabela';
+import { IToken, Tipo } from './Interfaces';
 
 @Injectable({
   providedIn: 'root', // Este serviço será injetado em toda a aplicação

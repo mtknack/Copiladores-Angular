@@ -37,7 +37,7 @@ export class ImportsDeclarationImpl implements ILog{
         this.objectService.skipIndex()
             
         this.objectService.logStatusSemantico(this.message(), false)
-            
+        return true
     }
 
 }

@@ -49,6 +49,7 @@ export class PackageDeclarationImpl implements ILog {
 
 
         this.objectService.logStatusSemantico(this.message(), false)
+        return true
     }
 
 }

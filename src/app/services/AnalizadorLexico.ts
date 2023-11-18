@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Reservadas } from './Reservadas';
 import { Identificadores } from './Identificadores';
-import { IToken, Tipo } from './ITabela';
+import { IToken, Tipo } from './Interfaces';
 import { AnalizadorSemantico } from './AnalisadorSemantico';
 
 @Injectable({
@@ -18,9 +18,8 @@ export class AnalizadorLexico {
     this.identificadores = identificadores;
   }
 
-  private formatadorDeTexto(texto: IToken[]): IToken[] {
+  public getErrosLexicos(texto: IToken[]): IToken[] {
     // fazer a parte de formatar texto aqui
-
     var errors: IToken[] = []
     texto!.forEach((text,index) => {
       if (text != null && text.tipo == Tipo.IDENTIFICADOR_INVALIDO) {
@@ -72,7 +71,7 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public encontrarPosicao(texto:string, palavra:string, token:IToken|null) {
+  public getPosicaoPalavra(texto:string, palavra:string, token:IToken|null) {
     var linhas = texto.split('\n');  // Dividir o texto em linhas
     for (var i = 0; i < linhas.length; i++) {
         var coluna = linhas[i].indexOf(palavra);
@@ -86,12 +85,13 @@ export class AnalizadorLexico {
 
 
 
+
   public analizar(texto: string): IToken[] {
     const textoVetor: string[] = this.separarTexto(texto);
     this.vetorDeTokens = [];
 
     var i = 0;
-    textoVetor.map((palavra) => {
+    textoVetor.map((palavra,linha) => {
       let tokenAux = this.reservadas.buscaReservadas(palavra);
 
       //Verifica se e um identificador
@@ -136,7 +136,7 @@ export class AnalizadorLexico {
       if(tokenAux != null){
         this.vetorDeTokens[i] = tokenAux
       }
-      this.encontrarPosicao(texto, palavra, this.vetorDeTokens[i]);
+      this.getPosicaoPalavra(texto, palavra, this.vetorDeTokens[i]);
       this.vetorDeTokens[i]!.id = i;
       i++;
 
@@ -144,10 +144,8 @@ export class AnalizadorLexico {
 
     });
 
-    console.log(this.vetorDeTokens)
+    // this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
 
-    this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
-
-    return this.formatadorDeTexto(this.vetorDeTokens);
+    return this.vetorDeTokens;
   }
 }

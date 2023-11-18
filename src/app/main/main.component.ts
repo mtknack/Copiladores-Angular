@@ -1,6 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angular/core';
 import { AnalizadorLexico } from '../services/AnalizadorLexico';
-import { IToken } from '../services/ITabela';
+import { IToken } from '../services/Interfaces';
 
 @Component({
   selector: 'app-main',
@@ -18,11 +18,12 @@ import java.awt.List;
 import java.util.List;
 import java.util.ArrayList;`;
 
-  textoConvertido: IToken[] = [];
+  Erros: IToken[] = [];
+  Tokens: IToken[] = [];
   constructor(private analizadorLexico: AnalizadorLexico) {}
 
   show(): boolean {
-    if (this.textoConvertido.length == 0) {
+    if (this.Erros.length == 0) {
       return true;
     }
     return false;
@@ -30,7 +31,9 @@ import java.util.ArrayList;`;
 
   btnCopilar() {
     this.updateTextareaLines();
-    this.textoConvertido = this.analizadorLexico.analizar(this.texto);
+    this.Tokens = this.analizadorLexico.analizar(this.texto);
+    this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
+    console.log(this.Erros)
   }
 
   ngAfterViewInit(): void {

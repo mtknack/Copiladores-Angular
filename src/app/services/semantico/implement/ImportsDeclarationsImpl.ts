@@ -3,6 +3,7 @@ import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ImportsDeclarationImpl } from "./ImportsDeclarationImpl";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { Tipo } from "../../Interfaces";
 
 
 @Injectable({
@@ -32,6 +33,11 @@ export class ImportsDeclarationsImpl implements ILog {
         this.processar()
         
         this.objectService.logStatusSemantico(this.message(), false)
+
+        // let regra1 = [PalavrasReservadas.PACKAGE, Tipo.IDENTIFICADOR_VALIDO, PalavrasReservadas.SEMICOLON]
+        // if(this.objectService.validaRegra(regra1))
+        // else regra2
+        return true
     }
 
 }

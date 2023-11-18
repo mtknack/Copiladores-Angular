@@ -1,4 +1,4 @@
-import { IToken } from "../../ITabela"
+import { IToken } from "../../Interfaces"
 import { Arvore } from "./Arvore"
 
 export interface IObjectInfo{

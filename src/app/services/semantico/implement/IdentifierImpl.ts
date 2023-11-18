@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { IIdentifier } from "../interfaces/IIdentifier";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { Tipo } from "../../ITabela";
+import { Tipo } from "../../Interfaces";
 
 
 @Injectable({

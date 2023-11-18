@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IToken, Tipo } from './ITabela';
+import { IToken, Tipo } from './Interfaces';
 import { ObjectService } from './semantico/Objetcs/ObjectService';
 import { PackageDeclarationImpl } from './semantico/implement/PackageDeclarationImpl';
 import { ImportsDeclarationsImpl } from './semantico/implement/ImportsDeclarationsImpl';

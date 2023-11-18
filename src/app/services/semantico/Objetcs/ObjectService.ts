@@ -1,9 +1,9 @@
 import { ElementRef, Injectable } from "@angular/core";
 import { IObjectInfo } from "./IObjectInfo";
 import { Arvore } from "./Arvore";
-import { IToken, Tipo } from "../../ITabela";
+import { IToken, Tipo } from "../../Interfaces";
 import { IObjectLog } from "./Log";
-import {  } from "../../ITabela"
+import {  } from "../../Interfaces"
 
 @Injectable({
     providedIn: 'root', // Este serviço será injetado em toda a aplicação
@@ -112,9 +112,9 @@ export class ObjectService {
 
     logStatusSemantico(log: IObjectLog, entrada: boolean){
         if(entrada){
-            console.log('entrando em: ', log, this.object)
+            // console.log('entrando em: ', log, this.object)
         }
-        console.log('saindo de: ', log, this.object)
+        // console.log('saindo de: ', log, this.object)
     }
 
     assembleTree(){
