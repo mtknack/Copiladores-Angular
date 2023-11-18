@@ -33,6 +33,7 @@ import java.util.ArrayList;`;
     this.updateTextareaLines();
     this.Tokens = this.analizadorLexico.analizar(this.texto);
     this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
+    
     console.log(this.Erros)
   }
 

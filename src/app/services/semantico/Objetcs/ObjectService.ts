@@ -4,6 +4,7 @@ import { Arvore } from "./Arvore";
 import { IToken, Tipo } from "../../Interfaces";
 import { IObjectLog } from "./Log";
 import {  } from "../../Interfaces"
+import { PalavrasReservadas } from "../../Reservadas";
 
 @Injectable({
     providedIn: 'root', // Este serviço será injetado em toda a aplicação
@@ -42,6 +43,8 @@ export class ObjectService {
     setObject(object: IObjectInfo ){
         this.object = object
     }
+
+    
 
     validaRegra(arrayDeToken:any[]):boolean{
         let qtdPalavra = arrayDeToken.length;
