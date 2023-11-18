@@ -21,14 +21,19 @@ export class IdentifierImpl implements ILog {
         }
     }
 
-    processar(){
-        let tdcerto = true
+    async processar(){
 
-        this.objectService.logStatusSemantico(this.message(), true)
+        try {
+            await this.objectService.logStatusSemantico(this.message(), true)
 
-        return this.objectService.validaTipoTokenAtual(Tipo.IDENTIFICADOR_VALIDO)
+            await return this.objectService.validaTipoTokenAtual(Tipo.IDENTIFICADOR_VALIDO)
         
-        this.objectService.logStatusSemantico(this.message(), false)
+            await this.objectService.logStatusSemantico(this.message(), false)
+        } catch (error) {
+            // Trate o erro aqui, se necessário
+            console.error(error);
+        }
+        
         
  
     }

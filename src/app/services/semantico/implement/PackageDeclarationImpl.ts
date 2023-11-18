@@ -24,28 +24,23 @@ export class PackageDeclarationImpl implements ILog {
         }
     }
 
-    // <importDeclaration> → import <identifier> ; | define <modifier> ;
-    processar(){
 
-        // this.objectService.logStatusSemantico(this.message(), true)
+    async processar() {
+        await this.objectService.logStatusSemantico(this.message(), true);
 
-        // let atualInicio = this.objectService.getIndex();
-        let [regra1,tokenEsperado] = this.objectService.validaRegra([PalavrasReservadas.PACKAGE, this.identifier, PalavrasReservadas.SEMICOLON])
-        let [regra2,teste] = this.objectService.validaRegra([PalavrasReservadas.PACKAGE, PalavrasReservadas.SEMICOLON])
-        
-
-        console.log(regra1)
-        console.log(regra2)
-        if(regra1 || regra2){
-            return true
+        try {
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE);
+            await this.objectService.skipIndex();
+            
+            await this.identifier.processar();
+            await this.objectService.skipIndex();
+            
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON);
+            await this.objectService.skipIndex();
+        } catch (error) {
+            // Trate o erro aqui, se necessário
+            console.error(error);
         }
-        this.objectService.criaErro(tokenEsperado)
-        console.log(this.objectService.object.tokens[this.objectService.object.atual].erro)
-        return false
-
-
-        // this.objectService.logStatusSemantico(this.message(), false)
-        // return true
+        await this.objectService.logStatusSemantico(this.message(), false);
     }
-
 }

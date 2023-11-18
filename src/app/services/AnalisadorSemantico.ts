@@ -23,7 +23,7 @@ export class AnalizadorSemantico {
     }
   }
 
-  startProcess(){
+  async startProcess(){
     
     this.program.processar() 
     console.log('foiiiiiiii')
