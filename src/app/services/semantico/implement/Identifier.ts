@@ -26,7 +26,7 @@ export class Identifier implements ILog {
 
         try {
             // this.objectService.logStatusSemantico(this.message(), true)
-            this.objectService.validaRegra([Tipo.IDENTIFICADOR_VALIDO],[])
+            this.objectService.validaRegra([Tipo.IDENTIFICADOR_VALIDO])
             // this.objectService.logStatusSemantico(this.message(), false)
         } catch (error) {
             // Trate o erro aqui, se necessário

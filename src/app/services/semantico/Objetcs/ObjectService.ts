@@ -45,11 +45,70 @@ export class ObjectService {
         this.object = object
     }
 
-    public validaRegra(arrayDeToken:any[],optionalTokens:number[]){
-        //([IMPORT, IDENTIFICADOR, SEMICOLON],[0,1,2])
-        
+
+    public gerarCombinacoes(vetorObjetos:any, vetorOpcionais:number[]) {
+        const resultado:any = [];
+      
+        function combinarComOpcionais(indicesOpcionais:number[]) {
+          const combinacao = [];
+          for (let i = 0; i < vetorObjetos.length; i++) {
+            if (!indicesOpcionais.includes(i)) {
+              combinacao.push(vetorObjetos[i]);
+            }
+          }
+          resultado.push(combinacao);
+        }
+      
+        function gerarCombinacoesRecursivas(indicesOpcionais:number[], posicao:number) {
+          if (posicao === vetorObjetos.length) {
+            combinarComOpcionais(indicesOpcionais);
+            return;
+          }
+      
+          // Objeto atual é opcional
+          gerarCombinacoesRecursivas([...indicesOpcionais, posicao], posicao + 1);
+      
+          // Objeto atual não é opcional
+          gerarCombinacoesRecursivas(indicesOpcionais, posicao + 1);
+        }
+      
+        gerarCombinacoesRecursivas([], 0);
+      
+        return resultado;
+      }
+      
+      
+      
+
+    
+
+      
+    public validaRegraOpcional(arrayDeToken:any[],optionalTokens:number[]){
+        //([IMPORT, IDENTIFICADOR],[0,1])
+        //[IMPORT, IDENTIFICADOR]
+        //[IMPORT]
+        //[IDENTIFICADOR]
+        // 
+        let qtd = optionalTokens.length
+        let possibilidades:any[]=[]
+        for (let i = 0; i < optionalTokens.length; i++) {
+            let possibilidade = arrayDeToken
+            let tokenAremover = arrayDeToken[optionalTokens[i]]
+            for (let j = 0; j < optionalTokens.length; j++) {
+                possibilidade.filter((token,index)=> index)
+            }
+            const element = optionalTokens[i];
+        }
+        // possibilidades.forEach((regra)=>this.validaRegra(regra))
+        // console.log(possibilidades)
+    }
+
+    public validaRegra(arrayDeToken:any[]){
         let primeiroIndex = this.getIndex();
-        let indexErro;
+        
+        let tentarDenovo = false;
+        let newArrayDeToken:any[]
+        let newOptionalTokens:number[]
         try{
             arrayDeToken.map((tipoToken, index) => {
                 // console.log(this.object.tokens[this.object.atual].token, tipoToken, this.object.atual)
@@ -66,13 +125,21 @@ export class ObjectService {
                     }
                 } catch (error) {
                     // if(index in optionalTokens){
-                    //     continue
+                        
+                    //     newArrayDeToken = arrayDeToken.filter((token,idx)=>idx != index)
+                    //     newOptionalTokens = optionalTokens.filter((t)=> t!=index).map(elem=> elem-1)
+                    //     // console.log(newArrayDeToken, newOptionalTokens)
+                    //     tentarDenovo = true;
+                    //     this.setIndex(primeiroIndex);
                     // }
-                    indexErro = this.object.atual;
                     throw error;
                 }
             });
         }catch(erro){
+            // if(tentarDenovo){
+
+            //     this.validaRegra(newArrayDeToken,newOptionalTokens)
+            // }
             this.setIndex(primeiroIndex);
             throw erro
         }

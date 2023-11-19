@@ -27,7 +27,7 @@ export class ImportDeclaration implements ILog {
 
     processar(){
         let regra1 = [PalavrasReservadas.IMPORT, this.identifier, PalavrasReservadas.SEMICOLON]
-        this.objectService.validaRegra(regra1,[]);
+        this.objectService.validaRegra(regra1);
     }
 
 }

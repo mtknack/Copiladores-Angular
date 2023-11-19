@@ -39,7 +39,7 @@ export class ImportDeclarations implements ILog {
         }
         catch(erro1){
             try{
-                this.objectService.validaRegra(regra2, [])
+                this.objectService.validaRegra(regra2)
             }
             catch(erro2){
                 throw erro2
