@@ -7,6 +7,8 @@ import { MethodDeclarator } from "./methodDeclarator";
 import { LocalVariableDeclaration } from "./LocalVariableDeclaration";
 import { Block } from "./Block";
 import { Identifier } from "./Identifier";
+import { EmptyStatement } from "./EmptyStatement";
+import { StatementExpression } from "./StatementExpression";
 
 
 @Injectable({
