@@ -2,14 +2,18 @@ import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { FieldDeclaration } from "./FieldDeclaration";
-import { MethodDeclarator } from "./methodDeclarator";
-import { LocalVariableDeclaration } from "./LocalVariableDeclaration";
 import { Block } from "./Block";
 import { Identifier } from "./Identifier";
 import { EmptyStatement } from "./EmptyStatement";
 import { StatementExpression } from "./StatementExpression";
-
+import { DoStatement } from "./DoStatement";
+import { BreakStatement } from "./BreakStatement";
+import { ContinueStatement } from "./ContinueStatement";
+import { ReturnStatement } from "./ReturnStatement";
+import { IfStatement } from "./IfStatement";
+import { WhileStatement } from "./WhileStatement";
+import { TryStatement } from "./TryStatement";
+import { ClassInstanceCreationExpression } from "./ClassInstanceCreationExpression";
 
 @Injectable({
     providedIn: 'root',
@@ -18,18 +22,18 @@ export class Statement implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private block:Block,
-        private emptyStatement:EmptyStatement,
-        private identifier:Identifier,
-        private statementExpression:StatementExpression,
-        private doStatement:DoStatement,
-        private breakStatement:BreakStatement,
+        private block: Block,
+        private emptyStatement: EmptyStatement,
+        private identifier: Identifier,
+        private statementExpression: StatementExpression,
+        private doStatement: DoStatement,
+        private breakStatement: BreakStatement,
         private continueStatement:ContinueStatement,
-        private returnStatement:ReturnStatement,
-        private ifStatement:IfStatement,
-        private whileStatement:WhileStatement,
-        private tryStatement:TryStatement,
-        private classInstanceCreationExpression:ClassInstanceCreationExpression
+        private returnStatement: ReturnStatement,
+        private ifStatement: IfStatement,
+        private whileStatement: WhileStatement,
+        private tryStatement: TryStatement,
+        private classInstanceCreationExpression: ClassInstanceCreationExpression
     ){
     }
 

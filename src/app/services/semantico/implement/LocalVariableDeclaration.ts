@@ -3,7 +3,6 @@ import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { FieldDeclaration } from "./FieldDeclaration";
-import { MethodDeclarator } from "./methodDeclarator";
 import { Type } from "./Type";
 import { Identifier } from "./Identifier";
 import { VariableDeclarators } from "./VariableDeclarators";

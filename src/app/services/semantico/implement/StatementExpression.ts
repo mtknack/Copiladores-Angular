@@ -1,14 +1,9 @@
 import { Injectable } from "@angular/core";
-import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { FieldDeclaration } from "./FieldDeclaration";
-import { MethodDeclarator } from "./methodDeclarator";
-import { LocalVariableDeclaration } from "./LocalVariableDeclaration";
-import { Block } from "./Block";
-import { Identifier } from "./Identifier";
-import { EmptyStatement } from "./EmptyStatement";
 import { MethodInvocation } from "./MethodInvocation";
+import { Assignment } from "./Assignment";
+import { LabeledStatement } from "./LabeledStatement";
 
 
 @Injectable({
@@ -18,9 +13,9 @@ export class StatementExpression implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private assignment:Assignment,
+        private assignment: Assignment,
         private methodInvocation:MethodInvocation,
-        private labeledStatement:LabeledStatement
+        private labeledStatement: LabeledStatement
     ){
     }
 

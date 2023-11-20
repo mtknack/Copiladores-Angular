@@ -2,8 +2,6 @@ import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { FieldDeclaration } from "./FieldDeclaration";
-import { MethodDeclarator } from "./methodDeclarator";
 import { LocalVariableDeclaration } from "./LocalVariableDeclaration";
 import { Statement } from "./Statement copy";
 
