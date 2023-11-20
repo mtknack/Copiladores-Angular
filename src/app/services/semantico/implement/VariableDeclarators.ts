@@ -5,20 +5,19 @@ import { ILog, IObjectLog } from "../Objetcs/Log";
 import { Modifier } from "./Modifier";
 import { Identifier } from "./Identifier";
 import { Type } from "./Type";
-import { FieldMethodDeclaration } from "./FieldMethodDeclaration";
+import { VariableDeclarator } from "./VariableDeclarator";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ClassBodyDeclaration implements ILog {
+export class VariableDeclarators implements ILog {
 
     constructor(
         private objectService: ObjectService,
-		private modifier: Modifier,
-		private identifier: Identifier,
-		private type: Type,
-		private fieldMethodDeclaration : FieldMethodDeclaration 
+        private variableDeclarator:VariableDeclarator,
+        private variableDeclarators:VariableDeclarators,
+        private identifier:Identifier,
     ){
 
     }
@@ -30,12 +29,15 @@ export class ClassBodyDeclaration implements ILog {
         }
     }
 
-		// <classBodyDeclaration> → <Modifiers>?<Type><identifier><fieldMethodDeclaration>
-		// TODO: fazer para rodar mais de uma vez aqui dentro sem ficar em um loop infinito
-    processar(){
 
-		let regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration]
-		this.objectService.validaRegra(regra1)
+    processar(){
+		let regra1 = [this.variableDeclarator]
+		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this.variableDeclarators]
+        try{
+            this.objectService.validaRegra(regra1)
+        }catch{
+            this.objectService.validaRegra(regra2)
+        }
 	}
 
 }

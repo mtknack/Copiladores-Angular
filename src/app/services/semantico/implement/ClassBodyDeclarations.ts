@@ -1,11 +1,7 @@
 import { Injectable } from "@angular/core";
-import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { ImportDeclaration } from "./ImportDeclaration";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { Modifier } from "./Modifier";
-import { Identifier } from "./Identifier";
-import { Type } from "./Type";
+import { ClassBodyDeclaration } from "./ClassBodyDeclaration";
 
 
 @Injectable({
@@ -15,9 +11,7 @@ export class ClassBodyDeclarations implements ILog {
 
     constructor(
         private objectService: ObjectService,
-				private modifier: Modifier,
-				private identifier: Identifier,
-				private type: Type,
+				private classBodyDeclaration: ClassBodyDeclaration
 				// private fieldMethodDeclarations : FieldMethodDeclarations 
     ){
 
@@ -32,6 +26,8 @@ export class ClassBodyDeclarations implements ILog {
 
 		// Regra: <classBodyDeclarations> → <classBodyDeclaration> | <classBodyDeclarations> <classBodyDeclaration>
     processar(){
+      let regra1 = [this.classBodyDeclaration]
+      this.objectService.validaRegra(regra1)
 		// TODO: fazer para rodar mais de uma vez aqui dentro sem ficar em um loop infinito
 
     }

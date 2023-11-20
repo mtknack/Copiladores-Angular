@@ -2,30 +2,34 @@ import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { ClassBodyDeclarations } from "./ClassBodyDeclarations";
+import { ComparationExpression } from "./ComparationExpression";
+import { Expression2 } from "./Expression2";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ClassBody implements ILog {
+export class Expression implements ILog {
 
     constructor(
         private objectService: ObjectService,
-		private classBodyDeclarations: ClassBodyDeclarations
-    ){}
+        private comparationExpression:ComparationExpression,
+        private expression2:Expression2,
+    ){
+
+    }
 
     message(): IObjectLog {
         return {
-            analise: "ClassBody Declarations",
+            analise: "ClassBodyDeclaration Declarations",
             status: true
         }
     }
 
-    // REGRA: <classBody> → { <classBodyDeclarations>? }
+
     processar(){
-        let regra1 = [PalavrasReservadas.LEFT_BRACKET, this.classBodyDeclarations, PalavrasReservadas.RIGHT_BRACKET]
+		let regra1 = [this.comparationExpression,this.expression2]
         this.objectService.validaRegra(regra1)
-    }
+	}
 
 }

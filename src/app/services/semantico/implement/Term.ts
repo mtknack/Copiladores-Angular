@@ -2,30 +2,34 @@ import { Injectable } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-import { ClassBodyDeclarations } from "./ClassBodyDeclarations";
+import { UnaryExpression } from "./UnaryExpression";
+import { MultiplicativeExpression } from "./MultiplicativeExpression";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ClassBody implements ILog {
+export class Term implements ILog {
 
     constructor(
         private objectService: ObjectService,
-		private classBodyDeclarations: ClassBodyDeclarations
-    ){}
+        private unaryExpression:UnaryExpression,
+        private multiplicativeExpression:MultiplicativeExpression
+    ){
+
+    }
 
     message(): IObjectLog {
         return {
-            analise: "ClassBody Declarations",
+            analise: "ClassBodyDeclaration Declarations",
             status: true
         }
     }
 
-    // REGRA: <classBody> → { <classBodyDeclarations>? }
+
     processar(){
-        let regra1 = [PalavrasReservadas.LEFT_BRACKET, this.classBodyDeclarations, PalavrasReservadas.RIGHT_BRACKET]
+		let regra1 = [this.unaryExpression,this.multiplicativeExpression]
         this.objectService.validaRegra(regra1)
-    }
+	}
 
 }

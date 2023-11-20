@@ -20,25 +20,18 @@ export class ClassModifier implements ILog {
         }
     }
 // Regra: <classModifier> → public | abstract | final
-    processar(): boolean {
-        var flag: boolean = false; 
-        // this.objectService.logStatusSemantico(this.message(), true)
-
-        // if(this.objectService.validaPalavraReservada(PalavrasReservadas.PUBLIC)){
-        //     flag = true;
-        // }
-        // else{
-        //     if(this.objectService.validaPalavraReservada(PalavrasReservadas.ABSTRACT)){
-        //         flag= true;
-        //     }
-        //     else{
-        //         if(this.objectService.validaPalavraReservada(PalavrasReservadas.FINAL)){
-        //             flag= true;
-        //         }
-        //     }
-        // }
-
-        // this.objectService.logStatusSemantico(this.message(), false)
-        return flag;
+    processar() {
+        let regra1 = [PalavrasReservadas.PUBLIC]
+        let regra2 = [PalavrasReservadas.ABSTRACT]
+        let regra3 = [PalavrasReservadas.FINAL]
+        try{
+            this.objectService.validaRegra(regra1)
+        }catch{
+            try{
+                this.objectService.validaRegra(regra2)
+            }catch{
+                this.objectService.validaRegra(regra3)
+            }
+        }
     }
 }
