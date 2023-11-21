@@ -17,13 +17,12 @@ export class ObjectService {
     constructor() { }
 
     private skipIndex() {
-        if (this.object.atual <= this.object.tokens.length && this.object.atual >= 0) {
+        if (this.object.atual < this.object.tokens.length-1) {
             this.object.atual++
         }
     }
 
     private backIndex() {
-
         if (this.object.atual <= this.object.tokens.length && this.object.atual >= 0) {
             this.object.atual--
         }

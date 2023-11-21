@@ -15,7 +15,7 @@ export class ImportDeclarations implements ILog {
     constructor(
         private importDeclaration: ImportDeclaration,
         private objectService: ObjectService,
-        private classDeclaration: ClassDeclaration,
+        // private classDeclaration: ClassDeclaration,
     ){
 
     }
@@ -30,7 +30,7 @@ export class ImportDeclarations implements ILog {
     // <importDeclarations> → <importDeclaration> | <importDeclarations> <importDeclaration>
     processar(){
         let regra1 = [this.importDeclaration]
-        let regra2 = [this, this.importDeclaration]
+        // let regra2 = [this, this.importDeclaration]
 
         
         try{
@@ -39,12 +39,12 @@ export class ImportDeclarations implements ILog {
             this.objectService.validaRegra(regra1)
         }
         catch(erro1){
-            try{
-                this.objectService.validaRegra(regra2)
-            }
-            catch(erro2){
-                throw erro2
-            }
+            // try{
+            //     this.objectService.validaRegra(regra2)
+            // }
+            // catch(erro2){
+            //     throw erro2
+            // }
             // verificar qual ods erros kancar
             
         }
