@@ -66,7 +66,7 @@ export class ObjectService {
     }
 
     async logStatusSemantico(log: IObjectLog, entrada: boolean){
-        if (entrada) {
+        if (entrada && this.object.atual <= this.object.tokens.length) {
             if(this.object.arvore.id == null){
                 this.object.arvore.arvore?.push({
                     id: 0,

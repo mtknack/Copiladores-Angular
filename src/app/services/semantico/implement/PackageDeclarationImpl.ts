@@ -36,10 +36,9 @@ export class PackageDeclarationImpl implements ILog {
             await this.objectService.skipIndex();
             
             await this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON);
-            await this.objectService.skipIndex();
+            // await this.objectService.skipIndex();
         } catch (error) {
-            // Trate o erro aqui, se necessário
-            console.error(error);
+            throw error
         }
         await this.objectService.logStatusSemantico(this.message(), false);
     }

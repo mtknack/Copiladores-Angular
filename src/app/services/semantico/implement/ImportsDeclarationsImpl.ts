@@ -30,12 +30,16 @@ export class ImportsDeclarationsImpl implements ILog {
             await this.objectService.logStatusSemantico(this.message(), true)
 
             await this.importsDeclarationImpl.processar() 
-            await this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
-            await this.processar()
+            try {
+                await this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
+                await this.processar()
+            } catch (error) {
+                
+            }
             
             await this.objectService.logStatusSemantico(this.message(), false)
         } catch (error) {
-            
+            throw error
         }
     }
 

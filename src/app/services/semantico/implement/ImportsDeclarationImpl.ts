@@ -38,7 +38,7 @@ export class ImportsDeclarationImpl implements ILog{
                 
             await this.objectService.logStatusSemantico(this.message(), false)
         } catch (error) {
-            
+            throw error
         }
     }
 

@@ -3,6 +3,7 @@ import { ITabela, Tipo } from './ITabela';
 import { ObjectService } from './semantico/Objetcs/ObjectService';
 import { PackageDeclarationImpl } from './semantico/implement/PackageDeclarationImpl';
 import { ImportsDeclarationsImpl } from './semantico/implement/ImportsDeclarationsImpl';
+import { ClassDeclarationImpl } from './semantico/implement/ClassDeclarationImpl';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,7 @@ export class AnalizadorSemantico {
     private objectService: ObjectService,
     private packageDeclaration: PackageDeclarationImpl,
     private importsDeclarationsImpl: ImportsDeclarationsImpl,
+    private classDeclaraitonImpl: ClassDeclarationImpl
   ){
   }
 
@@ -25,10 +27,12 @@ export class AnalizadorSemantico {
 
   async startProcess(){
     
+    debugger
     await this.packageDeclaration.processar() 
+    this.objectService.skipIndex()
     await this.importsDeclarationsImpl.processar()
-
-    console.clear()
+    // await this.classDeclaraitonImpl.processar()
+    
     console.log(this.objectService.printVetorLog()) 
     this.objectService.resetVetorLog()
   }
