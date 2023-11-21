@@ -15,7 +15,7 @@ export class ArgumentList implements ILog {
     constructor(
         private objectService: ObjectService,
         private expression:Expression,
-        private argumentList:ArgumentList
+        // private argumentList:ArgumentList
     ){
 
     }

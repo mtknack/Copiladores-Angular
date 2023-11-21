@@ -12,7 +12,6 @@ export class ClassBodyDeclarations implements ILog {
     constructor(
         private objectService: ObjectService,
 				private classBodyDeclaration: ClassBodyDeclaration
-				// private fieldMethodDeclarations : FieldMethodDeclarations 
     ){
 
     }

@@ -32,18 +32,11 @@ export class Program implements ILog{
 
     processar(){
         try{
-            let regra1 = [this.packageDeclaration, this.importDeclarations]//this.classDeclaration
             console.clear()
-            // this.objectService.validaRegra(regra1)
-            const vetor = [1, 2, 3];
+            let regra1 = [this.packageDeclaration, this.importDeclarations]//this.classDeclaration
+            this.objectService.validaRegra(regra1)
             
-            // Exemplo de uso
-            const vetorObjetos = [{ nome: 'obj1' }, { nome: 'obj2' }, { nome: 'obj3' }];
-            const vetorOpcionais = [0, 1];
             
-            const combinacoes = this.objectService.gerarCombinacoes(vetorObjetos, vetorOpcionais);
-            
-            console.log(combinacoes);
           
         }catch(err){
             console.log(false)

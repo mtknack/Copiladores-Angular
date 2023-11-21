@@ -16,7 +16,7 @@ export class VariableDeclarators implements ILog {
     constructor(
         private objectService: ObjectService,
         private variableDeclarator:VariableDeclarator,
-        private variableDeclarators:VariableDeclarators,
+        // private variableDeclarators:VariableDeclarators,
         private identifier:Identifier,
     ){
 
@@ -32,7 +32,7 @@ export class VariableDeclarators implements ILog {
 
     processar(){
 		let regra1 = [this.variableDeclarator]
-		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this.variableDeclarators]
+		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
         try{
             this.objectService.validaRegra(regra1)
         }catch{

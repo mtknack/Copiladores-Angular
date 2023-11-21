@@ -26,16 +26,6 @@ export class PackageDeclaration implements ILog {
 
 
     processar() {
-        // this.objectService.logStatusSemantico(this.message(), true);
-
-        try {
-            // this.objectService.getVetorTokensAtual(PalavrasReservadas.PACKAGE);
-            this.objectService.validaRegra([PalavrasReservadas.PACKAGE, this.identifier, PalavrasReservadas.SEMICOLON]);
-
-            // this.objectService.getVetorTokensAtual(PalavrasReservadas.SEMICOLON);
-        } catch (error) {
-            throw error
-        }
-        // this.objectService.logStatusSemantico(this.message(), false);
+        this.objectService.validaRegra([PalavrasReservadas.PACKAGE, this.identifier, PalavrasReservadas.SEMICOLON]);
     }
 }

@@ -13,7 +13,7 @@ export class AdditiveExpression implements ILog {
     constructor(
         private objectService: ObjectService,
         private term:Term,
-        private additiveExpression:AdditiveExpression
+        // private additiveExpression:AdditiveExpression
     ){
 
     }

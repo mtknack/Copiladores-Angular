@@ -97,6 +97,22 @@ export class ObjectService {
         // console.log(possibilidades)
     }
 
+    public validaRegras(arrayDeRegras:any[]){
+        let ultimaRegra = true;
+        arrayDeRegras.forEach((regra,index)=>{
+            try{
+                this.validaRegra(regra)
+                return
+            }
+            catch(erro){
+                if(index == arrayDeRegras.length){
+                    throw(erro)
+                }
+            }
+        })
+    }
+    
+
     public validaRegra(arrayDeToken: any[]) {
         let primeiroIndex = this.getIndex();
 
@@ -109,46 +125,41 @@ export class ObjectService {
                 try {
                     if (typeof tipoToken === typeof '') {
                         this.validaPalavraReservada(tipoToken);
-                        this.skipIndex();
-
                     } else if (typeof tipoToken === typeof 1) {
                         this.validaTipoTokenAtual(tipoToken);
-                        this.skipIndex();
                     } else {
                         tipoToken.processar();
                     }
                 } catch (error) {
                     // if(index in optionalTokens){
-
                     //     newArrayDeToken = arrayDeToken.filter((token,idx)=>idx != index)
-                    //     newOptionalTokens = optionalTokens.filter((t)=> t!=index).map(elem=> elem-1)
+                    //     newOptionalTokens = optionalTokens.filter((t)=> t!=index).map((elem)=> elem-1)
                     //     // console.log(newArrayDeToken, newOptionalTokens)
                     //     tentarDenovo = true;
                     //     this.setIndex(primeiroIndex);
-                    // }
+                    // }else{
                     throw error;
+                    // }
                 }
             });
         } catch (erro) {
-            // if(tentarDenovo){
-
-            //     this.validaRegra(newArrayDeToken,newOptionalTokens)
-            // }
             this.setIndex(primeiroIndex);
             throw erro
         }
     }
 
-    private validaPalavraReservada(regra: string) {
+    public validaPalavraReservada(regra: string) {
         if (this.object.tokens[this.object.atual].token != regra) {
             throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
         }
+        this.skipIndex()
     }
 
-    private validaTipoTokenAtual(tipo: Number) {
+    public validaTipoTokenAtual(tipo: Number) {
         if (this.object.tokens[this.object.atual].tipo != tipo) {
             throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
         }
+        this.skipIndex()
     }
 
     newObject(tokens: IToken[]) {

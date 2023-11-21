@@ -34,6 +34,8 @@ export class RelationalExpression implements ILog {
 		let regra5 = [PalavrasReservadas.GREATER_THAN,this.operationalExpression, this]
 		let regra6 = [PalavrasReservadas.GREATER_THAN_OR_EQUALS,this.operationalExpression, this]
 		let regra7 = []
+        
+        let arrayDeRegras = [regra1,regra2,regra3,regra4]
         this.objectService.validaRegra(regra1)
 	}
 
