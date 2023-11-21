@@ -29,6 +29,8 @@ export class ClassDeclarationImpl implements ILog {
             await this.objectService.logStatusSemantico(this.message(), true)
 
             await this.objectService.getVetorTokensAtual(PalavrasReservadas.PUBLIC)
+            await this.objectService.skipIndex()
+            await this.objectService.getVetorTokensAtual(PalavrasReservadas.CLASS)
 
             await this.objectService.logStatusSemantico(this.message(), false)
         } catch (error) {

@@ -34,7 +34,8 @@ export class ImportsDeclarationsImpl implements ILog {
                 await this.objectService.getVetorTokensAtual(PalavrasReservadas.IMPORT)
                 await this.processar()
             } catch (error) {
-                
+                this.objectService.backIndex()
+                return
             }
             
             await this.objectService.logStatusSemantico(this.message(), false)

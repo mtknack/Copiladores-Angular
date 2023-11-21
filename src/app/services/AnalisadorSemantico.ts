@@ -27,12 +27,13 @@ export class AnalizadorSemantico {
 
   async startProcess(){
     
-    debugger
     await this.packageDeclaration.processar() 
     this.objectService.skipIndex()
     await this.importsDeclarationsImpl.processar()
-    // await this.classDeclaraitonImpl.processar()
+    this.objectService.skipIndex()
+    await this.classDeclaraitonImpl.processar()
     
+    console.clear()
     console.log(this.objectService.printVetorLog()) 
     this.objectService.resetVetorLog()
   }
