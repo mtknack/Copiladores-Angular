@@ -11,7 +11,7 @@ export class HighlightWordsWithEDirective {
     const words: string[] = this.el.nativeElement.value.split(' ');
     const highlightedWords: string[] = words.map((word: string) => {
       if (word.toLowerCase().includes('abcd')) {
-        console.log(word)
+        // console.log(word)
         return `<span class="highlighted">${word}</span>`;
       }
       return word;

@@ -32,6 +32,12 @@ import java.util.ArrayList;`;
     }
     return false;
   }
+  showSemantico():boolean{
+    if (this.ErrosTemporario.length == 0) {
+      return true;
+    }
+    return false;
+  }
 
   btnCopilar() {
     this.updateTextareaLines();

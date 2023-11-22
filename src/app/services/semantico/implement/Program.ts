@@ -36,13 +36,16 @@ export class Program implements ILog{
             console.clear()
             // let regra1 = [this.packageDeclaration, this.importDeclaration,this.classDeclaration]
             let regra1 = [this.packageDeclaration, this.importDeclarations,]
+            let regra2 = [this.importDeclarations,]
+            let regra3 = [this.packageDeclaration,]
             // let regra2 = [this.packageDeclaration, this.importDeclaration,this.importDeclaration,this.importDeclaration]
             // let regras:any[] = []
             // regras.push(regra1)
             // this.objectService.validaRegras(regras)
             this.objectService.validaRegras([regra1])
+            return Error(``)
         }catch(err: any){
-            // console.log(false)
+            console.log(err)
             return err
         }
         

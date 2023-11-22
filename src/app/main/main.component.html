@@ -48,9 +48,9 @@
         <span style="color: rgb(233, 44, 44);">Coluna: </span> {{t.coluna}}
       </p>
     </div>
-    <div class="resultado">
+    <div class="resultado" [hidden]="showSemantico()">
       <p class="texto">
-        <span style="color: rgb(233, 44, 44);">Error: </span>{{ErrosTemporario}}
+        <span style="color: rgb(233, 44, 44);">Error: </span>{{ErrosTemporario == undefined? '':ErrosTemporario}}
       </p>
     </div>
 
