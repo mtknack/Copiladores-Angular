@@ -12,6 +12,7 @@ export class MainComponent implements AfterViewInit {
 
   @ViewChild('textareaRef') textareaRef!: ElementRef;
   textareaLines!: number[];
+  selectCopiler: number = 0
 
   texto: string = 
 `package br.biblioteca.telas;
@@ -21,6 +22,7 @@ import java.util.ArrayList;`;
 
   Erros: IToken[] = [];
   Tokens: IToken[] = [];
+  ErrosTemporario: string = ''
   // Arovre: Arvore
   constructor(private analizadorLexico: AnalizadorLexico, private analizadorSemantico: AnalizadorSemantico) {}
 
@@ -33,9 +35,36 @@ import java.util.ArrayList;`;
 
   btnCopilar() {
     this.updateTextareaLines();
-    this.Tokens = this.analizadorLexico.analizar(this.texto);
-    this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
-    let teste = this.analizadorSemantico.initializeVariables(this.Tokens)
+
+    switch(this.selectCopiler){
+      case 0:
+        console.log(this.selectCopiler)
+        this.Tokens = this.analizadorLexico.analizar(this.texto);
+        this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
+        break
+      case 1:
+        console.log(this.selectCopiler)
+        this.Tokens = this.analizadorLexico.analizar(this.texto);
+        this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
+        if(this.Erros.length == 0){
+          let msgErro = this.analizadorSemantico.initializeVariables(this.Tokens)
+          if(msgErro == undefined){
+            this.ErrosTemporario = ''
+          }
+          else{
+            this.ErrosTemporario = msgErro.__zone_symbol__value.message
+          }
+          
+          
+        }
+        break
+      case 2:
+        console.log(this.selectCopiler)
+        break
+    }
+    // this.Tokens = this.analizadorLexico.analizar(this.texto);
+    // this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
+    // let teste = this.analizadorSemantico.initializeVariables(this.Tokens)
   }
 
   ngAfterViewInit(): void {
@@ -48,4 +77,20 @@ import java.util.ArrayList;`;
     this.textareaLines = Array.from({ length: lines.length }, (_, i) => i + 1);
   }
 
+  tipoAnalisador(): String {
+    switch(this.selectCopiler){
+      case 0:
+        return 'Lexico'
+      break
+      case 1:
+        return 'Semantico'
+      break
+      case 2:
+        return 'Sintatico'
+      break
+      default:
+        return ''
+      break
+    }
+  }
 }

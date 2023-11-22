@@ -16,16 +16,16 @@ export class AnalizadorSemantico {
   ){
   }
 
-  initializeVariables(vetorTokens: IToken[]){
+  initializeVariables(vetorTokens: IToken[]): any{
     if(vetorTokens != null){
       this.objectService.newObject(vetorTokens as IToken[]);
-      this.startProcess()
+      return this.startProcess()
     }
   }
 
   async startProcess(){
     
-    this.program.processar() 
+    return this.program.processar() 
     
   }
 }

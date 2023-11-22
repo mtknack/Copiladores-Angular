@@ -13,6 +13,7 @@ export class ObjectService {
 
     object!: IObjectInfo
     vetorDeLog: [any] = [null]
+    vetorError: [String | null] = [null]
 
     constructor() { }
 
@@ -97,14 +98,20 @@ export class ObjectService {
     }
 
     public validaRegras(arrayDeRegras:any[]){
-        let ultimaRegra = true;
+        // let inicio_index = this.getIndex()
+        // for (let index = 0; index < arrayDeRegras.length; index++) {
+        //     let regra = arrayDeRegras[index];
+            
+        // }
+
         arrayDeRegras.forEach((regra,index)=>{
             try{
                 this.validaRegra(regra)
                 return
             }
-            catch(erro){
-                if(index == arrayDeRegras.length){
+            catch(erro:any){
+            // this.setIndex(inicio_index);
+                if(index == arrayDeRegras.length-1){
                     throw(erro)
                 }
             }
@@ -119,26 +126,13 @@ export class ObjectService {
         let newArrayDeToken: any[]
         let newOptionalTokens: number[]
         try {
-            arrayDeToken.map((tipoToken, index) => {
-                // console.log(this.object.tokens[this.object.atual].token, tipoToken, this.object.atual)
-                try {
-                    if (typeof tipoToken === typeof '') {
-                        this.validaPalavraReservada(tipoToken);
-                    } else if (typeof tipoToken === typeof 1) {
-                        this.validaTipoTokenAtual(tipoToken);
-                    } else {
-                        tipoToken.processar();
-                    }
-                } catch (error) {
-                    // if(index in optionalTokens){
-                    //     newArrayDeToken = arrayDeToken.filter((token,idx)=>idx != index)
-                    //     newOptionalTokens = optionalTokens.filter((t)=> t!=index).map((elem)=> elem-1)
-                    //     // console.log(newArrayDeToken, newOptionalTokens)
-                    //     tentarDenovo = true;
-                    //     this.setIndex(primeiroIndex);
-                    // }else{
-                    throw error;
-                    // }
+            arrayDeToken.map((tipoToken, index) => {                
+                if (typeof tipoToken === typeof '') {
+                    this.validaPalavraReservada(tipoToken);
+                } else if (typeof tipoToken === typeof 1) {
+                    this.validaTipoTokenAtual(tipoToken);
+                } else {
+                    tipoToken.processar();
                 }
             });
         } catch (erro) {
@@ -149,14 +143,24 @@ export class ObjectService {
 
     public validaPalavraReservada(regra: string) {
         if (this.object.tokens[this.object.atual].token != regra) {
-            throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+            // throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
+            throw new Error(`Esperando "${regra}" na linha ${this.object.tokens[this.object.atual].linha}`)
         }
         this.skipIndex()
+    }
+    
+    public validaPalavraReservadaSemPular(regra: string) {
+        if (this.object.tokens[this.object.atual].token == regra) {
+            return true
+        }
+        return false
     }
 
     public validaTipoTokenAtual(tipo: Number) {
         if (this.object.tokens[this.object.atual].tipo != tipo) {
-            throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
+            // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
+            throw new Error(`Esperado um identificador valido na linha ${this.object.tokens[this.object.atual].linha}`)
+            
         }
         this.skipIndex()
     }

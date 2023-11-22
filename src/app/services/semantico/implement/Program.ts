@@ -17,7 +17,7 @@ export class Program implements ILog{
     constructor(
         private packageDeclaration: PackageDeclaration,
         private importDeclaration:ImportDeclaration,
-        // private importDeclarations:ImportDeclarations,
+        private importDeclarations:ImportDeclarations,
         // private classDeclaration:ClassDeclaration,
         private objectService: ObjectService,
     ){
@@ -31,15 +31,19 @@ export class Program implements ILog{
         }
     }
 
-    processar(){
+    processar(): any{
         try{
             console.clear()
-            let regra1 = [this.packageDeclaration, this.importDeclaration]//this.classDeclaration
-            this.objectService.validaRegra(regra1)
-          
-        }catch(err){
+            // let regra1 = [this.packageDeclaration, this.importDeclaration,this.classDeclaration]
+            let regra1 = [this.packageDeclaration, this.importDeclarations,]
+            // let regra2 = [this.packageDeclaration, this.importDeclaration,this.importDeclaration,this.importDeclaration]
+            // let regras:any[] = []
+            // regras.push(regra1)
+            // this.objectService.validaRegras(regras)
+            this.objectService.validaRegras([regra1])
+        }catch(err: any){
             // console.log(false)
-            console.log(err)
+            return err
         }
         
 

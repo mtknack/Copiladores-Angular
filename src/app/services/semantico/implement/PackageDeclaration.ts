@@ -26,6 +26,6 @@ export class PackageDeclaration implements ILog {
 
 
     processar() {
-        this.objectService.validaRegra([PalavrasReservadas.PACKAGE, this.identifier, PalavrasReservadas.SEMICOLON]);
+        this.objectService.validaRegras([[PalavrasReservadas.PACKAGE, this.identifier, PalavrasReservadas.SEMICOLON]]);
     }
 }

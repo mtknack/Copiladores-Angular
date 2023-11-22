@@ -30,24 +30,24 @@ export class ImportDeclarations implements ILog {
     // <importDeclarations> → <importDeclaration> | <importDeclarations> <importDeclaration>
     processar(){
         let regra1 = [this.importDeclaration]
-        // let regra2 = [this, this.importDeclaration]
+        let regra2 = [this, this.importDeclaration]
 
-        
         try{
-            // this.objectService.validaRegra(regra1,[])
-            // throw "Validar com o professor de como parar a recursão"
-            this.objectService.validaRegra(regra1)
-        }
-        catch(erro1){
-            // try{
-            //     this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra1])
+            // if (this.objectService.object.tokens[this.objectService.object.atual].token == PalavrasReservadas.IMPORT) {
+            //     console.log(this.objectService.object.atual+1)
+            //     this.processar()
             // }
-            // catch(erro2){
-            //     throw erro2
-            // }
-            // verificar qual ods erros kancar
+            if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.IMPORT)){
+                this.processar()
+            }
             
+        }catch(erro){
+            throw erro
         }
+        
+        // throw "Validar com o professor de como parar a recursão"
+        
     }
 
 }

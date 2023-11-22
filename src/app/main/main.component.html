@@ -2,14 +2,14 @@
   <h1>Compilador Java</h1>
   <header class="mb-3">
     <div class="btn-group botao" role="group" aria-label="Button group with nested dropdown">
-      <div class="btn-group" role="group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          Tipo de Analisador
+      <div class="dropdown" role="group">
+        <button type="button"  class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+          Analisador  {{ tipoAnalisador() }}
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Analisador Lexico</a></li>
-          <li><a class="dropdown-item" href="#">Analisador sla2</a></li>
-          <li><a class="dropdown-item" href="#">Analisador sla3</a></li>
+          <li><a class="dropdown-item" href="#" (click)="selectCopiler = 0">Analisador Lexico</a></li>
+          <li><a class="dropdown-item" href="#" (click)="selectCopiler = 1">Analisador Semantico</a></li>
+          <li><a class="dropdown-item" href="#" (click)="selectCopiler = 2">Analisador Sintatico</a></li>
         </ul>
       </div>
     </div>
@@ -46,6 +46,11 @@
         <span style="color: rgb(233, 44, 44);">Error: </span>{{t.textoOriginal}}
         <span style="color: rgb(233, 44, 44);">Linha: </span>{{t.linha}}
         <span style="color: rgb(233, 44, 44);">Coluna: </span> {{t.coluna}}
+      </p>
+    </div>
+    <div class="resultado">
+      <p class="texto">
+        <span style="color: rgb(233, 44, 44);">Error: </span>{{ErrosTemporario}}
       </p>
     </div>
 
