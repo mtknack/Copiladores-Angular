@@ -12,7 +12,7 @@ export class Reservadas {
   }
 
   public buscaReservadas(token: string): IToken | null{
-    const reservada = this.reservadas.find((op) => op.textoOriginal === token);
+    const reservada = structuredClone(this.reservadas.find((op) => op.textoOriginal === token));
     return reservada ? reservada : null;
   }
 

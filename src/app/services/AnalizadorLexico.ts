@@ -71,16 +71,20 @@ export class AnalizadorLexico {
     return vetorTexto;
   }
 
-  public getPosicaoPalavra(texto:string, palavra:string, token:IToken|null) {
+  public getPosicaoPalavra(texto:string, palavra:string, token:IToken|null, linhaInicioBusca:number, colIniBuscaLinhaIni:number) {
+    let colunaInicioBusca: number = colIniBuscaLinhaIni
     var linhas = texto.split('\n');  // Dividir o texto em linhas
-    for (var i = 0; i < linhas.length; i++) {
-        var coluna = linhas[i].indexOf(palavra);
+    for (var i = linhaInicioBusca; i < linhas.length; i++) {
+        var coluna = linhas[i].indexOf(palavra, colunaInicioBusca);
+        colunaInicioBusca = 0
         if (coluna !== -1) {
           // A palavra foi encontrada na linha i, coluna coluna
           token!.linha = i+1
           token!.coluna = coluna+1
+          break
         }
     }
+    /* console.log(`Palavra: '${palavra}'; Linha: ${token!.linha}; Coluna ${token!.coluna}`) */
   }
 
 
@@ -88,6 +92,9 @@ export class AnalizadorLexico {
 
   public analizar(texto: string): IToken[] {
     const textoVetor: string[] = this.separarTexto(texto);
+    let linhaInicioBusca: number = 0
+    let colunaInicioBusca: number = 0
+    
     this.vetorDeTokens = [];
 
     var i = 0;
@@ -133,19 +140,25 @@ export class AnalizadorLexico {
           token: 'IDENTIFICADOR_INVALIDO',
         };
       }
+
       if(tokenAux != null){
-        this.vetorDeTokens[i] = tokenAux
+        this.vetorDeTokens.push(tokenAux)
       }
-      this.getPosicaoPalavra(texto, palavra, this.vetorDeTokens[i]);
+      this.getPosicaoPalavra(texto, palavra, this.vetorDeTokens[i], linhaInicioBusca, colunaInicioBusca);
+      linhaInicioBusca = this.vetorDeTokens[i].linha!.valueOf() - 1;
+      /* console.log(`Linha Endereço: ${linhaInicioBusca}`) */
+      colunaInicioBusca = this.vetorDeTokens[i].coluna!.valueOf() + palavra.length - 1;
+      /* console.log(`Coluna Endereço: ${colunaInicioBusca}`) */
       this.vetorDeTokens[i]!.id = i;
       i++;
-
       
 
     });
 
     // this.analisadorSemantico.initializeVariables(this.vetorDeTokens)
 
+    // this.vetorDeTokens.forEach((value) => {console.log(value)})
+    // console.log(this.vetorDeTokens)
     return this.vetorDeTokens;
   }
 }
