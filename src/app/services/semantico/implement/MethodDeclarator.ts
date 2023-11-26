@@ -13,7 +13,7 @@ export class MethodDeclarator implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private formalParameterList:FormalParameterList
+        private formalParameterList: FormalParameterList
         
     ){
 

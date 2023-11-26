@@ -12,7 +12,7 @@ export class LabeledStatement implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private statement: Statement
+        // private statement: Statement
     ){
     }
 
@@ -26,10 +26,10 @@ export class LabeledStatement implements ILog {
 
     processar(){
        
-        var regra1 = PalavrasReservadas.COLON
-        var regra2 = this.statement
+        // var regra1 = PalavrasReservadas.COLON
+        // var regra2 = this.statement
         
-        this.objectService.validaRegra([regra1, regra2])
+        // this.objectService.validaRegra([regra1, regra2])
 	}
 
 }

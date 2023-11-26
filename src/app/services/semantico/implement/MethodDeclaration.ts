@@ -14,12 +14,9 @@ export class MethodDeclaration implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private methodDeclarator : MethodDeclarator,
+        private methodDeclarator: MethodDeclarator,
         private block : Block,
-        
-    ){
-
-    }
+    ){}
 
     message(): IObjectLog {
         return {
@@ -30,8 +27,8 @@ export class MethodDeclaration implements ILog {
 
 
     processar(){
-        let regra1 = [this.methodDeclarator, this.block]
-        this.objectService.validaRegra(regra1)
+        // let regra1 = [this.methodDeclarator, this.block]
+        // this.objectService.validaRegra(regra1)
         
 	}
 

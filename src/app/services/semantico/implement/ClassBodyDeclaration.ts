@@ -30,8 +30,6 @@ export class ClassBodyDeclaration implements ILog {
         }
     }
 
-		// <classBodyDeclaration> → <Modifiers>?<Type><identifier><fieldMethodDeclaration>
-		// TODO: fazer para rodar mais de uma vez aqui dentro sem ficar em um loop infinito
     processar(){
 
 		let regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration]

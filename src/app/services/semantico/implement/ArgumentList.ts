@@ -14,7 +14,7 @@ export class ArgumentList implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private expression:Expression,
+        // private expression: Expression,
     ){
 
     }
@@ -28,11 +28,11 @@ export class ArgumentList implements ILog {
 
 
     processar(){
-		let regra1 = [this.expression]
+		// let regra1 = [this.expression]
 		// let regra2 = [this, PalavrasReservadas.COMMA, this.expression]
 		
         // try{
-            this.objectService.validaRegra(regra1)
+            // this.objectService.validaRegra(regra1)
         // }
         // catch{
         //     this.objectService.validaRegra(regra2)            

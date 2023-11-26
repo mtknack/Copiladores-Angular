@@ -27,8 +27,8 @@ export class Block implements ILog {
 
 
     processar(){
-        let regra1 = [PalavrasReservadas.LEFT_BRACKET,this.blockStatements,PalavrasReservadas.RIGHT_BRACKET]
-        this.objectService.validaRegra(regra1)
+        // let regra1 = [PalavrasReservadas.LEFT_BRACKET,this.blockStatements,PalavrasReservadas.RIGHT_BRACKET]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

@@ -14,7 +14,7 @@ export class BlockStatement implements ILog {
     constructor(
         private objectService: ObjectService,
         private localVariableDeclaration:LocalVariableDeclaration,
-        private statement:Statement,
+        private statement: Statement,
     ){
     }
 
@@ -27,10 +27,10 @@ export class BlockStatement implements ILog {
 
 
     processar(){
-        let regra1 = [this.localVariableDeclaration, PalavrasReservadas.SEMICOLON]
-        let regra2 = [this.statement]
-        // let regra2 = [this, this.blockStatement]
-        this.objectService.validaRegra(regra1)
+        // let regra1 = [this.localVariableDeclaration, PalavrasReservadas.SEMICOLON]
+        // let regra2 = [this.statement]
+        // // let regra2 = [this, this.blockStatement]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

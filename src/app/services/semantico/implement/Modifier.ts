@@ -11,7 +11,7 @@ export class Modifier implements ILog {
 
     constructor(
         private objectService: ObjectService,
-    ){}
+    ) { }
 
     message(): IObjectLog {
         return {
@@ -19,36 +19,35 @@ export class Modifier implements ILog {
             status: true
         }
     }
-// Regra: <classModifier> → public | abstract | final
-    processar(): boolean {
-        var flag: boolean = false; 
-        // this.objectService.logStatusSemantico(this.message(), true)
 
-        // if(this.objectService.validaPalavraReservada(PalavrasReservadas.PUBLIC)){
-        //     flag = true;
-        // }
-        // else{
-        //     if(this.objectService.validaPalavraReservada(PalavrasReservadas.PROTECTED)){
-        //         flag= true;
-        //     }
-        //     else{
-        //         if(this.objectService.validaPalavraReservada(PalavrasReservadas.PRIVATE)){
-        //             flag= true;
-        //         }
-		// 						else{
-		// 							if(this.objectService.validaPalavraReservada(PalavrasReservadas.STATIC)){
-		// 									flag= true;
-		// 							}
-		// 							else{
-		// 								if(this.objectService.validaPalavraReservada(PalavrasReservadas.FINAL)){
-		// 										flag= true;
-		// 								}
-		// 						}
-		// 					}
-        //     }
-        // }
+    modifiers = [
+        PalavrasReservadas.PUBLIC,
+        PalavrasReservadas.PROTECTED,
+        PalavrasReservadas.PRIVATE,
+        PalavrasReservadas.STATIC,
+        PalavrasReservadas.FINAL
+    ]
 
-        // this.objectService.logStatusSemantico(this.message(), false)
-        return flag;
+
+    processar() {
+        
+        try {
+            this.objectService.validaRegra(['MULTIPLA PALAVRA'], this.modifiers)
+        } catch (error) {
+            
+        }
+    }
+
+    getModifier(atual: string): boolean {
+
+        var busca = this.modifiers.filter(x => x == atual)
+        if (
+            busca[0] != undefined
+        ) {
+            return true
+        }
+        else {
+            return false
+        }
     }
 }

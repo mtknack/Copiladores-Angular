@@ -29,20 +29,20 @@ export class UnaryExpression implements ILog {
 
 
     processar(){
-		let regra1 = [PalavrasReservadas.ADD,this.identifier1,this.methodInvocation]
-		let regra2 = [PalavrasReservadas.SUBTRACT,this.identifier1,this.methodInvocation]
-		let regra3 = [this.identifier1,this.methodInvocation]
-        try{
-            this.objectService.validaRegra(regra1)
-        }
-        catch{
-            try{
-                this.objectService.validaRegra(regra2)
-            }
-            catch{
-                this.objectService.validaRegra(regra3)
-            }
-        }
+		// let regra1 = [PalavrasReservadas.ADD,this.identifier1,this.methodInvocation]
+		// let regra2 = [PalavrasReservadas.SUBTRACT,this.identifier1,this.methodInvocation]
+		// let regra3 = [this.identifier1,this.methodInvocation]
+        // try{
+        //     this.objectService.validaRegra(regra1)
+        // }
+        // catch{
+        //     try{
+        //         this.objectService.validaRegra(regra2)
+        //     }
+        //     catch{
+        //         this.objectService.validaRegra(regra3)
+        //     }
+        // }
 	}
 
 }

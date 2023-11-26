@@ -7,6 +7,7 @@ import { PackageDeclaration } from "./PackageDeclaration";
 import { ImportDeclarations } from "./ImportDeclarations";
 import { ClassDeclaration } from "./ClassDeclaration";
 import { ImportDeclaration } from "./ImportDeclaration";
+import { Modifier } from "./Modifier";
 
 
 @Injectable({
@@ -16,10 +17,11 @@ export class Program implements ILog{
 
     constructor(
         private packageDeclaration: PackageDeclaration,
-        private importDeclaration:ImportDeclaration,
-        private importDeclarations:ImportDeclarations,
-        // private classDeclaration:ClassDeclaration,
+        private importDeclaration: ImportDeclaration,
+        private importDeclarations: ImportDeclarations,
+        private classDeclaration: ClassDeclaration,
         private objectService: ObjectService,
+        private modifier: Modifier
     ){
 
     }
@@ -34,15 +36,23 @@ export class Program implements ILog{
     processar(): any{
         try{
             console.clear()
-            // let regra1 = [this.packageDeclaration, this.importDeclaration,this.classDeclaration]
-            let regra1 = [this.packageDeclaration, this.importDeclarations,]
-            let regra2 = [this.importDeclarations,]
-            let regra3 = [this.packageDeclaration,]
-            // let regra2 = [this.packageDeclaration, this.importDeclaration,this.importDeclaration,this.importDeclaration]
-            // let regras:any[] = []
-            // regras.push(regra1)
-            // this.objectService.validaRegras(regras)
-            this.objectService.validaRegras([regra1])
+
+            let regra1 = [this.packageDeclaration]
+            let regra2 = [this.importDeclarations]
+            let regra3 = [this.classDeclaration]
+
+            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.PACKAGE){
+                this.objectService.validaRegras([regra1])
+            }
+            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
+                this.objectService.validaRegras([regra2])
+            }
+            if(
+                this.modifier.getModifier(this.objectService.getObjectAtualToken())
+                ){
+                this.objectService.validaRegras([regra3])
+            }
+
             return Error(``)
         }catch(err: any){
             console.log(err)

@@ -28,12 +28,12 @@ export class StatementExpression implements ILog {
 
 
     processar(){
-        let regra1 = [this.assignment]
-        let regra2 = [this.methodInvocation]
-        let regra3 = [this.labeledStatement]
-        // let regra2 = [this, this.blockStatement]
+        // let regra1 = [this.assignment]
+        // let regra2 = [this.methodInvocation]
+        // let regra3 = [this.labeledStatement]
+        // // let regra2 = [this, this.blockStatement]
         
-        this.objectService.validaRegra(regra1)
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

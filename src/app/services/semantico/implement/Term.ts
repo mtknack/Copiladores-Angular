@@ -14,7 +14,7 @@ export class Term implements ILog {
     constructor(
         private objectService: ObjectService,
         private unaryExpression:UnaryExpression,
-        private multiplicativeExpression:MultiplicativeExpression
+        // private multiplicativeExpression:MultiplicativeExpression
     ){
 
     }
@@ -28,8 +28,8 @@ export class Term implements ILog {
 
 
     processar(){
-		let regra1 = [this.unaryExpression,this.multiplicativeExpression]
-        this.objectService.validaRegra(regra1)
+		// let regra1 = [this.unaryExpression,this.multiplicativeExpression]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

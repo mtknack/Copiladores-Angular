@@ -4,6 +4,7 @@ import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { FieldDeclaration } from "./FieldDeclaration";
 import { MethodDeclaration } from "./MethodDeclaration";
+import { VariableDeclarators } from "./VariableDeclarators";
 
 
 @Injectable({
@@ -13,23 +14,22 @@ export class FieldMethodDeclaration implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private fieldDeclaration : FieldDeclaration,
-        private methodDeclaration:MethodDeclaration
-    ){
-
-    }
+        private variableDeclarators: VariableDeclarators,
+        private methodDeclaration: MethodDeclaration
+    ){}
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "FieldMethodDeclaration",
             status: true
         }
     }
 
-
     processar(){
-        let regra1 = [this.fieldDeclaration]
+        debugger
+        let regra1 = [this.variableDeclarators, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.methodDeclaration]
+
         try{
             this.objectService.validaRegra(regra1)
         }catch{

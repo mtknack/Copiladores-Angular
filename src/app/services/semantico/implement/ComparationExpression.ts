@@ -14,12 +14,8 @@ export class ComparationExpression implements ILog {
     constructor(
         private objectService: ObjectService,
         private operationalExpression:OperationalExpression,
-        private relationalExpression:RelationalExpression,
-
-        
-    ){
-
-    }
+        // private relationalExpression:RelationalExpression,
+    ){}
 
     message(): IObjectLog {
         return {
@@ -30,8 +26,8 @@ export class ComparationExpression implements ILog {
 
 
     processar(){
-		let regra1 = [this.operationalExpression,this.relationalExpression]
-        this.objectService.validaRegra(regra1)
+		// let regra1 = [this.operationalExpression,this.relationalExpression]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

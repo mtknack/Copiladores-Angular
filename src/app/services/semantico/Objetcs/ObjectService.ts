@@ -45,6 +45,9 @@ export class ObjectService {
         this.object = object
     }
 
+    getObjectAtualToken(): string {
+        return this.object.tokens[this.object.atual].token
+    }
 
     public gerarCombinacoes(vetorObjetos: any, vetorOpcionais: number[]) {
         const resultado: any = [];
@@ -119,7 +122,7 @@ export class ObjectService {
     }
     
 
-    public validaRegra(arrayDeToken: any[]) {
+    public validaRegra(arrayDeToken: any[], arrayDeTokenOr?: any[]) {
         let primeiroIndex = this.getIndex();
 
         let tentarDenovo = false;
@@ -128,7 +131,20 @@ export class ObjectService {
         try {
             arrayDeToken.map((tipoToken, index) => {                
                 if (typeof tipoToken === typeof '') {
-                    this.validaPalavraReservada(tipoToken);
+                    console.log(tipoToken)
+                    if(arrayDeTokenOr != undefined){
+                        arrayDeTokenOr.map(palavra => {
+                            if(this.validaPalavraReservadaSemPular(palavra)){
+                                this.validaPalavraReservada(palavra)
+                                // ver um jeito de parar o map
+                                return
+                            }
+                        })
+                    }
+                    else{
+                        this.validaPalavraReservada(tipoToken);
+                    }
+                    
                 } else if (typeof tipoToken === typeof 1) {
                     this.validaTipoTokenAtual(tipoToken);
                 } else {

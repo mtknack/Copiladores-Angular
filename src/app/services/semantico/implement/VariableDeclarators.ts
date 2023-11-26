@@ -6,6 +6,7 @@ import { Modifier } from "./Modifier";
 import { Identifier } from "./Identifier";
 import { Type } from "./Type";
 import { VariableDeclarator } from "./VariableDeclarator";
+import { Expression } from "./Expression";
 
 
 @Injectable({
@@ -15,8 +16,8 @@ export class VariableDeclarators implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private variableDeclarator:VariableDeclarator,
-        // private variableDeclarators:VariableDeclarators,
+        private expression: Expression,
+        // private variableDeclarator: VariableDeclarator,
         private identifier:Identifier,
     ){
 
@@ -31,13 +32,16 @@ export class VariableDeclarators implements ILog {
 
 
     processar(){
-		let regra1 = [this.variableDeclarator]
-		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
-        try{
-            this.objectService.validaRegra(regra1)
-        }catch{
-            this.objectService.validaRegra(regra2)
-        }
+		// let regra1 = [this.expression]
+		// let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
+        // try{
+            
+        //     this.objectService.validaRegra(regra1)
+
+
+        // }catch{
+        //     this.objectService.validaRegra(regra2)
+        // }
 	}
 
 }

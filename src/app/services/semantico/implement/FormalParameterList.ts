@@ -13,7 +13,7 @@ export class FormalParameterList implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private formalParameter:FormalParameter
+        private formalParameter: FormalParameter
         
     ){
 

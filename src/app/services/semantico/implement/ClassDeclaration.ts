@@ -14,8 +14,8 @@ export class ClassDeclaration implements ILog {
     constructor(
         private objectService: ObjectService,
         private classModifier: ClassModifier,
-        private identifier: Identifier,
-        private classBody:ClassBody
+        private classBody: ClassBody,
+        private identifier: Identifier
     ){}
 
     message(): IObjectLog {
@@ -25,12 +25,11 @@ export class ClassDeclaration implements ILog {
         }
     }
 
-    processar(): any{
+    processar(){
 
+        // deixei o modificador a principio como obrigatorio
         let regra1 = [this.classModifier, PalavrasReservadas.CLASS, this.identifier, this.classBody]
         this.objectService.validaRegra(regra1)
-
-
     }
 
 }

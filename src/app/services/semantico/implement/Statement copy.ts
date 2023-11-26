@@ -22,7 +22,7 @@ export class Statement implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private block: Block,
+        // private block: Block,
         private emptyStatement: EmptyStatement,
         private identifier: Identifier,
         private statementExpression: StatementExpression,
@@ -46,33 +46,33 @@ export class Statement implements ILog {
 
 
     processar(){
-        let regra1 = [this.block]
-        let regra2 = [this.emptyStatement]
-        let regra3 = [this.identifier,this.statementExpression,PalavrasReservadas.SEMICOLON]
-        let regra4 = [this.doStatement]
-        let regra5 = [this.breakStatement]
-        let regra6 = [this.continueStatement]
-        let regra7 = [this.returnStatement]
-        let regra8 = [this.ifStatement]
-        let regra9 = [this.whileStatement]
-        let regra10 = [this.tryStatement]
-        let regra11 = [this.classInstanceCreationExpression]
-        let regras = [regra1,regra2,regra3,regra4,regra5,regra6,regra7,regra8,regra9,regra10,regra11]
+        // let regra1 = [this.block]
+        // let regra2 = [this.emptyStatement]
+        // let regra3 = [this.identifier,this.statementExpression,PalavrasReservadas.SEMICOLON]
+        // let regra4 = [this.doStatement]
+        // let regra5 = [this.breakStatement]
+        // let regra6 = [this.continueStatement]
+        // let regra7 = [this.returnStatement]
+        // let regra8 = [this.ifStatement]
+        // let regra9 = [this.whileStatement]
+        // let regra10 = [this.tryStatement]
+        // let regra11 = [this.classInstanceCreationExpression]
+        // let regras = [regra1,regra2,regra3,regra4,regra5,regra6,regra7,regra8,regra9,regra10,regra11]
 
-        try{
-            regras.forEach((regra)=>{
-                try{
-                    this.objectService.validaRegra(regra)
-                    return
-                }
-                catch{
-                }
-            })
-        }catch{
+        // try{
+        //     regras.forEach((regra)=>{
+        //         try{
+        //             this.objectService.validaRegra(regra)
+        //             return
+        //         }
+        //         catch{
+        //         }
+        //     })
+        // }catch{
 
-        }
-        // let regra2 = [this, this.blockStatement]
-        this.objectService.validaRegra(regra1)
+        // }
+        // // let regra2 = [this, this.blockStatement]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

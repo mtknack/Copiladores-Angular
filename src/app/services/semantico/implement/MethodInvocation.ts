@@ -29,15 +29,15 @@ export class MethodInvocation implements ILog {
 
 
     processar(){
-		let regra1 = [PalavrasReservadas.LEFT_BRACE,this.argumentList, PalavrasReservadas.RIGHT_BRACE]
-		let regra2 = [PalavrasReservadas.SUPER,PalavrasReservadas.PERIOD,this.identifier,this.argumentList, PalavrasReservadas.RIGHT_BRACE]
+		// let regra1 = [PalavrasReservadas.LEFT_BRACE,this.argumentList, PalavrasReservadas.RIGHT_BRACE]
+		// let regra2 = [PalavrasReservadas.SUPER,PalavrasReservadas.PERIOD,this.identifier,this.argumentList, PalavrasReservadas.RIGHT_BRACE]
 		
-        try{
-            this.objectService.validaRegra(regra1)
-        }
-        catch{
-            this.objectService.validaRegra(regra2)            
-        }
+        // try{
+        //     this.objectService.validaRegra(regra1)
+        // }
+        // catch{
+        //     this.objectService.validaRegra(regra2)            
+        // }
 	}
 
 }

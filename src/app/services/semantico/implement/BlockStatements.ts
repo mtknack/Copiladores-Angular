@@ -26,9 +26,9 @@ export class BlockStatements implements ILog {
 
 
     processar(){
-        let regra1 = [this.blockStatement]
-        // let regra2 = [this, this.blockStatement]
-        this.objectService.validaRegra(regra1)
+        // let regra1 = [this.blockStatement]
+        // // let regra2 = [this, this.blockStatement]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }

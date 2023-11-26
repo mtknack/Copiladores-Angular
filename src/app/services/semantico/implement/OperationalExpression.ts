@@ -13,8 +13,8 @@ export class OperationalExpression implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private term:Term,
-        private additiveExpression:AdditiveExpression
+        private term: Term,
+        // private additiveExpression: AdditiveExpression
     ){
 
     }
@@ -28,8 +28,8 @@ export class OperationalExpression implements ILog {
 
 
     processar(){
-		let regra1 = [this.term,this.additiveExpression]
-        this.objectService.validaRegra(regra1)
+		// let regra1 = [this.term,this.additiveExpression]
+        // this.objectService.validaRegra(regra1)
 	}
 
 }
