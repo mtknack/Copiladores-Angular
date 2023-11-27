@@ -29,7 +29,7 @@ export class MethodDeclarator implements ILog {
 
 
     processar(){
-        let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS,this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
+        let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
         this.objectService.validaRegra(regra1)
         
 	}

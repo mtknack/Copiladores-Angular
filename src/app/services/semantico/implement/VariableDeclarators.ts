@@ -18,7 +18,7 @@ export class VariableDeclarators implements ILog {
     constructor(
         private objectService: ObjectService,
         private expression: Expression,
-        private identifier:Identifier,
+        private identifier: Identifier,
     ){
 
     }

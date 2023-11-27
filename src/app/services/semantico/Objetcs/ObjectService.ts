@@ -19,9 +19,13 @@ export class ObjectService {
     constructor() { }
 
     private skipIndex() {
-        if (this.object.atual < this.object.tokens.length-1) {
+        if (this.object.atual <= this.object.tokens.length-1) {
             this.object.atual++
         }
+
+        // if (this.object.atual < this.object.tokens.length-1) {
+        //     this.object.atual++
+        // }
     }
 
     private backIndex() {
@@ -141,8 +145,8 @@ export class ObjectService {
 
     public validaPalavraReservada(regra: string) {
         let tokenDoErro = this.object.tokens[this.object.atual]
+        console.log(tokenDoErro)
         if (this.object.tokens[this.object.atual].token != regra) {
-            // throw new Error(`Error de verificação em validar: ${this.object.tokens[this.object.atual].token} == ${regra} `)
             throw new Error(`Esperando "${regra}" na linha ${tokenDoErro.linha}`)
         }
         this.skipIndex()
@@ -158,6 +162,7 @@ export class ObjectService {
 
     public validaTipoTokenAtual(tipo: Number) {
         let tokenDoErro = this.object.tokens[this.object.atual]
+        console.log(tokenDoErro)
         if (this.object.tokens[this.object.atual].tipo != tipo) {
             // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
             throw new Error(`Esperado um identificador valido na linha ${tokenDoErro.linha}`)

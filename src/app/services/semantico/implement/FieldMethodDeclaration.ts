@@ -29,6 +29,10 @@ export class FieldMethodDeclaration implements ILog {
         let regra1 = [this.variableDeclarators, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.methodDeclaration]
 
+        // if(this.objectService.validaPalavraReservadaSemPular()){
+
+        // }
+        // debugger
         this.objectService.validaRegras([regra1,regra2])
         
 	}

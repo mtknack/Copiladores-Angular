@@ -42,13 +42,14 @@ export class Program implements ILog{
             let regra2 = [this.importDeclarations]
             let regra3 = [this.classDeclaration]
 
-            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.PACKAGE){
-                this.objectService.validaRegras([regra1])
-            }
-            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
-                this.objectService.validaRegras([regra2])
-            }
+            // if(this.objectService.getObjectAtualToken() == PalavrasReservadas.PACKAGE){
+            //     this.objectService.validaRegras([regra1])
+            // }
+            // if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
+            //     this.objectService.validaRegras([regra2])
+            // }
             if(this.objectService.validaPalavrasReservadas(this.classModifier)){
+                debugger
                 this.objectService.validaRegras([regra3])
             }
 

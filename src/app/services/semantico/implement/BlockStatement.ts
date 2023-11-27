@@ -44,21 +44,23 @@ export class BlockStatement implements ILog {
 
     processar(){
         // debugger
-        let regra1 = [this.localVariableDeclaration, PalavrasReservadas.SEMICOLON, this]
+        let regra1 = [this.localVariableDeclaration, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.statement, this]
         
         console.log(this.objectService.object.tokens[this.objectService.object.atual])   
-        debugger
+        
         // if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.RIGHT_BRACE)){
         //     console.log("teste")
         // }
         if(this.objectService.validaPalavrasReservadas(this.type)){
+            console.log('entrei variavel')
             this.objectService.validaRegras([regra1])
+            this.processar()
         }
-        else if(this.objectService.validaPalavrasReservadas(this)){
-            // this.objectService.loop = 1
-            this.objectService.validaRegras([regra2])
-        }
+        // else if(this.objectService.validaPalavrasReservadas(this)){
+        //     // this.objectService.loop = 1
+        //     this.objectService.validaRegras([regra2])
+        // }
 
 	}
 

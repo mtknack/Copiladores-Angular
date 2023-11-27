@@ -16,11 +16,11 @@ export class MainComponent implements AfterViewInit {
   selectCopiler: number = 0
 
   texto: string = 
-`package br.biblioteca.telas;
-import java.awt.List;
-public class teste { 
-    public int str(int teste) {
- ; `;
+`public class teste { 
+  public int str(int teste) {
+
+  }
+}`;
 
   Erros: IToken[] = [];
   Tokens: IToken[] = [];

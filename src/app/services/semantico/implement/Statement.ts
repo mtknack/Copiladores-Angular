@@ -58,7 +58,7 @@ export class Statement implements ILog {
         let regra10 = [this.tryStatement]
         let regra11 = [this.classInstanceCreationExpression]
         let regras = [regra1,regra2,regra3]
-        debugger
+        // debugger
         this.objectService.validaRegras(regras)
 	}
 
