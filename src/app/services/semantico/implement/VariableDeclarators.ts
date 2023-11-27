@@ -7,6 +7,7 @@ import { Identifier } from "./Identifier";
 import { Type } from "./Type";
 import { VariableDeclarator } from "./VariableDeclarator";
 import { Expression } from "./Expression";
+import { concatAll } from "rxjs";
 
 
 @Injectable({
@@ -17,7 +18,6 @@ export class VariableDeclarators implements ILog {
     constructor(
         private objectService: ObjectService,
         private expression: Expression,
-        // private variableDeclarator: VariableDeclarator,
         private identifier:Identifier,
     ){
 
@@ -32,16 +32,15 @@ export class VariableDeclarators implements ILog {
 
 
     processar(){
-		// let regra1 = [this.expression]
-		// let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
-        // try{
-            
-        //     this.objectService.validaRegra(regra1)
+		let regra1 = [PalavrasReservadas.EQUALS, this.expression]
+		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
 
-
-        // }catch{
-        //     this.objectService.validaRegra(regra2)
-        // }
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.EQUALS)){
+            this.objectService.validaRegra(regra1)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
+            this.objectService.validaRegra(regra2)
+        }
+    
 	}
 
 }

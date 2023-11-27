@@ -1,5 +1,11 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { TryStatement } from "./TryStatement";
+import { ClassInstanceCreationExpression } from "./ClassInstanceCreationExpression";
+import { ObjectService } from "../Objetcs/ObjectService";
+import { PalavrasReservadas } from "../../Reservadas";
+import { Expression } from "./Expression";
+import { Statement } from "./Statement";
 
 
 @Injectable({
@@ -8,7 +14,8 @@ import { ILog, IObjectLog } from "../Objetcs/Log";
 export class WhileStatement implements ILog {
 
     constructor(
-        
+        private objectService: ObjectService,
+        private injector: Injector
     ){
     }
 
@@ -21,7 +28,11 @@ export class WhileStatement implements ILog {
 
 
     processar(){
-        
+        var regra1 = [PalavrasReservadas.WHILE, PalavrasReservadas.LEFT_PARENTHESIS, 
+            this.injector.get(Expression), PalavrasReservadas.RIGHT_PARENTHESIS, 
+            this.injector.get(Statement)]
+
+        this.objectService.validaRegra(regra1)
 	}
 
 }

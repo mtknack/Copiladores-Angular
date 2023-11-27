@@ -21,36 +21,21 @@ export class Type implements ILog {
         }
     }
 	
-	types = [
-		PalavrasReservadas.BYTE, 
-		PalavrasReservadas.SHORT, 
-		PalavrasReservadas.INT, 
-		PalavrasReservadas.LONG, 
-		PalavrasReservadas.CHAR, 
-		PalavrasReservadas.FLOAT, 
-		PalavrasReservadas.DOUBLE, 
-		PalavrasReservadas.BOOLEAN, 
-		PalavrasReservadas.VOID, 
+	palavras = [
+		[PalavrasReservadas.BYTE, ],
+		[PalavrasReservadas.SHORT, ],
+		[PalavrasReservadas.INT, ],
+		[PalavrasReservadas.LONG, ],
+		[PalavrasReservadas.CHAR, ],
+		[PalavrasReservadas.FLOAT, ],
+		[PalavrasReservadas.DOUBLE, ],
+		[PalavrasReservadas.BOOLEAN, ],
+		[PalavrasReservadas.VOID, ]
 	]
 
-    processar() {
-        try {
-            this.objectService.validaRegra(['MULTIPLA PALAVRA'], this.types)
-		} catch (error) {
-			
-		}
+    processar() {        
+        this.objectService.validaRegras(this.palavras)
     }
 
-	getTypes(atual: string): boolean{
 
-		var busca = this.types.filter(x => x == atual)
-        if (
-            busca[0] != undefined
-        ) {
-            return true
-        }
-        else {
-            return false
-        }
-	}
 }

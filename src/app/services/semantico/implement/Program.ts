@@ -8,6 +8,7 @@ import { ImportDeclarations } from "./ImportDeclarations";
 import { ClassDeclaration } from "./ClassDeclaration";
 import { ImportDeclaration } from "./ImportDeclaration";
 import { Modifier } from "./Modifier";
+import { ClassModifier } from "./ClassModifier";
 
 
 @Injectable({
@@ -21,7 +22,7 @@ export class Program implements ILog{
         private importDeclarations: ImportDeclarations,
         private classDeclaration: ClassDeclaration,
         private objectService: ObjectService,
-        private modifier: Modifier
+        private classModifier: ClassModifier
     ){
 
     }
@@ -35,7 +36,7 @@ export class Program implements ILog{
 
     processar(): any{
         try{
-            console.clear()
+            // console.clear()
 
             let regra1 = [this.packageDeclaration]
             let regra2 = [this.importDeclarations]
@@ -47,9 +48,7 @@ export class Program implements ILog{
             if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
                 this.objectService.validaRegras([regra2])
             }
-            if(
-                this.modifier.getModifier(this.objectService.getObjectAtualToken())
-                ){
+            if(this.objectService.validaPalavrasReservadas(this.classModifier)){
                 this.objectService.validaRegras([regra3])
             }
 

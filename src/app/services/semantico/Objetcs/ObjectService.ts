@@ -14,6 +14,7 @@ export class ObjectService {
     object!: IObjectInfo
     vetorDeLog: [any] = [null]
     vetorError: [String | null] = [null]
+    loop: Number = -1
 
     constructor() { }
 
@@ -49,37 +50,6 @@ export class ObjectService {
         return this.object.tokens[this.object.atual].token
     }
 
-    public gerarCombinacoes(vetorObjetos: any, vetorOpcionais: number[]) {
-        const resultado: any = [];
-
-        function combinarComOpcionais(indicesOpcionais: number[]) {
-            const combinacao = [];
-            for (let i = 0; i < vetorObjetos.length; i++) {
-                if (!indicesOpcionais.includes(i)) {
-                    combinacao.push(vetorObjetos[i]);
-                }
-            }
-            resultado.push(combinacao);
-        }
-
-        function gerarCombinacoesRecursivas(indicesOpcionais: number[], posicao: number) {
-            if (posicao === vetorObjetos.length) {
-                combinarComOpcionais(indicesOpcionais);
-                return;
-            }
-
-            // Objeto atual é opcional
-            gerarCombinacoesRecursivas([...indicesOpcionais, posicao], posicao + 1);
-
-            // Objeto atual não é opcional
-            gerarCombinacoesRecursivas(indicesOpcionais, posicao + 1);
-        }
-
-        gerarCombinacoesRecursivas([], 0);
-
-        return resultado;
-    }
-
     public validaRegraOpcional(arrayDeToken: any[], optionalTokens: number[]) {
         //([IMPORT, IDENTIFICADOR],[0,1])
         //[IMPORT, IDENTIFICADOR]
@@ -101,24 +71,19 @@ export class ObjectService {
     }
 
     public validaRegras(arrayDeRegras:any[]){
-        // let inicio_index = this.getIndex()
-        // for (let index = 0; index < arrayDeRegras.length; index++) {
-        //     let regra = arrayDeRegras[index];
-            
-        // }
-
-        arrayDeRegras.forEach((regra,index)=>{
+        let erroTotal = ``
+        for (let index = 0; index < arrayDeRegras.length; index++) {
+            const regra = arrayDeRegras[index];
             try{
                 this.validaRegra(regra)
-                return
-            }
-            catch(erro:any){
-            // this.setIndex(inicio_index);
+                break
+            }catch(erro){
+                // erroTotal += erro
                 if(index == arrayDeRegras.length-1){
                     throw(erro)
                 }
             }
-        })
+        }
     }
     
 
@@ -131,19 +96,19 @@ export class ObjectService {
         try {
             arrayDeToken.map((tipoToken, index) => {                
                 if (typeof tipoToken === typeof '') {
-                    console.log(tipoToken)
-                    if(arrayDeTokenOr != undefined){
-                        arrayDeTokenOr.map(palavra => {
-                            if(this.validaPalavraReservadaSemPular(palavra)){
-                                this.validaPalavraReservada(palavra)
-                                // ver um jeito de parar o map
-                                return
-                            }
-                        })
-                    }
-                    else{
+                    // console.log(tipoToken)
+                    // if(arrayDeTokenOr != undefined){
+                    //     arrayDeTokenOr.map(palavra => {
+                    //         if(this.validaPalavraReservadaSemPular(palavra)){
+                    //             this.validaPalavraReservada(palavra)
+                    //             // ver um jeito de parar o map
+                    //             return
+                    //         }
+                    //     })
+                    // }
+                    // else{
                         this.validaPalavraReservada(tipoToken);
-                    }
+                    // }
                     
                 } else if (typeof tipoToken === typeof 1) {
                     this.validaTipoTokenAtual(tipoToken);
@@ -157,6 +122,23 @@ export class ObjectService {
         }
     }
 
+    public validaPalavrasReservadas(classe:any){
+        for (let i = 0; i < classe.palavras.length; i++) {
+            let palavra = classe.palavras[i]
+            if (typeof palavra === typeof '') {
+                if(this.validaPalavraReservadaSemPular(palavra)){
+                    return true
+                }
+            }
+            else if (typeof palavra === typeof 1) {
+                if(this.validaTipoTokenAtualSemPular(palavra)){
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     public validaPalavraReservada(regra: string) {
         let tokenDoErro = this.object.tokens[this.object.atual]
         if (this.object.tokens[this.object.atual].token != regra) {
@@ -167,7 +149,8 @@ export class ObjectService {
     }
     
     public validaPalavraReservadaSemPular(regra: string) {
-        if (this.object.tokens[this.object.atual].token == regra) {
+        let token = this.object.tokens[this.object.atual].token
+        if (token == regra) {
             return true
         }
         return false
@@ -183,6 +166,14 @@ export class ObjectService {
         this.skipIndex()
     }
 
+    public validaTipoTokenAtualSemPular(tipo: Number) {
+        let tokenDoErro = this.object.tokens[this.object.atual]
+        if (tokenDoErro.tipo == tipo) {
+            return true
+        }
+        return false
+    }
+
     newObject(tokens: IToken[]) {
         var x = {
             tokens: tokens,
@@ -191,6 +182,10 @@ export class ObjectService {
         }
 
         this.setObject(x)
+    }
+
+    static getInstance(){
+        return this
     }
 
     newArvore(): Arvore {

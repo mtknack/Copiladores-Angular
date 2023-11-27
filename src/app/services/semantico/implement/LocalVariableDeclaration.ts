@@ -15,7 +15,7 @@ export class LocalVariableDeclaration implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private type:Type,
+        private type: Type,
         private identifier:Identifier,
         private variableDeclarators:VariableDeclarators,
     ){
@@ -31,7 +31,7 @@ export class LocalVariableDeclaration implements ILog {
 
     processar(){
         let regra1 = [this.type,this.identifier,this.variableDeclarators]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 	}
 
 }

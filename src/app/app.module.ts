@@ -9,6 +9,9 @@ import { Reservadas } from './services/Reservadas';
 import { AnalizadorLexico } from './services/AnalizadorLexico';
 import { HighlightWordsWithEDirective } from './diretivas/highlight-words-with-e.directive';
 import { PackageDeclaration } from './services/semantico/implement/PackageDeclaration';
+import { Statement } from './services/semantico/implement/Statement';
+import { BlockStatement } from './services/semantico/implement/BlockStatement';
+import { Block } from './services/semantico/implement/Block';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { PackageDeclaration } from './services/semantico/implement/PackageDeclar
   providers: [
     Reservadas,
     AnalizadorLexico,
-    PackageDeclaration
+    PackageDeclaration,
+    Statement,
+    BlockStatement,
+    Block
   ],
   bootstrap: [AppComponent]
 })

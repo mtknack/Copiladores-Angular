@@ -1,10 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Inject, forwardRef } from "@angular/core";
 import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { FieldDeclaration } from "./FieldDeclaration";
-import { BlockStatements } from "./BlockStatements";
-
+import { BlockStatement } from "./BlockStatement";
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +12,7 @@ export class Block implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private blockStatements : BlockStatements,
+        private blockStatement: BlockStatement,
     ){
 
     }
@@ -27,8 +26,8 @@ export class Block implements ILog {
 
 
     processar(){
-        // let regra1 = [PalavrasReservadas.LEFT_BRACKET,this.blockStatements,PalavrasReservadas.RIGHT_BRACKET]
-        // this.objectService.validaRegra(regra1)
+        let regra1 = [PalavrasReservadas.LEFT_BRACE, this.blockStatement, PalavrasReservadas.RIGHT_BRACE]
+        this.objectService.validaRegras([regra1])
 	}
 
 }

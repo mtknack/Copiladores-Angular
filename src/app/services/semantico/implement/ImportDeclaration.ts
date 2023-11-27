@@ -12,9 +12,9 @@ export class ImportDeclaration implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private identifier:Identifier
+        private identifier: Identifier
     ){
-
+        
     }
 
     message(): IObjectLog {
@@ -26,7 +26,7 @@ export class ImportDeclaration implements ILog {
 
     processar(){
         let regra1 = [PalavrasReservadas.IMPORT, this.identifier, PalavrasReservadas.SEMICOLON]
-        this.objectService.validaRegras([regra1]);
+        this.objectService!.validaRegras([regra1]);
     }
 
 }

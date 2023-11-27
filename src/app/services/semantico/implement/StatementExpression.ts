@@ -14,7 +14,7 @@ export class StatementExpression implements ILog {
     constructor(
         private objectService: ObjectService,
         private assignment: Assignment,
-        private methodInvocation:MethodInvocation,
+        private methodInvocation: MethodInvocation,
         private labeledStatement: LabeledStatement
     ){
     }
@@ -28,12 +28,12 @@ export class StatementExpression implements ILog {
 
 
     processar(){
-        // let regra1 = [this.assignment]
-        // let regra2 = [this.methodInvocation]
-        // let regra3 = [this.labeledStatement]
-        // // let regra2 = [this, this.blockStatement]
+        var regra1 = [this.assignment]
+        var regra2 = [this.methodInvocation]
+        var regra3 = [this.labeledStatement]
+        var regras = [regra1, regra2, regra3]
         
-        // this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras(regras)
 	}
 
 }

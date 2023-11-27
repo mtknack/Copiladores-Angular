@@ -20,34 +20,33 @@ export class Modifier implements ILog {
         }
     }
 
-    modifiers = [
-        PalavrasReservadas.PUBLIC,
-        PalavrasReservadas.PROTECTED,
-        PalavrasReservadas.PRIVATE,
-        PalavrasReservadas.STATIC,
-        PalavrasReservadas.FINAL
+    palavras = [
+        [PalavrasReservadas.PUBLIC],
+        [PalavrasReservadas.PROTECTED],
+        [PalavrasReservadas.PRIVATE],
+        [PalavrasReservadas.STATIC],
+        [PalavrasReservadas.FINAL],
     ]
 
 
     processar() {
-        
         try {
-            this.objectService.validaRegra(['MULTIPLA PALAVRA'], this.modifiers)
+            this.objectService.validaRegras(this.palavras)
         } catch (error) {
-            
+            throw error
         }
     }
 
-    getModifier(atual: string): boolean {
+    // getModifier(atual: string): boolean {
 
-        var busca = this.modifiers.filter(x => x == atual)
-        if (
-            busca[0] != undefined
-        ) {
-            return true
-        }
-        else {
-            return false
-        }
-    }
+    //     var busca = this.modifiers.filter(x => x == atual)
+    //     if (
+    //         busca[0] != undefined
+    //     ) {
+    //         return true
+    //     }
+    //     else {
+    //         return false
+    //     }
+    // }
 }

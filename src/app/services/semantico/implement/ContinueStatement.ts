@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
-
+import { ObjectService } from "../Objetcs/ObjectService";
+import { Identifier } from "./Identifier";
+import { PalavrasReservadas } from "../../Reservadas";
 
 @Injectable({
     providedIn: 'root',
@@ -8,7 +10,8 @@ import { ILog, IObjectLog } from "../Objetcs/Log";
 export class ContinueStatement implements ILog {
 
     constructor(
-        
+        private objectService : ObjectService,
+        private identifier: Identifier
     ){
     }
 
@@ -21,7 +24,8 @@ export class ContinueStatement implements ILog {
 
 
     processar(){
-        
+        let regra1 = [PalavrasReservadas.CONTINUE, this.identifier, PalavrasReservadas.SEMICOLON]
+        this.objectService.validaRegras([regra1])
 	}
 
 }

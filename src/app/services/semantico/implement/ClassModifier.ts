@@ -19,19 +19,18 @@ export class ClassModifier implements ILog {
             status: true
         }
     }
+
+    palavras = [
+        PalavrasReservadas.PUBLIC,
+        PalavrasReservadas.ABSTRACT,
+        PalavrasReservadas.FINAL
+    ]
 // Regra: <classModifier> → public | abstract | final
     processar() {
         let regra1 = [PalavrasReservadas.PUBLIC]
         let regra2 = [PalavrasReservadas.ABSTRACT]
         let regra3 = [PalavrasReservadas.FINAL]
-        try{
-            this.objectService.validaRegra(regra1)
-        }catch{
-            try{
-                this.objectService.validaRegra(regra2)
-            }catch{
-                this.objectService.validaRegra(regra3)
-            }
-        }
+        this.objectService.validaRegras([regra1,regra2,regra3])
+        
     }
 }

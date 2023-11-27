@@ -14,7 +14,7 @@ export class Expression implements ILog {
     constructor(
         private objectService: ObjectService,
         private comparationExpression: ComparationExpression,
-        // private expression2:Expression2,
+        private expression2:Expression2,
     ){
 
     }
@@ -28,8 +28,8 @@ export class Expression implements ILog {
 
 
     processar(){
-		// let regra1 = [this.comparationExpression,this.expression2]
-        // this.objectService.validaRegra(regra1)
+		let regra1 = [this.comparationExpression, this.expression2]
+        this.objectService.validaRegra(regra1)
 	}
 
 }

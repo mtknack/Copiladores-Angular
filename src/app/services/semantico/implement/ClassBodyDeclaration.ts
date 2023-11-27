@@ -31,9 +31,17 @@ export class ClassBodyDeclaration implements ILog {
     }
 
     processar(){
+        var regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration]
 
-		let regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration]
-		this.objectService.validaRegra(regra1)
+        try {
+            this.objectService.validaRegra(regra1)
+            if(this.objectService.validaPalavrasReservadas(this.modifier)){
+                this.objectService.validaRegra([this])
+            }
+        } catch (error) {
+            throw error
+        }
+        
 	}
 
 }

@@ -28,10 +28,13 @@ export class FormalParameter implements ILog {
         }
     }
 
-
     processar(){
         let regra1 = [this.type, this.identifier]
         this.objectService.validaRegra(regra1)
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
+            this.objectService.validaPalavraReservada(PalavrasReservadas.COMMA)
+            this.processar()
+        }
         
 	}
 

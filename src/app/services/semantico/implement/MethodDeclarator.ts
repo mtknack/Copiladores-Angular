@@ -3,7 +3,8 @@ import { PalavrasReservadas } from "../../Reservadas";
 import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { FieldDeclaration } from "./FieldDeclaration";
-import { FormalParameterList } from "./FormalParameterList";
+
+import { FormalParameter } from "./FormalParameter";
 
 
 @Injectable({
@@ -13,7 +14,7 @@ export class MethodDeclarator implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private formalParameterList: FormalParameterList
+        private formalParameter: FormalParameter
         
     ){
 
@@ -28,7 +29,7 @@ export class MethodDeclarator implements ILog {
 
 
     processar(){
-        let regra1 = [PalavrasReservadas.LEFT_BRACE,this.formalParameterList, PalavrasReservadas.RIGHT_BRACE]
+        let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS,this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
         this.objectService.validaRegra(regra1)
         
 	}

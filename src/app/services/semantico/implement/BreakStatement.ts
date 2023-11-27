@@ -1,5 +1,8 @@
 import { Injectable } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { ObjectService } from "../Objetcs/ObjectService";
+import { PalavrasReservadas } from "../../Reservadas";
+import { Identifier } from "./Identifier";
 
 
 @Injectable({
@@ -8,7 +11,8 @@ import { ILog, IObjectLog } from "../Objetcs/Log";
 export class BreakStatement implements ILog {
 
     constructor(
-        
+        private objectService : ObjectService,
+        private identifier: Identifier
     ){
     }
 
@@ -21,7 +25,8 @@ export class BreakStatement implements ILog {
 
 
     processar(){
-        
+        let regra1 = [PalavrasReservadas.BREAK, this.identifier, PalavrasReservadas.SEMICOLON]
+        this.objectService.validaRegras([regra1])
 	}
 
 }

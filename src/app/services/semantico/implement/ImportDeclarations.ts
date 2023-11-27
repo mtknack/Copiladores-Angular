@@ -27,7 +27,6 @@ export class ImportDeclarations implements ILog {
         }
     }
 
-    // <importDeclarations> → <importDeclaration> | <importDeclarations> <importDeclaration>
     processar(){
         let regra1 = [this.importDeclaration]
         let regra2 = [this, this.importDeclaration]

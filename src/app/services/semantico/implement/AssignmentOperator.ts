@@ -38,17 +38,7 @@ export class AssignmentOperator implements ILog {
         var regra11 = PalavrasReservadas.XOR_ASSIGN
         
 
-        this.objectService.validaRegra([regra1])
-        this.objectService.validaRegra([regra2])
-        this.objectService.validaRegra([regra3])
-        this.objectService.validaRegra([regra4])
-        this.objectService.validaRegra([regra5])
-        this.objectService.validaRegra([regra6])
-        this.objectService.validaRegra([regra7])
-        this.objectService.validaRegra([regra8])
-        this.objectService.validaRegra([regra9])
-        this.objectService.validaRegra([regra10])
-        this.objectService.validaRegra([regra11])
+        this.objectService.validaRegras([regra1,regra2,regra3,regra4,regra5,regra6,regra7,regra8,regra9,regra10,regra11])
 
         // fazer um validaRegra de multiplas opções, onde se o de cima der erro o de baixo é chamado
 

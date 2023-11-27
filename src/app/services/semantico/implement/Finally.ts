@@ -1,35 +1,34 @@
 import { Injectable, Injector } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { Identifier } from "./Identifier";
 import { PalavrasReservadas } from "../../Reservadas";
-import { Expression } from "./Expression";
+import { Block } from "./Block";
+import { CatchClause } from "./CatchClause";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ReturnStatement implements ILog {
+export class Finally implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private injector: Injector
+        private injector: Injector,
     ){
     }
 
     message(): IObjectLog {
         return {
-            analise: "ReturnStatement",
+            analise: "Finally",
             status: true
         }
     }
 
 
     processar(){
-        // expression é opicional aqui
-        var regra1 = [PalavrasReservadas.RETURN, this.injector.get(Expression), PalavrasReservadas.SEMICOLON]
+        var regra1 = [PalavrasReservadas.FINALLY, this.injector.get(Block)]
 
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 	}
 
 }

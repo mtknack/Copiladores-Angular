@@ -26,15 +26,11 @@ export class FieldMethodDeclaration implements ILog {
     }
 
     processar(){
-        debugger
         let regra1 = [this.variableDeclarators, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.methodDeclaration]
 
-        try{
-            this.objectService.validaRegra(regra1)
-        }catch{
-            this.objectService.validaRegra(regra2)
-        }
+        this.objectService.validaRegras([regra1,regra2])
+        
 	}
 
 }

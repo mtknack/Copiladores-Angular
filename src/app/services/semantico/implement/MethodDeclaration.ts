@@ -27,8 +27,8 @@ export class MethodDeclaration implements ILog {
 
 
     processar(){
-        // let regra1 = [this.methodDeclarator, this.block]
-        // this.objectService.validaRegra(regra1)
+        let regra1 = [this.methodDeclarator, this.block]
+        this.objectService.validaRegras([regra1])
         
 	}
 

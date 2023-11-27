@@ -1,33 +1,35 @@
 import { Injectable, Injector } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { ObjectService } from "../Objetcs/ObjectService";
-import { Identifier } from "./Identifier";
 import { PalavrasReservadas } from "../../Reservadas";
-import { Expression } from "./Expression";
+import { Block } from "./Block";
+import { FormalParameter } from "./FormalParameter";
 
 
 @Injectable({
     providedIn: 'root',
 })
-export class ReturnStatement implements ILog {
+export class CatchClause implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private injector: Injector
+        private injector: Injector,
+        private formalParameter: FormalParameter
     ){
     }
 
     message(): IObjectLog {
         return {
-            analise: "ReturnStatement",
+            analise: "CatchClause",
             status: true
         }
     }
 
 
     processar(){
-        // expression é opicional aqui
-        var regra1 = [PalavrasReservadas.RETURN, this.injector.get(Expression), PalavrasReservadas.SEMICOLON]
+        var regra1 = [PalavrasReservadas.CATCH, PalavrasReservadas.LEFT_PARENTHESIS, 
+            this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS,
+            this.injector.get(Block), this]
 
         this.objectService.validaRegra(regra1)
 	}

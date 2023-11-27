@@ -27,16 +27,26 @@ export class RelationalExpression implements ILog {
 
 
     processar(){
-		let regra1 = [PalavrasReservadas.EQUALS,this.operationalExpression, this]
-		let regra2 = [PalavrasReservadas.NOT_EQUALS,this.operationalExpression, this]
-		let regra3 = [PalavrasReservadas.LESS_THAN,this.operationalExpression, this]
-		let regra4 = [PalavrasReservadas.LESS_THAN_OR_EQUALS,this.operationalExpression, this]
-		let regra5 = [PalavrasReservadas.GREATER_THAN,this.operationalExpression, this]
-		let regra6 = [PalavrasReservadas.GREATER_THAN_OR_EQUALS,this.operationalExpression, this]
-		let regra7 = []
+        var regra1 = [PalavrasReservadas.EQUALS,this.operationalExpression, this]
+		var regra2 = [PalavrasReservadas.NOT_EQUALS,this.operationalExpression, this]
+		var regra3 = [PalavrasReservadas.LESS_THAN,this.operationalExpression, this]
+		var regra4 = [PalavrasReservadas.LESS_THAN_OR_EQUALS,this.operationalExpression, this]
+		var regra5 = [PalavrasReservadas.GREATER_THAN,this.operationalExpression, this]
+		var regra6 = [PalavrasReservadas.GREATER_THAN_OR_EQUALS,this.operationalExpression, this]
         
-        let arrayDeRegras = [regra1,regra2,regra3,regra4]
-        this.objectService.validaRegra(regra1)
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.EQUALS)){
+            this.objectService.validaRegra(regra1)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.NOT_EQUALS)){
+            this.objectService.validaRegra(regra2)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LESS_THAN)){
+            this.objectService.validaRegra(regra3)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LESS_THAN_OR_EQUALS)){
+            this.objectService.validaRegra(regra4)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.GREATER_THAN)){
+            this.objectService.validaRegra(regra5)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.GREATER_THAN_OR_EQUALS)){
+            this.objectService.validaRegra(regra6)
+        }
 	}
 
 }

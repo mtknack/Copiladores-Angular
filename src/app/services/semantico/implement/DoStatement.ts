@@ -1,5 +1,9 @@
-import { Injectable } from "@angular/core";
+import { Injectable, Injector } from "@angular/core";
 import { ILog, IObjectLog } from "../Objetcs/Log";
+import { PalavrasReservadas } from "../../Reservadas";
+import { ObjectService } from "../Objetcs/ObjectService";
+import { Statement } from "./Statement";
+import { Expression } from "./Expression";
 
 
 @Injectable({
@@ -8,7 +12,10 @@ import { ILog, IObjectLog } from "../Objetcs/Log";
 export class DoStatement implements ILog {
 
     constructor(
-        
+        private objectService: ObjectService,
+        private injector: Injector,
+        // private statement: Statement,
+        private expression: Expression
     ){
     }
 
@@ -21,7 +28,11 @@ export class DoStatement implements ILog {
 
 
     processar(){
-        
+        let regra1 = [PalavrasReservadas.DO, this.injector.get(Statement), 
+            PalavrasReservadas.WHILE, PalavrasReservadas.LEFT_PARENTHESIS, 
+            this.expression, PalavrasReservadas.RIGHT_PARENTHESIS, 
+            PalavrasReservadas.SEMICOLON]
+        this.objectService.validaRegras([regra1])
 	}
 
 }

@@ -27,10 +27,17 @@ export class Expression2 implements ILog {
 
 
     processar(){
-		let regra1 = [PalavrasReservadas.LOGICAL_OR,this.comparationExpression, this]
-		let regra2 = [PalavrasReservadas.LOGICAL_AND,this.comparationExpression, this]
-		let regra3 = []
-        this.objectService.validaRegra(regra1)
+		let regra1 = [PalavrasReservadas.LOGICAL_OR, this.comparationExpression, this]
+		let regra2 = [PalavrasReservadas.LOGICAL_AND, this.comparationExpression, this]
+
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LOGICAL_OR)){
+            this.objectService.validaRegra(regra1)
+        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LOGICAL_AND)){
+            this.objectService.validaRegra(regra2)
+        }else{
+            
+        }
+        
 	}
 
 }

@@ -27,9 +27,12 @@ export class ClassDeclaration implements ILog {
 
     processar(){
 
-        // deixei o modificador a principio como obrigatorio
         let regra1 = [this.classModifier, PalavrasReservadas.CLASS, this.identifier, this.classBody]
-        this.objectService.validaRegra(regra1)
+        try{
+            this.objectService.validaRegra(regra1)
+        }catch(erro){
+            throw erro
+        }
     }
 
 }

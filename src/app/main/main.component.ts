@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, AfterViewInit, OnInit } from '@angula
 import { AnalizadorLexico } from '../services/AnalizadorLexico';
 import { IToken } from '../services/Interfaces';
 import { AnalizadorSemantico } from '../services/AnalisadorSemantico';
+import * as javaparser7Min from '../services/semantico/Objetcs/javaparser7.min.js';
 
 @Component({
   selector: 'app-main',
@@ -17,11 +18,9 @@ export class MainComponent implements AfterViewInit {
   texto: string = 
 `package br.biblioteca.telas;
 import java.awt.List;
-import java.util.List;
-import java.util.ArrayList;
 public class teste { 
-
-}`;
+    public int str(int teste) {
+ ; `;
 
   Erros: IToken[] = [];
   Tokens: IToken[] = [];
@@ -47,12 +46,10 @@ public class teste {
 
     switch(this.selectCopiler){
       case 0:
-        console.log(this.selectCopiler)
         this.Tokens = this.analizadorLexico.analizar(this.texto);
         this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
         break
-      case 1:
-        console.log(this.selectCopiler)
+      case 1:        
         this.Tokens = this.analizadorLexico.analizar(this.texto);
         this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
         if(this.Erros.length == 0){
@@ -63,17 +60,13 @@ public class teste {
           else{
             this.ErrosTemporario = msgErro.__zone_symbol__value.message
           }
-          
-          
         }
+        
         break
       case 2:
-        console.log(this.selectCopiler)
+        // console.log(this.selectCopiler)
         break
     }
-    // this.Tokens = this.analizadorLexico.analizar(this.texto);
-    // this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
-    // let teste = this.analizadorSemantico.initializeVariables(this.Tokens)
   }
 
   ngAfterViewInit(): void {
