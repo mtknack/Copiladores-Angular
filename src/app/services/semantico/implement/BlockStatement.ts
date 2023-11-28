@@ -37,6 +37,8 @@ export class BlockStatement implements ILog {
         PalavrasReservadas.DO, 
         PalavrasReservadas.BREAK, 
         PalavrasReservadas.CONTINUE, 
+        PalavrasReservadas.RETURN,
+        PalavrasReservadas.IF,
         PalavrasReservadas.WHILE, 
         PalavrasReservadas.TRY, 
         PalavrasReservadas.NEW

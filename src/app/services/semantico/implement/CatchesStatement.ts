@@ -30,13 +30,12 @@ export class CatchesStatement implements ILog {
     processar(){
         this.objectService.logClas(this.message(), true);
 
-        var regra1 = [this.catchClause, this.finally_]
+        var regra1 = [this.catchClause]
         var regra2 =  [this.finally_]
 
-        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.CATCH)){
-            this.objectService.validaRegra(regra1)
-        }else{
-            this.objectService.validaRegra(regra2)
+        this.objectService.validaRegras([regra1])
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.FINALLY)){
+            this.objectService.validaRegras([regra2])
         }
 
         this.objectService.logClas(this.message(), false);

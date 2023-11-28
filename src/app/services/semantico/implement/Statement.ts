@@ -60,7 +60,7 @@ export class Statement implements ILog {
         let regra9 = [this.whileStatement]
         let regra10 = [this.tryStatement]
         let regra11 = [this.classInstanceCreationExpression]
-        let regras = [regra2,regra3,regra4,regra5,regra6,regra7, regra1]
+        let regras = [regra1, regra2, regra3, regra4, regra5, regra6, regra7, regra8, regra9, regra10, regra11]
 
         console.log("teste")
         debugger

@@ -29,6 +29,22 @@ export class MainComponent implements AfterViewInit {
     continue ;
 
     return teste ;
+
+    if ( ) { 
+      while ( ){ 
+
+      }
+    } else {
+      try { 
+
+      } catch ( ) {
+
+      } finally {
+        
+      }
+    }
+
+    new teste () ;
   }
 }`;
 

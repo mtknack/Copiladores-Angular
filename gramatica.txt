@@ -15,7 +15,7 @@
 • <block> → { <blockStatement>? }
 • <blockStatement> → <localVariableDeclaration> ; <blockStatement> | <statement> <blockStatement> | E
 • <localVariableDeclaration> → <type><identifier> <variableDeclarators>
-• <statement> → <block> | ; | <identifier><statementExpression> ; | <doStatement> | <breakStatement> | <continueStatement> | <returnStatement> |<ifSstatement> |
+• <statement> → <block> | ; | <identifier><statementExpression> ; | <doStatement> | <breakStatement> | <continueStatement> | <returnStatement> |<ifStatement> |
 <whileStatement> | <tryStatement> | <classInstanceCreationExpression>
 • <labeledStatement> → : <statement>
 

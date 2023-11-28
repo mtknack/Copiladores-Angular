@@ -31,13 +31,16 @@ export class IfStatement implements ILog {
 
     processar(){
 
+        this.objectService.logClas(this.message(), true);
         // ver o caso de se contiver ou não o ifThenElseStatement
         var regra1 = [
             PalavrasReservadas.IF, PalavrasReservadas.LEFT_PARENTHESIS, 
-            this.expression, PalavrasReservadas.RIGHT_PARENTHESIS, 
+             PalavrasReservadas.RIGHT_PARENTHESIS, 
             this.injector.get(Statement), this.ifThenElseStatement]
 
         this.objectService.validaRegra(regra1)
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

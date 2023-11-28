@@ -28,12 +28,16 @@ export class CatchClause implements ILog {
 
     processar(){
         this.objectService.logClas(this.message(), true);
-
+        
+        //falta formal parameter
         var regra1 = [PalavrasReservadas.CATCH, PalavrasReservadas.LEFT_PARENTHESIS, 
-            this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS,
-            this.injector.get(Block), this]
+             PalavrasReservadas.RIGHT_PARENTHESIS,
+            this.injector.get(Block)]
 
         this.objectService.validaRegra(regra1)
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.CATCH)){
+            this.processar();
+        }
 
         this.objectService.logClas(this.message(), false);
 	}
