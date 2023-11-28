@@ -25,7 +25,7 @@ export class BlockStatement implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "BlockStatement",
             status: true
         }
     }
@@ -43,7 +43,9 @@ export class BlockStatement implements ILog {
     ]
 
     processar(){
-        // debugger
+        
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [this.localVariableDeclaration, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.statement, this]
         
@@ -57,10 +59,11 @@ export class BlockStatement implements ILog {
             this.objectService.validaRegras([regra1])
             this.processar()
         }
-        // else if(this.objectService.validaPalavrasReservadas(this)){
-        //     // this.objectService.loop = 1
-        //     this.objectService.validaRegras([regra2])
-        // }
+        else if(this.objectService.validaPalavrasReservadas(this)){
+            this.objectService.validaRegras([regra2])
+        }
+
+        this.objectService.logClas(this.message(), false);
 
 	}
 

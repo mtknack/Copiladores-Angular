@@ -27,11 +27,15 @@ export class CatchClause implements ILog {
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
         var regra1 = [PalavrasReservadas.CATCH, PalavrasReservadas.LEFT_PARENTHESIS, 
             this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS,
             this.injector.get(Block), this]
 
         this.objectService.validaRegra(regra1)
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

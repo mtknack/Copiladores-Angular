@@ -26,6 +26,8 @@ export class Identifier implements ILog {
 
     processar(){
 
+        this.objectService.logClas(this.message(), true);
+
         try {
             // this.objectService.logStatusSemantico(this.message(), true)
             this.objectService.validaRegras([[Tipo.IDENTIFICADOR_VALIDO]])
@@ -35,7 +37,7 @@ export class Identifier implements ILog {
             throw error
         }
         
-
+        this.objectService.logClas(this.message(), false);
  
     }
 

@@ -36,8 +36,10 @@ export class Program implements ILog{
 
     processar(): any{
         try{
-            // console.clear()
+            console.clear()
 
+            this.objectService.expecteds = []
+            
             let regra1 = [this.packageDeclaration]
             let regra2 = [this.importDeclarations]
             let regra3 = [this.classDeclaration]
@@ -49,15 +51,30 @@ export class Program implements ILog{
             //     this.objectService.validaRegras([regra2])
             // }
             if(this.objectService.validaPalavrasReservadas(this.classModifier)){
-                debugger
                 this.objectService.validaRegras([regra3])
             }
 
-            return Error(``)
+            throw Error(``)
         }catch(err: any){
-            console.log(err)
-            return err
+            let esperados = this.objectService.expecteds
+            console.log(esperados)
+            let msg = '';
+            if(esperados.length === 0){
+                return Error(``)
+            }else{
+                msg = "Esperando "
+                for (let i = 0; i < esperados.length-1; i++) {
+                    const esperado = esperados[i];
+                    msg += '"'+esperado.vetor+'"['+ esperado.linha+','+ esperado.coluna+'], '
+                }
+                const esperado = esperados[esperados.length-1];
+                    msg += '"'+esperado.vetor+'"['+ esperado.linha+','+ esperado.coluna+']';
+            }
+            console.log(msg)
+            return Error(msg)
+            // return err
         }
+
         
 
         // if(retorno)

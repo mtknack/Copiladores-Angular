@@ -22,13 +22,16 @@ export class ArgumentList implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "ArgumentList",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [this.injector.get(Expression)]
 		let regra2 = [this, PalavrasReservadas.COMMA, this.injector.get(Expression)]
 		
@@ -38,6 +41,8 @@ export class ArgumentList implements ILog {
         catch{
             this.objectService.validaRegra(regra2)            
         }
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

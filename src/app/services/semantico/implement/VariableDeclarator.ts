@@ -19,16 +19,20 @@ export class VariableDeclarator implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "VariableDeclarator",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [this.expression]
         this.objectService.validaRegra(regra1)
         
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

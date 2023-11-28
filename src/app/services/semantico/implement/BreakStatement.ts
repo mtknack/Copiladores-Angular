@@ -11,8 +11,7 @@ import { Identifier } from "./Identifier";
 export class BreakStatement implements ILog {
 
     constructor(
-        private objectService : ObjectService,
-        private identifier: Identifier
+        private objectService : ObjectService
     ){
     }
 
@@ -25,8 +24,12 @@ export class BreakStatement implements ILog {
 
 
     processar(){
-        let regra1 = [PalavrasReservadas.BREAK, this.identifier, PalavrasReservadas.SEMICOLON]
+        this.objectService.logClas(this.message(), true);
+
+        let regra1 = [PalavrasReservadas.BREAK, PalavrasReservadas.SEMICOLON]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

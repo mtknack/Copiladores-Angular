@@ -17,13 +17,15 @@ export class AssignmentOperator implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "Assignment",
+            analise: "AssignmentOperator",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
 
         var regra1 = PalavrasReservadas.ASSIGN
         var regra2 = PalavrasReservadas.MULTIPLY_ASSIGN
@@ -42,6 +44,7 @@ export class AssignmentOperator implements ILog {
 
         // fazer um validaRegra de multiplas opções, onde se o de cima der erro o de baixo é chamado
 
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

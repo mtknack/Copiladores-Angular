@@ -2,24 +2,29 @@ import { ElementRef, Injectable } from "@angular/core";
 import { IObjectInfo } from "./IObjectInfo";
 import { Arvore } from "./Arvore";
 import { IToken, Tipo } from "../../Interfaces";
-import { IObjectLog } from "./Log";
+import { ILog, IObjectLog } from "./Log";
 import { } from "../../Interfaces"
 import { PalavrasReservadas } from "../../Reservadas";
 
+type expected = {
+    vetor:any,
+    linha:any,
+    coluna:any
+}
 @Injectable({
     providedIn: 'root', // Este serviço será injetado em toda a aplicação
 })
 export class ObjectService {
 
     object!: IObjectInfo
-    vetorDeLog: [any] = [null]
+    expecteds: expected[] = []
     vetorError: [String | null] = [null]
     loop: Number = -1
 
     constructor() { }
 
     private skipIndex() {
-        if (this.object.atual <= this.object.tokens.length-1) {
+        if (this.object.atual < this.object.tokens.length) {
             this.object.atual++
         }
 
@@ -76,10 +81,14 @@ export class ObjectService {
 
     public validaRegras(arrayDeRegras:any[]){
         let erroTotal = ``
+        let indexAtual = this.getIndex();
         for (let index = 0; index < arrayDeRegras.length; index++) {
             const regra = arrayDeRegras[index];
             try{
-                this.validaRegra(regra)
+                this.validaRegra(regra)//index = 2
+                for (let j = 0; j < index; j++) {
+                    this.expecteds.pop();
+                }
                 break
             }catch(erro){
                 // erroTotal += erro
@@ -91,7 +100,7 @@ export class ObjectService {
     }
     
 
-    public validaRegra(arrayDeToken: any[], arrayDeTokenOr?: any[]) {
+    public validaRegra(arrayDeToken: any[]) {
         let primeiroIndex = this.getIndex();
 
         let tentarDenovo = false;
@@ -143,10 +152,28 @@ export class ObjectService {
         return false
     }
 
+    public validaPalavrasReservadas2(classe:any){
+        for (let i = 0; i < classe.palavras.length; i++) {
+            let palavra = classe.palavras[i][0]
+            if (typeof palavra === typeof '') {
+                if(this.validaPalavraReservadaSemPular(palavra)){
+                    return true
+                }
+            }
+            else if (typeof palavra === typeof 1) {
+                if(this.validaTipoTokenAtualSemPular(palavra)){
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     public validaPalavraReservada(regra: string) {
         let tokenDoErro = this.object.tokens[this.object.atual]
-        console.log(tokenDoErro)
         if (this.object.tokens[this.object.atual].token != regra) {
+            // this.vetorDeLog.push(`Esperando "${regra}" na linha ${tokenDoErro.linha}`)
+            this.expecteds.push({coluna:tokenDoErro.coluna,linha:tokenDoErro.linha, vetor:regra})
             throw new Error(`Esperando "${regra}" na linha ${tokenDoErro.linha}`)
         }
         this.skipIndex()
@@ -162,11 +189,10 @@ export class ObjectService {
 
     public validaTipoTokenAtual(tipo: Number) {
         let tokenDoErro = this.object.tokens[this.object.atual]
-        console.log(tokenDoErro)
         if (this.object.tokens[this.object.atual].tipo != tipo) {
-            // throw new Error(`Error de verificação de tipo em validar tipo: ${this.object.tokens[this.object.atual].tipo} === ${tipo} `)
+            this.expecteds.push({coluna:tokenDoErro.coluna,linha:tokenDoErro.linha, vetor:"identificador_valido"})            
+            // this.vetorDeLog.push(`Esperado um identificador valido na linha ${tokenDoErro.linha}`)
             throw new Error(`Esperado um identificador valido na linha ${tokenDoErro.linha}`)
-            
         }
         this.skipIndex()
     }
@@ -189,6 +215,14 @@ export class ObjectService {
         this.setObject(x)
     }
 
+    logClas(classe: IObjectLog, entrada: boolean){
+        if(entrada){
+            console.log(`Entrando na classe ${classe.analise}`)
+        }else{
+            console.log(`Saindo da classe ${classe.analise}`)
+        }
+    }
+
     static getInstance(){
         return this
     }
@@ -199,26 +233,4 @@ export class ObjectService {
         }
     }
 
-    logStatusSemantico(log: IObjectLog, entrada: boolean) {
-        if (entrada) {
-            this.vetorDeLog.push(`entrando em: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
-        }
-        else {
-            this.vetorDeLog.push(`saindo de: ${log.analise} virificando: ${this.object.tokens[this.object.atual].token} original: ${this.object.tokens[this.object.atual].textoOriginal}`);
-        }
-    }
-
-    printVetorLog(): any {
-        return this.vetorDeLog;
-    }
-
-    resetVetorLog() {
-        this.vetorDeLog = [null];
-    }
-
-    assembleTree() {
-
-    }
 }
-
-//PROGRAM -> PACKAGE IMPORT CLASS

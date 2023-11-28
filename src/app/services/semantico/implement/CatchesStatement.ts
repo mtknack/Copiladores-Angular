@@ -28,6 +28,8 @@ export class CatchesStatement implements ILog {
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
         var regra1 = [this.catchClause, this.finally_]
         var regra2 =  [this.finally_]
 
@@ -36,6 +38,8 @@ export class CatchesStatement implements ILog {
         }else{
             this.objectService.validaRegra(regra2)
         }
+
+        this.objectService.logClas(this.message(), false);
 
 	}
 

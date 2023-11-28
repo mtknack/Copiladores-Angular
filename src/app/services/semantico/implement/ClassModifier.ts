@@ -15,7 +15,7 @@ export class ClassModifier implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassModifier Declaration",
+            analise: "ClassModifier",
             status: true
         }
     }
@@ -27,10 +27,15 @@ export class ClassModifier implements ILog {
     ]
 // Regra: <classModifier> → public | abstract | final
     processar() {
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [PalavrasReservadas.PUBLIC]
         let regra2 = [PalavrasReservadas.ABSTRACT]
         let regra3 = [PalavrasReservadas.FINAL]
         this.objectService.validaRegras([regra1,regra2,regra3])
+
+        this.objectService.logClas(this.message(), false);
         
     }
 }

@@ -39,13 +39,16 @@ export class Statement implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "Statement",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [this.injector.get(Block)]
         let regra2 = [PalavrasReservadas.SEMICOLON]
         let regra3 = [this.identifier, this.statementExpression, PalavrasReservadas.SEMICOLON]
@@ -57,9 +60,13 @@ export class Statement implements ILog {
         let regra9 = [this.whileStatement]
         let regra10 = [this.tryStatement]
         let regra11 = [this.classInstanceCreationExpression]
-        let regras = [regra1,regra2,regra3]
-        // debugger
+        let regras = [regra2,regra3,regra4,regra5,regra6,regra7, regra1]
+
+        console.log("teste")
+        debugger
         this.objectService.validaRegras(regras)
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

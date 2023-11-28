@@ -25,13 +25,16 @@ export class VariableDeclarators implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "VariableDeclarators",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [PalavrasReservadas.EQUALS, this.expression]
 		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
 
@@ -40,6 +43,8 @@ export class VariableDeclarators implements ILog {
         }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
             this.objectService.validaRegra(regra2)
         }
+
+        this.objectService.logClas(this.message(), false);
     
 	}
 

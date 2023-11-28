@@ -20,16 +20,20 @@ export class MethodDeclaration implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "MethodDeclaration",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [this.methodDeclarator, this.block]
         this.objectService.validaRegras([regra1])
         
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

@@ -21,15 +21,20 @@ export class Expression implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "Expression",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [this.comparationExpression, this.expression2]
         this.objectService.validaRegra(regra1)
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

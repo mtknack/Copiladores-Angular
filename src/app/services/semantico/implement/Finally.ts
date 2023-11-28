@@ -26,9 +26,14 @@ export class Finally implements ILog {
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         var regra1 = [PalavrasReservadas.FINALLY, this.injector.get(Block)]
 
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

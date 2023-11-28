@@ -30,23 +30,14 @@ export class Modifier implements ILog {
 
 
     processar() {
+
+        this.objectService.logClas(this.message(), true);
         try {
             this.objectService.validaRegras(this.palavras)
         } catch (error) {
-            throw error
+            // throw error
         }
+
+        this.objectService.logClas(this.message(), false);
     }
-
-    // getModifier(atual: string): boolean {
-
-    //     var busca = this.modifiers.filter(x => x == atual)
-    //     if (
-    //         busca[0] != undefined
-    //     ) {
-    //         return true
-    //     }
-    //     else {
-    //         return false
-    //     }
-    // }
 }

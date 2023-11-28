@@ -20,12 +20,14 @@ export class ClassDeclaration implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "Class Declaration",
+            analise: "ClassDeclaration",
             status: true
         }
     }
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
 
         let regra1 = [this.classModifier, PalavrasReservadas.CLASS, this.identifier, this.classBody]
         try{
@@ -33,6 +35,8 @@ export class ClassDeclaration implements ILog {
         }catch(erro){
             throw erro
         }
+
+        this.objectService.logClas(this.message(), false);
     }
 
 }

@@ -19,15 +19,19 @@ export class Block implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "Block",
             status: true
         }
     }
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [PalavrasReservadas.LEFT_BRACE, this.blockStatement, PalavrasReservadas.RIGHT_BRACE]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

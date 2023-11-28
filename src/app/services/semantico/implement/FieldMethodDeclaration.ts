@@ -26,15 +26,18 @@ export class FieldMethodDeclaration implements ILog {
     }
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [this.variableDeclarators, PalavrasReservadas.SEMICOLON]
         let regra2 = [this.methodDeclaration]
 
         // if(this.objectService.validaPalavraReservadaSemPular()){
 
         // }
-        // debugger
-        this.objectService.validaRegras([regra1,regra2])
+        this.objectService.validaRegras([regra1, regra2])
         
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

@@ -19,13 +19,15 @@ export class AdditiveExpression implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "AdditiveExpression",
             status: true
         }
     }
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [PalavrasReservadas.ADD, this.term, this]
 		let regra2 = [PalavrasReservadas.SUBTRACT, this.term, this]
 
@@ -35,6 +37,7 @@ export class AdditiveExpression implements ILog {
             this.objectService.validaRegra(regra2)
         }
         
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

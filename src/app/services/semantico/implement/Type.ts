@@ -16,7 +16,7 @@ export class Type implements ILog {
 	
     message(): IObjectLog {
         return {
-            analise: "Type Declaration",
+            analise: "Type",
             status: true
         }
     }
@@ -34,7 +34,12 @@ export class Type implements ILog {
 	]
 
     processar() {        
+
+        this.objectService.logClas(this.message(), true);
+
         this.objectService.validaRegras(this.palavras)
+
+        this.objectService.logClas(this.message(), false);
     }
 
 

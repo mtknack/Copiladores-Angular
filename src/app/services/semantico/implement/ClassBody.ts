@@ -17,15 +17,19 @@ export class ClassBody implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBody Declarations",
+            analise: "ClassBody",
             status: true
         }
     }
 
     processar(){
 
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [PalavrasReservadas.LEFT_BRACE, this.classBodyDeclaration, PalavrasReservadas.RIGHT_BRACE]
         this.objectService.validaRegra(regra1)
+
+        this.objectService.logClas(this.message(), false);
     }
 
 }

@@ -29,9 +29,13 @@ export class MethodDeclarator implements ILog {
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
         this.objectService.validaRegra(regra1)
         
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

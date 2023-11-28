@@ -26,10 +26,15 @@ export class ReturnStatement implements ILog {
 
 
     processar(){
-        // expression é opicional aqui
-        var regra1 = [PalavrasReservadas.RETURN, this.injector.get(Expression), PalavrasReservadas.SEMICOLON]
+        this.objectService.logClas(this.message(), true);
 
-        this.objectService.validaRegra(regra1)
+        // var regra1 = [PalavrasReservadas.RETURN, this.injector.get(Expression), PalavrasReservadas.SEMICOLON]
+        // this.objectService.validaRegra(regra1)
+
+        var regra2 = [PalavrasReservadas.RETURN, this.injector.get(Identifier), PalavrasReservadas.SEMICOLON]
+        this.objectService.validaRegras([regra2])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

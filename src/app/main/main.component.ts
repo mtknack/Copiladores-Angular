@@ -17,8 +17,18 @@ export class MainComponent implements AfterViewInit {
 
   texto: string = 
 `public class teste { 
-  public int str(int teste) {
+  public int str ;
+  private char teste ;
 
+  public void fcn(int var) {
+    do {
+
+    } while ( ) ;
+
+    break ;
+    continue ;
+
+    return teste ;
   }
 }`;
 

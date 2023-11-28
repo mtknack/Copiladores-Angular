@@ -25,8 +25,8 @@
 • <whileStatement> → while ( <expression> ) <statement>
 • <doStatement> → do <statement> while ( <expression> ) ;
 • <breakStatement> → break <identifier>? ;
-• <continueStatement> → continue <identifier>? ;
-• <returnStatement> → return <expression>? ;
+• <continueStatement> → continue;
+• <returnStatement> → return <expression>? ; | return <identifier> ;
 • <tryStatement> → try <block> <catchesStatement>
 • <catchesStatement> → <catchClause> <finally> ? | <finally>
 • <catchClause> → catch ( <formalParameter> ) <block> <catchClause> | E
@@ -37,7 +37,6 @@
 • <expression2> → || <comparationExpression> <expression2> | && <comparationExpression> <expression2> | ε
 • <comparationExpression> → <operationalExpression> <relationalExpression>
 • <relationalExpression> → == <operationalExpression> <relationalExpression> | != <operationalExpression> <relationalExpression>
-
 |< <operationalExpression> <relationalExpression>
 | <= <operationalExpression> <relationalExpression>
 | > <operationalExpression> <relationalExpression>

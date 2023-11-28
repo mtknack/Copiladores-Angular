@@ -26,11 +26,14 @@ export class Assignment implements ILog {
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
 
         var regra1 = this.assignmentOperator
         var regra2 = this.expression
         
         this.objectService.validaRegra([regra1, regra2])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

@@ -11,7 +11,6 @@ export class ContinueStatement implements ILog {
 
     constructor(
         private objectService : ObjectService,
-        private identifier: Identifier
     ){
     }
 
@@ -24,8 +23,13 @@ export class ContinueStatement implements ILog {
 
 
     processar(){
-        let regra1 = [PalavrasReservadas.CONTINUE, this.identifier, PalavrasReservadas.SEMICOLON]
+
+        this.objectService.logClas(this.message(), true);
+
+        let regra1 = [PalavrasReservadas.CONTINUE, PalavrasReservadas.SEMICOLON]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

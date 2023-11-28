@@ -17,21 +17,26 @@ export class LocalVariableDeclaration implements ILog {
         private objectService: ObjectService,
         private type: Type,
         private identifier:Identifier,
-        private variableDeclarators:VariableDeclarators,
+        private variableDeclarators: VariableDeclarators,
     ){
     }
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "LocalVariableDeclaration",
             status: true
         }
     }
 
 
     processar(){
+
+        this.objectService.logClas(this.message(), true);
+
         let regra1 = [this.type,this.identifier,this.variableDeclarators]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }
