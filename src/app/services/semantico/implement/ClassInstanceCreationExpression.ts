@@ -31,7 +31,7 @@ export class ClassInstanceCreationExpression implements ILog {
         //  falta this.argumentList,
         var regra1 = [PalavrasReservadas.NEW, this.injector.get(Identifier),
         PalavrasReservadas.LEFT_PARENTHESIS, 
-        PalavrasReservadas.RIGHT_PARENTHESIS]
+        PalavrasReservadas.RIGHT_PARENTHESIS,  PalavrasReservadas.SEMICOLON]
         console.log(this.objectService.getObjectAtualToken())
         this.objectService.validaRegras([regra1])
 
