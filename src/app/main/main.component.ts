@@ -61,29 +61,29 @@ public class teste {
         //     this.ErrosTemporario = msgErro.__zone_symbol__value.message
         //   }
         // }
-        console.clear()
+        // console.clear()
+        let filtrar = ["@","enum",'//', '/*',`0b`,`0B`,`0X`,`0x`]
         if('parse' in javaparser7Min){
           let msgDoErro = ''
           try{
             let teste = javaparser7Min.parse(this.texto)
             this.ErrosTemporario = ``
           }catch(erro:any){
-            console.log(erro)
             msgDoErro = `Esperando `
             let t = erro.expected.filter((t:any) => t.text != undefined )
-            for (let i = t.length-1; i > t.length-3; i--) {
+            for (let i = t.length-1; i >= t.length-5; i--) {
               msgDoErro += '"' + t[i].text + '" ou '
             }
-            msgDoErro += '"' + t[t.length-3].text + '"'
-
-            // msgDoErro += t[t.length-1].text + '"'
+            if(!(t[t.length-6].text in filtrar)){
+              msgDoErro += '"' + t[t.length-6].text + '"'
+            }
             msgDoErro += " na linha " + erro.location.start.line + ' coluna ' +erro.location.start.column
             console.log(msgDoErro)
             this.ErrosTemporario = msgDoErro
           }
         }
         else{
-          console.log("fudeu");
+          console.log("nao funcionou");
         }
         break
       case 2:
