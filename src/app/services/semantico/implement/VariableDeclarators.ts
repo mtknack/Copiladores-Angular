@@ -39,10 +39,11 @@ export class VariableDeclarators implements ILog {
 		let regra2 = [PalavrasReservadas.COMMA, this.identifier, this]
 
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.EQUALS)){
-            this.objectService.validaRegra(regra1)
+            this.objectService.validaRegras([regra1])
         }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
-            this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra2])
         }
+        
 
         this.objectService.logClas(this.message(), false);
     

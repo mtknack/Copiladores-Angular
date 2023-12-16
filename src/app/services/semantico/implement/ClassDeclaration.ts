@@ -31,7 +31,7 @@ export class ClassDeclaration implements ILog {
 
         let regra1 = [this.classModifier, PalavrasReservadas.CLASS, this.identifier, this.classBody]
         try{
-            this.objectService.validaRegra(regra1)
+            this.objectService.validaRegras([regra1])
         }catch(erro){
             throw erro
         }

@@ -33,18 +33,12 @@ export class ClassBodyDeclaration implements ILog {
     processar(){
         this.objectService.logClas(this.message(), true);
 
-        var regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration]
-        try {
-            this.objectService.validaRegra(regra1)
-            if(this.objectService.validaPalavrasReservadas2(this.modifier)){
-                this.objectService.validaRegra([this])
-            }
-            
-        } catch (error) {
+        var regra1 = [this.modifier, this.type, this.identifier, this.fieldMethodDeclaration, this]
 
-            // throw error
+        if(this.objectService.validaPalavrasReservadas2(this.modifier)){
+            this.objectService.validaRegras([regra1])
         }
-        
+
         this.objectService.logClas(this.message(), false);
 	}
 

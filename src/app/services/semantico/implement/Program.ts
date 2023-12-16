@@ -70,7 +70,6 @@ export class Program implements ILog{
                 const esperado = esperados[esperados.length-1];
                     msg += '"'+esperado.vetor+'"['+ esperado.linha+','+ esperado.coluna+']';
             }
-            console.log(msg)
             return Error(msg)
             // return err
         }

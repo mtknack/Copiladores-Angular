@@ -32,7 +32,7 @@ export class WhileStatement implements ILog {
             this.injector.get(Expression), PalavrasReservadas.RIGHT_PARENTHESIS, 
             this.injector.get(Statement)]
 
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 	}
 
 }

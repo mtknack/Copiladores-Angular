@@ -30,7 +30,7 @@ export class FieldDeclaration implements ILog {
         this.objectService.logClas(this.message(), true);
         
 		let regra1 = [this.variableDeclarators, PalavrasReservadas.SEMICOLON]
-		this.objectService.validaRegra(regra1)
+		this.objectService.validaRegras([regra1])
 
         this.objectService.logClas(this.message(), false);
 	}

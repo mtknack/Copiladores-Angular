@@ -31,7 +31,7 @@ export class TryStatement implements ILog {
 
         var regra1 = [PalavrasReservadas.TRY, this.injector.get(Block), this.catchesStatement]
 
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 
         this.objectService.logClas(this.message(), false);
     }

@@ -16,35 +16,12 @@ export class MainComponent implements AfterViewInit {
   selectCopiler: number = 0
 
   texto: string = 
-`public class teste { 
+`{ 
   public int str ;
   private char teste ;
 
   public void fcn(int var) {
-    do {
-
-    } while ( ) ;
-
-    break ;
-    continue ;
-
-    return teste ;
-
-    if ( ) { 
-      while ( ){ 
-
-      }
-    } else {
-      try { 
-
-      } catch ( ) {
-
-      } finally {
-        
-      }
-    }
-
-    new teste () ;
+    
   }
 }`;
 

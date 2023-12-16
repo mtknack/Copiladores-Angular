@@ -32,9 +32,9 @@ export class AdditiveExpression implements ILog {
 		let regra2 = [PalavrasReservadas.SUBTRACT, this.term, this]
 
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.ADD)){
-            this.objectService.validaRegra(regra1)
+            this.objectService.validaRegras([regra1])
         }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUBTRACT)){
-            this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra2])
         }
         
         this.objectService.logClas(this.message(), false);

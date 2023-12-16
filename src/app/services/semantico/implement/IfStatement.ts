@@ -38,7 +38,7 @@ export class IfStatement implements ILog {
              PalavrasReservadas.RIGHT_PARENTHESIS, 
             this.injector.get(Statement), this.ifThenElseStatement]
 
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 
         this.objectService.logClas(this.message(), false);
 	}

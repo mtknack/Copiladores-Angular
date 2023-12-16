@@ -33,7 +33,7 @@ export class MethodDeclarator implements ILog {
         this.objectService.logClas(this.message(), true);
 
         let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
         
         this.objectService.logClas(this.message(), false);
 	}

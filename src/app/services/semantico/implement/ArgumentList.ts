@@ -35,12 +35,7 @@ export class ArgumentList implements ILog {
 		let regra1 = [this.injector.get(Expression)]
 		let regra2 = [this, PalavrasReservadas.COMMA, this.injector.get(Expression)]
 		
-        try{
-            this.objectService.validaRegra(regra1)
-        }
-        catch{
-            this.objectService.validaRegra(regra2)            
-        }
+        this.objectService.validaRegras([regra1,regra2])     
 
         this.objectService.logClas(this.message(), false);
 	}

@@ -31,9 +31,9 @@ export class Expression2 implements ILog {
 		let regra2 = [PalavrasReservadas.LOGICAL_AND, this.comparationExpression, this]
 
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LOGICAL_OR)){
-            this.objectService.validaRegra(regra1)
+            this.objectService.validaRegras([regra1])
         }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LOGICAL_AND)){
-            this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra2])
         }else{
             
         }

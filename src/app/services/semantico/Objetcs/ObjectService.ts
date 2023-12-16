@@ -56,7 +56,26 @@ export class ObjectService {
     }
 
     getObjectAtualToken(): string {
-        return this.object.tokens[this.object.atual].token
+        if(this.object.atual >= this.object.tokens.length){
+            return 'VAZIO'
+        }
+        else{
+            return this.object.tokens[this.object.atual].token
+        }
+    }
+
+    getObjectAtualTokenObject(): IToken {
+        if(this.object.atual >= this.object.tokens.length){
+            return {
+                textoOriginal:"", 
+                tipo:Tipo.IDENTIFICADOR_INVALIDO,token:"",
+                linha:this.object.tokens[this.object.atual-1].linha,
+                coluna:(this.object.tokens[this.object.atual-1].coluna! + 1)
+            }
+        }
+        else{
+            return this.object.tokens[this.object.atual]
+        }
     }
 
     public validaRegraOpcional(arrayDeToken: any[], optionalTokens: number[]) {
@@ -80,27 +99,29 @@ export class ObjectService {
     }
 
     public validaRegras(arrayDeRegras:any[]){
-        let erroTotal = ``
         let indexAtual = this.getIndex();
+        let qtdRegrasQueRodou = 0;
         for (let index = 0; index < arrayDeRegras.length; index++) {
             const regra = arrayDeRegras[index];
             try{
                 this.validaRegra(regra)//index = 2
-                for (let j = 0; j < index; j++) {
-                    this.expecteds.pop();
-                }
+                //[BYTE],[SHORT identificador],[int],[float]
+                qtdRegrasQueRodou = index
                 break
             }catch(erro){
-                // erroTotal += erro
                 if(index == arrayDeRegras.length-1){
                     throw(erro)
+                }
+            }finally{
+                for (let j = 0; j < qtdRegrasQueRodou; j++) {
+                    this.expecteds.pop();
                 }
             }
         }
     }
     
 
-    public validaRegra(arrayDeToken: any[]) {
+    private validaRegra(arrayDeToken: any[]) {
         let primeiroIndex = this.getIndex();
 
         let tentarDenovo = false;
@@ -170,8 +191,8 @@ export class ObjectService {
     }
 
     public validaPalavraReservada(regra: string) {
-        let tokenDoErro = this.object.tokens[this.object.atual]
-        if (this.object.tokens[this.object.atual].token != regra) {
+        let tokenDoErro = this.getObjectAtualTokenObject()
+        if (tokenDoErro.token != regra) {
             // this.vetorDeLog.push(`Esperando "${regra}" na linha ${tokenDoErro.linha}`)
             this.expecteds.push({coluna:tokenDoErro.coluna,linha:tokenDoErro.linha, vetor:regra})
             throw new Error(`Esperando "${regra}" na linha ${tokenDoErro.linha}`)
@@ -180,7 +201,7 @@ export class ObjectService {
     }
     
     public validaPalavraReservadaSemPular(regra: string) {
-        let token = this.object.tokens[this.object.atual].token
+        let token = this.getObjectAtualTokenObject().token
         if (token == regra) {
             return true
         }
@@ -188,17 +209,17 @@ export class ObjectService {
     }
 
     public validaTipoTokenAtual(tipo: Number) {
-        let tokenDoErro = this.object.tokens[this.object.atual]
-        if (this.object.tokens[this.object.atual].tipo != tipo) {
+        let tokenDoErro = this.getObjectAtualTokenObject()
+
+        if (this.getObjectAtualTokenObject().tipo != tipo) {
             this.expecteds.push({coluna:tokenDoErro.coluna,linha:tokenDoErro.linha, vetor:"identificador_valido"})            
-            // this.vetorDeLog.push(`Esperado um identificador valido na linha ${tokenDoErro.linha}`)
             throw new Error(`Esperado um identificador valido na linha ${tokenDoErro.linha}`)
         }
         this.skipIndex()
     }
 
     public validaTipoTokenAtualSemPular(tipo: Number) {
-        let tokenDoErro = this.object.tokens[this.object.atual]
+        let tokenDoErro = this.getObjectAtualTokenObject()
         if (tokenDoErro.tipo == tipo) {
             return true
         }

@@ -32,7 +32,7 @@ export class Expression implements ILog {
         this.objectService.logClas(this.message(), true);
 
 		let regra1 = [this.comparationExpression, this.expression2]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 
         this.objectService.logClas(this.message(), false);
 	}

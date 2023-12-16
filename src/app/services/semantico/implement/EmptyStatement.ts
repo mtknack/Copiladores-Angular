@@ -28,7 +28,7 @@ export class EmptyStatement implements ILog {
 
     processar(){
 		let regra1 = [PalavrasReservadas.SEMICOLON]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 	}
 
 }

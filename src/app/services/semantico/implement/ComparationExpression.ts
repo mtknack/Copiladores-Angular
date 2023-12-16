@@ -19,7 +19,7 @@ export class ComparationExpression implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "ComparationExpression",
             status: true
         }
     }
@@ -27,7 +27,7 @@ export class ComparationExpression implements ILog {
 
     processar(){
 		var regra1 = [this.operationalExpression, this.relationalExpression]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
 	}
 
 }

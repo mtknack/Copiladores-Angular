@@ -34,7 +34,7 @@ export class CatchClause implements ILog {
              PalavrasReservadas.RIGHT_PARENTHESIS,
             this.injector.get(Block)]
 
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.CATCH)){
             this.processar();
         }

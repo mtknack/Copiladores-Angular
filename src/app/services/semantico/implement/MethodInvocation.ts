@@ -22,21 +22,26 @@ export class MethodInvocation implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "MethodInvocation",
             status: true
         }
     }
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.argumentList, PalavrasReservadas.RIGHT_PARENTHESIS]
 		let regra2 = [PalavrasReservadas.SUPER, PalavrasReservadas.PERIOD, this.identifier, PalavrasReservadas.LEFT_PARENTHESIS, this.argumentList, PalavrasReservadas.RIGHT_BRACE]
 		
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LEFT_PARENTHESIS)){
-            this.objectService.validaRegra(regra1)
-        }else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUPER)){
-            this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra1])
         }
+        else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUPER)){
+            this.objectService.validaRegras([regra2])
+        }
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

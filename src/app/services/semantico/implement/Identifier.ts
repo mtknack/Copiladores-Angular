@@ -27,15 +27,11 @@ export class Identifier implements ILog {
     processar(){
 
         this.objectService.logClas(this.message(), true);
+        let regra1 = [Tipo.IDENTIFICADOR_VALIDO]
+        debugger
+        this.objectService.validaRegras([regra1])
+        
 
-        try {
-            // this.objectService.logStatusSemantico(this.message(), true)
-            this.objectService.validaRegras([[Tipo.IDENTIFICADOR_VALIDO]])
-            // this.objectService.logStatusSemantico(this.message(), false)
-        } catch (error) {
-            // Trate o erro aqui, se necessário
-            throw error
-        }
         
         this.objectService.logClas(this.message(), false);
  

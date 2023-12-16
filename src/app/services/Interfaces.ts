@@ -13,11 +13,11 @@ export const Tipo = {
 };
 
 export interface IToken {
-  id?: Number;
-  tipo: Number;
+  id?: number;
+  tipo: number;
   textoOriginal: string;
   token: string;
-  linha?: Number;
-  coluna?: Number;
+  linha?: number;
+  coluna?: number;
   erro?: string
 }

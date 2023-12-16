@@ -21,15 +21,15 @@ export class OperationalExpression implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "OperationalExpression",
             status: true
         }
     }
 
 
     processar(){
-		let regra1 = [this.term,this.additiveExpression]
-        this.objectService.validaRegra(regra1)
+		let regra1 = [this.term, this.additiveExpression]
+        this.objectService.validaRegras([regra1])
 	}
 
 }

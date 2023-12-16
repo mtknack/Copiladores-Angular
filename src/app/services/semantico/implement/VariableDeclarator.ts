@@ -30,7 +30,7 @@ export class VariableDeclarator implements ILog {
         this.objectService.logClas(this.message(), true);
 
 		let regra1 = [this.expression]
-        this.objectService.validaRegra(regra1)
+        this.objectService.validaRegras([regra1])
         
         this.objectService.logClas(this.message(), false);
 	}

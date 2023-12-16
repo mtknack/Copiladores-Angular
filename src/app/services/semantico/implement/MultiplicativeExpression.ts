@@ -33,13 +33,13 @@ export class MultiplicativeExpression implements ILog {
 		let regra3 = [PalavrasReservadas.MODULO, this.unaryExpression, this]
 
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.MULTIPLY)){
-            this.objectService.validaRegra(regra1)
+            this.objectService.validaRegras([regra1])
         }
         else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.DIVIDE)){
-            this.objectService.validaRegra(regra2)
+            this.objectService.validaRegras([regra2])
         }
         else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.MODULO)){
-            this.objectService.validaRegra(regra3)
+            this.objectService.validaRegras([regra3])
         }
       
 	}
