@@ -4,7 +4,7 @@ import { ObjectService } from "../Objetcs/ObjectService";
 import { ILog, IObjectLog } from "../Objetcs/Log";
 import { MethodInvocation } from "./MethodInvocation";
 import { Tipo } from "../../Interfaces";
-import { Identifier } from "./Identifier";
+import { Identifier1 } from "./Identifier1";
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class UnaryExpression implements ILog {
 
     constructor(
         private objectService: ObjectService,
-        private identifier: Identifier,
+        private identifier1: Identifier1,
         private methodInvocation: MethodInvocation
     ){
 
@@ -29,13 +29,14 @@ export class UnaryExpression implements ILog {
 
 
     processar(){
-		let regra1 = [PalavrasReservadas.ADD, this.identifier, this.methodInvocation]
-		let regra2 = [PalavrasReservadas.SUBTRACT, this.identifier, this.methodInvocation]
-		let regra3 = [this.identifier, this.methodInvocation]
+		let regra1 = [PalavrasReservadas.ADD, this.identifier1, this.methodInvocation]
+		let regra2 = [PalavrasReservadas.SUBTRACT, this.identifier1, this.methodInvocation]
+		let regra3 = [this.identifier1, this.methodInvocation]
 
-        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.ADD) || this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUBTRACT) || this.objectService.validaTipoTokenAtualSemPular(Tipo.IDENTIFICADOR_VALIDO)){
-            this.objectService.validaRegras([regra1, regra2, regra3])
+        if(!(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.ADD) || this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUBTRACT) || this.objectService.validaTipoTokenAtualSemPular(Tipo.IDENTIFICADOR_VALIDO) || this.objectService.validaTipoTokenAtualSemPular(Tipo.NUMBER))){
+            return
         }
+        this.objectService.validaRegras([regra1, regra2, regra3])
         
 	}
 

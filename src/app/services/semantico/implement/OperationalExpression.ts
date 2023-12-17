@@ -28,8 +28,12 @@ export class OperationalExpression implements ILog {
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
 		let regra1 = [this.term, this.additiveExpression]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

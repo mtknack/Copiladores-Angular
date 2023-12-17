@@ -56,12 +56,12 @@ export class BlockStatement implements ILog {
         // if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.RIGHT_BRACE)){
         //     console.log("teste")
         // }
-        if(this.objectService.validaPalavrasReservadas(this.type)){
+        if(this.objectService.validaPalavrasReservadas2(this.type)){
             console.log('entrei variavel')
             this.objectService.validaRegras([regra1])
             this.processar()
         }
-        else if(this.objectService.validaPalavrasReservadas(this)){
+        if(this.objectService.validaPalavrasReservadas(this)){
             this.objectService.validaRegras([regra2])
         }
 

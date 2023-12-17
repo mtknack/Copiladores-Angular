@@ -19,17 +19,22 @@ export class FormalParameter implements ILog {
         
     ){
 
-    }
+    }   
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "FormalParameter",
             status: true
         }
     }
 
     processar(){
         let regra1 = [this.type, this.identifier]
+
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.RIGHT_PARENTHESIS)){
+           return 
+        }
+
         this.objectService.validaRegras([regra1])
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
             this.objectService.validaPalavraReservada(PalavrasReservadas.COMMA)

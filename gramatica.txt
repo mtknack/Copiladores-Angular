@@ -7,14 +7,15 @@
 • <classBodyDeclaration> → <Modifiers>?<Type><identifier><fieldMethodDeclaration> <classBodyDeclaration> | E
 • <fieldMethodDeclaration> → <variableDeclarators> ; | <methodDeclaration>
 • <Modifier> → public | protected | private | static | final { pode tern a LP somente um destes modifier ou nehum deles}
-• <variableDeclarators> → = <expression> | , <identifier> <variableDeclarators> | E
+• <variableDeclarators> → = <identifier1> | = <expression> | , <identifier> <variableDeclarators> | E
 • <methodDeclaration> → <methodDeclarator> <block>
 • <methodDeclarator> → ( <formalParameter>? )
-• <formalParameter> → <type> <identifier> | , <type> <identifier> <formalParameterList> | E
+• <formalParameter> → <type> <identifier> <formalParameterList> | E
+• <formalParameterList> → , <type> <identifier> <formalParameterList> | E
 • <type> → byte | short | int | long | char | float | double | boolean | void
 • <block> → { <blockStatement>? }
 • <blockStatement> → <localVariableDeclaration> ; <blockStatement> | <statement> <blockStatement> | E
-• <localVariableDeclaration> → <type><identifier> <variableDeclarators>
+• <localVariableDeclaration> → <type> <identifier> <variableDeclarators> | , <identifier> <variableDeclarators> 
 • <statement> → <block> | ; | <identifier><statementExpression> ; | <doStatement> | <breakStatement> | <continueStatement> | <returnStatement> |<ifStatement> |
 <whileStatement> | <tryStatement> | <classInstanceCreationExpression>
 • <labeledStatement> → : <statement>
@@ -51,7 +52,7 @@
 • <unaryExpression> → + <identifier1> <methodInvocation>? | - <identifier1><methodInvocation>? | <identifier1><methodInvocation>?
 • <methodInvocation> → ( <argumentList>? ) | super . <identifier> ( <argumentList>? )
 • <classInstanceCreationExpression> → new <classType> ( <argumentList>? )
-• <argumentList> → <expression> | <argumentList> , <expression>
+• <argumentList> → <expression> , <argumentList> | ε
 
 <Identifier > aceita nome
 <Identifier1 > aceita nome, int, real

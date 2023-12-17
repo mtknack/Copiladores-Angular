@@ -32,14 +32,14 @@ export class MethodInvocation implements ILog {
         this.objectService.logClas(this.message(), true);
 
 		let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.argumentList, PalavrasReservadas.RIGHT_PARENTHESIS]
-		let regra2 = [PalavrasReservadas.SUPER, PalavrasReservadas.PERIOD, this.identifier, PalavrasReservadas.LEFT_PARENTHESIS, this.argumentList, PalavrasReservadas.RIGHT_BRACE]
+		// let regra2 = [PalavrasReservadas.SUPER, PalavrasReservadas.PERIOD, this.identifier, PalavrasReservadas.LEFT_PARENTHESIS, this.argumentList, PalavrasReservadas.RIGHT_BRACE]
 		
         if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.LEFT_PARENTHESIS)){
             this.objectService.validaRegras([regra1])
         }
-        else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUPER)){
-            this.objectService.validaRegras([regra2])
-        }
+        // else if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.SUPER)){
+        //     this.objectService.validaRegras([regra2])
+        // }
 
         this.objectService.logClas(this.message(), false);
 	}

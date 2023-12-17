@@ -35,51 +35,22 @@ export class Program implements ILog{
     }
 
     processar(): any{
-        try{
-            console.clear()
 
-            this.objectService.expecteds = []
-            
-            let regra1 = [this.packageDeclaration]
-            let regra2 = [this.importDeclarations]
-            let regra3 = [this.classDeclaration]
-
-            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.PACKAGE){
-                this.objectService.validaRegras([regra1])
-            }
-            if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
-                this.objectService.validaRegras([regra2])
-            }
-            if(this.objectService.validaPalavrasReservadas(this.classModifier)){
-                this.objectService.validaRegras([regra3])
-            }
-
-            throw Error(``)
-        }catch(err: any){
-            let esperados = this.objectService.expecteds
-            console.log(esperados)
-            let msg = '';
-            if(esperados.length === 0){
-                return Error(``)
-            }else{
-                msg = "Esperando "
-                for (let i = 0; i < esperados.length-1; i++) {
-                    const esperado = esperados[i];
-                    msg += '"'+esperado.vetor+'"['+ esperado.linha+','+ esperado.coluna+'], '
-                }
-                const esperado = esperados[esperados.length-1];
-                    msg += '"'+esperado.vetor+'"['+ esperado.linha+','+ esperado.coluna+']';
-            }
-            return Error(msg)
-            // return err
-        }
-
+        this.objectService.expecteds = []
         
+        let regra1 = [this.packageDeclaration]
+        let regra2 = [this.importDeclarations]
+        let regra3 = [this.classDeclaration]
 
-        // if(retorno)
-        //     return true
-
-        // return false
+        if(this.objectService.getObjectAtualToken() == PalavrasReservadas.PACKAGE){
+            this.objectService.validaRegras([regra1])
+        }
+        if(this.objectService.getObjectAtualToken() == PalavrasReservadas.IMPORT){
+            this.objectService.validaRegras([regra2])
+        }
+        if(this.objectService.validaPalavrasReservadas(this.classModifier)){
+            this.objectService.validaRegras([regra3])
+        }
     }
 
 }

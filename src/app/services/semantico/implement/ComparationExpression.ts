@@ -26,8 +26,12 @@ export class ComparationExpression implements ILog {
 
 
     processar(){
+        this.objectService.logClas(this.message(), true);
+
 		var regra1 = [this.operationalExpression, this.relationalExpression]
         this.objectService.validaRegras([regra1])
+
+        this.objectService.logClas(this.message(), false);
 	}
 
 }

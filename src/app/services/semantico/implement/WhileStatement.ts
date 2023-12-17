@@ -30,7 +30,8 @@ export class WhileStatement implements ILog {
     processar(){
         var regra1 = [PalavrasReservadas.WHILE, PalavrasReservadas.LEFT_PARENTHESIS, 
             this.injector.get(Expression), PalavrasReservadas.RIGHT_PARENTHESIS, 
-            this.injector.get(Statement)]
+            this.injector.get(Statement)
+        ]
 
         this.objectService.validaRegras([regra1])
 	}

@@ -16,12 +16,12 @@ export class MainComponent implements AfterViewInit {
   selectCopiler: number = 0
 
   texto: string = 
-`{ 
+`public class teste { 
   public int str ;
   private char teste ;
 
   public void fcn(int var) {
-    
+    int 
   }
 }`;
 
@@ -53,6 +53,7 @@ export class MainComponent implements AfterViewInit {
         this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
         break
       case 1:        
+        console.clear()
         this.Tokens = this.analizadorLexico.analizar(this.texto);
         this.Erros = this.analizadorLexico.getErrosLexicos(this.Tokens)
         if(this.Erros.length == 0){

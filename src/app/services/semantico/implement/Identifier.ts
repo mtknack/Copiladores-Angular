@@ -28,7 +28,6 @@ export class Identifier implements ILog {
 
         this.objectService.logClas(this.message(), true);
         let regra1 = [Tipo.IDENTIFICADOR_VALIDO]
-        debugger
         this.objectService.validaRegras([regra1])
         
 

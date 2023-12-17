@@ -29,9 +29,9 @@ export class IfThenElseStatement implements ILog {
 
         // aqui acontece o erro de que caso é tirado o ultimo } não pega o error
         var regra1 = [PalavrasReservadas.ELSE, this.injector.get(Statement)]
-
-        this.objectService.validaRegras([regra1])
-
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.ELSE)){
+            this.objectService.validaRegras([regra1])
+        }
         this.objectService.logClas(this.message(), false);
 	}
 

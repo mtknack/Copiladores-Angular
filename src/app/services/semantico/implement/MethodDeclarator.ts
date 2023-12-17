@@ -22,7 +22,7 @@ export class MethodDeclarator implements ILog {
 
     message(): IObjectLog {
         return {
-            analise: "ClassBodyDeclaration Declarations",
+            analise: "MethodDeclarator",
             status: true
         }
     }
@@ -33,6 +33,7 @@ export class MethodDeclarator implements ILog {
         this.objectService.logClas(this.message(), true);
 
         let regra1 = [PalavrasReservadas.LEFT_PARENTHESIS, this.formalParameter, PalavrasReservadas.RIGHT_PARENTHESIS]
+        // let regra2 = [PalavrasReservadas.LEFT_PARENTHESIS, PalavrasReservadas.RIGHT_PARENTHESIS]
         this.objectService.validaRegras([regra1])
         
         this.objectService.logClas(this.message(), false);

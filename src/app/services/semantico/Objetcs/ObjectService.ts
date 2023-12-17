@@ -65,12 +65,14 @@ export class ObjectService {
     }
 
     getObjectAtualTokenObject(): IToken {
+        let num = 0 
+        this.object.atual-1 <= 0 ? num = 0 : num = this.object.atual-1
         if(this.object.atual >= this.object.tokens.length){
             return {
                 textoOriginal:"", 
                 tipo:Tipo.IDENTIFICADOR_INVALIDO,token:"",
-                linha:this.object.tokens[this.object.atual-1].linha,
-                coluna:(this.object.tokens[this.object.atual-1].coluna! + 1)
+                linha:num,
+                coluna:(num + 1)
             }
         }
         else{
@@ -79,11 +81,7 @@ export class ObjectService {
     }
 
     public validaRegraOpcional(arrayDeToken: any[], optionalTokens: number[]) {
-        //([IMPORT, IDENTIFICADOR],[0,1])
-        //[IMPORT, IDENTIFICADOR]
-        //[IMPORT]
-        //[IDENTIFICADOR]
-        // 
+
         let qtd = optionalTokens.length
         let possibilidades: any[] = []
         for (let i = 0; i < optionalTokens.length; i++) {
@@ -94,8 +92,6 @@ export class ObjectService {
             }
             const element = optionalTokens[i];
         }
-        // possibilidades.forEach((regra)=>this.validaRegra(regra))
-        // console.log(possibilidades)
     }
 
     public validaRegras(arrayDeRegras:any[]){
@@ -208,6 +204,15 @@ export class ObjectService {
         return false
     }
 
+    // public validaPalavraReservadaSemPularVetor(regra: any[]) {
+    //     let token = this.getObjectAtualTokenObject().token
+    //     if (regra.includes(token)) {
+    //         return true
+    //         console.log(token, 'sssssssssssssssssssssssssssssssssssssssssssssssssssssss')
+    //     }
+    //     return false
+    // }
+
     public validaTipoTokenAtual(tipo: Number) {
         let tokenDoErro = this.getObjectAtualTokenObject()
 
@@ -238,9 +243,9 @@ export class ObjectService {
 
     logClas(classe: IObjectLog, entrada: boolean){
         if(entrada){
-            console.log(`Entrando na classe ${classe.analise}`)
+            console.log(`Entrando na classe ${classe.analise} - ${this.getObjectAtualToken()}`)
         }else{
-            console.log(`Saindo da classe ${classe.analise}`)
+            console.log(`Saindo da classe ${classe.analise} - ${this.getObjectAtualToken()}`)
         }
     }
 

@@ -33,9 +33,12 @@ export class ArgumentList implements ILog {
         this.objectService.logClas(this.message(), true);
 
 		let regra1 = [this.injector.get(Expression)]
-		let regra2 = [this, PalavrasReservadas.COMMA, this.injector.get(Expression)]
+		let regra2 = [PalavrasReservadas.COMMA, this]
 		
-        this.objectService.validaRegras([regra1,regra2])     
+        this.objectService.validaRegras([regra1])     
+        if(this.objectService.validaPalavraReservadaSemPular(PalavrasReservadas.COMMA)){
+            this.objectService.validaRegras([regra2])     
+        }
 
         this.objectService.logClas(this.message(), false);
 	}
